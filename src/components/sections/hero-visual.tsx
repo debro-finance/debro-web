@@ -6,7 +6,6 @@ type Tile = {
   alt: string;
   width: number;
   height: number;
-  angle: number;
   size: string;
   shadow: string;
 };
@@ -17,7 +16,6 @@ const TILES: Tile[] = [
     alt: "Apple",
     width: 475,
     height: 475,
-    angle: 20,
     size: "h-14 w-14 sm:h-16 sm:w-16 md:h-[4.5rem] md:w-[4.5rem]",
     shadow: "shadow-[0_12px_30px_-14px_rgb(20_27_61/0.22)]",
   },
@@ -26,7 +24,6 @@ const TILES: Tile[] = [
     alt: "Microsoft",
     width: 48,
     height: 48,
-    angle: 75,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
     shadow: "shadow-[0_10px_26px_-14px_rgb(20_27_61/0.18)]",
   },
@@ -35,7 +32,6 @@ const TILES: Tile[] = [
     alt: "NVIDIA",
     width: 64,
     height: 64,
-    angle: 135,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
     shadow: "shadow-[0_12px_30px_-16px_rgb(20_27_61/0.2)]",
   },
@@ -44,7 +40,6 @@ const TILES: Tile[] = [
     alt: "Visa",
     width: 750,
     height: 471,
-    angle: 195,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
     shadow: "shadow-[0_10px_26px_-14px_rgb(20_27_61/0.18)]",
   },
@@ -53,7 +48,6 @@ const TILES: Tile[] = [
     alt: "Amazon",
     width: 64,
     height: 64,
-    angle: 260,
     size: "h-14 w-14 sm:h-16 sm:w-16 md:h-[4.5rem] md:w-[4.5rem]",
     shadow: "shadow-[0_14px_34px_-16px_rgb(20_27_61/0.22)]",
   },
@@ -62,9 +56,24 @@ const TILES: Tile[] = [
     alt: "Tesla",
     width: 64,
     height: 64,
-    angle: 320,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
     shadow: "shadow-[0_12px_30px_-16px_rgb(20_27_61/0.2)]",
+  },
+  {
+    src: "/assets/companies/ko.svg",
+    alt: "Coca-Cola",
+    width: 64,
+    height: 64,
+    size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
+    shadow: "shadow-[0_10px_26px_-14px_rgb(20_27_61/0.18)]",
+  },
+  {
+    src: "/assets/companies/mcd.svg",
+    alt: "McDonald's",
+    width: 512,
+    height: 512,
+    size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
+    shadow: "shadow-[0_10px_26px_-14px_rgb(20_27_61/0.18)]",
   },
 ];
 
@@ -93,21 +102,20 @@ export function HeroVisual() {
         />
 
         {/* Orbiting company logos */}
-        {TILES.map((tile) => {
-          const delay = -((tile.angle / 360) * ORBIT_DURATION);
+        {TILES.map((tile, index) => {
+          const delay = -((index / TILES.length) * ORBIT_DURATION);
           return (
             <div
               key={tile.src}
-              className="motion-safe:animate-[orbit_var(--dur)_linear_var(--delay)_infinite] absolute left-1/2 top-1/2"
+              className="motion-safe:animate-[orbit_var(--dur)_linear_var(--delay)_infinite] absolute left-[15%] top-[15%] h-[70%] w-[70%]"
               style={
                 {
-                  transform: `rotate(${tile.angle}deg)`,
                   "--dur": `${ORBIT_DURATION}s`,
                   "--delay": `${delay}s`,
                 } as React.CSSProperties
               }
             >
-              <div className="translate-x-[7.5rem] sm:translate-x-[9.5rem] md:translate-x-[11rem]">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
                 <div
                   className={`motion-safe:animate-[counter-orbit_var(--dur)_linear_var(--delay)_infinite] flex ${tile.size} items-center justify-center rounded-2xl border border-line bg-white/95 p-2 ring-1 ring-navy/5 backdrop-blur-sm ${tile.shadow} sm:p-2.5`}
                   style={
@@ -133,7 +141,7 @@ export function HeroVisual() {
         {/* Central DeBro monogram — stationary focal point */}
         <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-navy shadow-[0_18px_44px_-18px_rgb(20_27_61/0.35)] ring-1 ring-navy/10 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]">
-            <BrandIcon variant="white" className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14" />
+            <BrandIcon variant="white" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
           </div>
         </div>
       </div>
