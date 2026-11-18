@@ -55,10 +55,6 @@ export function buildMetadata(): Metadata {
         "max-image-preview": "large",
       },
     },
-    icons: {
-      icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-      apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
-    },
   };
 }
 

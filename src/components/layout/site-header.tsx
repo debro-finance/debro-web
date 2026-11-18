@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { Container } from "@/components/ui/container";
-import { NAV_LINKS } from "@/lib/site";
+import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-white">
       <Container className="relative flex h-16 items-center justify-between gap-4 lg:h-20">
         <Link
           href="/"
@@ -33,7 +33,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <a
-            href="#waitlist-email"
+            href={WAITLIST_HREF}
             className="hidden h-10 items-center justify-center rounded-full bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent sm:inline-flex"
           >
             Join the waitlist

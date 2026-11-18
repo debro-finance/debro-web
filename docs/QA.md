@@ -18,7 +18,7 @@ Last run: 2026-11-18, local macOS build of the refinement branch.
 | --- | --- | --- |
 | Typecheck | `npm run typecheck` | Pass |
 | Lint | `npm run lint` | Pass |
-| Unit tests | `npm test` | 37 passed (5 files) |
+| Unit tests | `npm test` | 46 passed (7 files) |
 | Production build | `npm run build` | Pass |
 | DB integration tests | `TEST_DATABASE_URL=… npm run test:db` | 5 passed (1 file) |
 
@@ -71,6 +71,9 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 - Solana, blockchain, wallet and self-custody detail appears mainly in the FAQ; the primary page copy contains none of those terms by design.
 - The previous navy rectangle was replaced with a light layered-folio composition: soft-blue and navy offset cards, the official monogram in a nested aperture, and an explicit “Illustrative” note. No fake charts, prices, returns or portfolio data.
 - Metadata, OG/Twitter copy, structured data and the regenerated OG image use the investing-first headline. No `Solana` or `self-custodial` framing remains in share metadata.
+- Waitlist CTAs (header, hero, FAQ, footer and mobile menu) all target `#waitlist`; desktop and mobile jumps land the heading and signup area below the sticky header without cropping.
+- Mobile menu opens on a real coordinate tap at 390 px, closes on Escape with focus returning to the trigger, on outside pointer interaction, and on navigation-link follow. The panel is a solid-surface fixed dropdown outside the blurred header layer.
+- `/favicon.ico` returns 200 as `image/x-icon` with 16, 32 and 48 px entries derived from `debro-icon-navy.svg`; `/icon.svg` and `/apple-icon.png` remain available without conflicting icon metadata.
 - Lighthouse remained at Performance 100, Accessibility 100, Best Practices 96, SEO 100 for the indexable configuration.
 
 ## Preview deployment

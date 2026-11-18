@@ -24,6 +24,8 @@ These are the only approved logo geometries. They must not be recreated, traced,
   - `debro-logo-vertical-navy.svg`
 - The site header uses the navy horizontal logo, the prelaunch favicon and apple icon use the navy icon, and the footer uses the original white horizontal logo on navy.
 - `src/app/icon.svg` is the navy icon. `src/app/apple-icon.png` is generated from the official icon on approved navy.
+- `src/app/favicon.ico` is a multi-size ICO (16, 32 and 48 px PNG entries) rendered from `debro-icon-navy.svg`, so browsers that request `/favicon.ico` directly still receive the official DB monogram. `npm run assets:generate` regenerates it; no icon geometry is redrawn.
+- Favicons are declared through Next.js file conventions rather than manual `icons` metadata, which avoids duplicate or conflicting `<link rel="icon">` tags. `/favicon.ico`, `/icon.svg` and `/apple-icon.png` all resolve from the served page.
 - `public/branding/og-image.png` (1200×630) embeds the official horizontal logo geometry inside a branded composition. Regenerate with `npm run assets:generate`; the script never redraws the logo.
 
 ## UI typography

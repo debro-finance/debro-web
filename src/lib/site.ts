@@ -45,6 +45,8 @@ export function isWaitlistEnabled(): boolean {
   );
 }
 
+export const WAITLIST_HREF = "#waitlist";
+
 export const NAV_LINKS = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#why-debro", label: "Why DeBro" },

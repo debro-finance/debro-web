@@ -60,6 +60,33 @@ function buildOgSvg(logo) {
 </svg>`;
 }
 
+function buildIco(images) {
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0);
+  header.writeUInt16LE(1, 2);
+  header.writeUInt16LE(images.length, 4);
+
+  const entries = Buffer.alloc(16 * images.length);
+  let offset = header.length + entries.length;
+
+  images.forEach(({ size, data }, index) => {
+    const entry = index * 16;
+    const dimension = size >= 256 ? 0 : size;
+
+    entries.writeUInt8(dimension, entry);
+    entries.writeUInt8(dimension, entry + 1);
+    entries.writeUInt8(0, entry + 2);
+    entries.writeUInt8(0, entry + 3);
+    entries.writeUInt16LE(1, entry + 4);
+    entries.writeUInt16LE(32, entry + 6);
+    entries.writeUInt32LE(data.length, entry + 8);
+    entries.writeUInt32LE(offset, entry + 12);
+    offset += data.length;
+  });
+
+  return Buffer.concat([header, entries, ...images.map(({ data }) => data)]);
+}
+
 function buildAppleIconSvg(icon) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
   <rect width="180" height="180" rx="40" fill="#141B3D"/>
@@ -86,7 +113,24 @@ async function main() {
     .png({ compressionLevel: 9 })
     .toFile(path.join(root, "src", "app", "apple-icon.png"));
 
-  console.log("Generated public/branding/og-image.png and src/app/apple-icon.png");
+  const navyIcon = await readSvg("debro-icon-navy.svg");
+  const faviconImages = await Promise.all(
+    [16, 32, 48].map(async (size) => ({
+      size,
+      data: await sharp(Buffer.from(navyIcon))
+        .resize(size, size, { fit: "contain" })
+        .png({ compressionLevel: 9 })
+        .toBuffer(),
+    })),
+  );
+  await writeFile(
+    path.join(root, "src", "app", "favicon.ico"),
+    buildIco(faviconImages),
+  );
+
+  console.log(
+    "Generated public/branding/og-image.png, src/app/apple-icon.png and src/app/favicon.ico",
+  );
 }
 
 main().catch((error) => {
