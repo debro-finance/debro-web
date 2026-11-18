@@ -1,34 +1,55 @@
-# Branding — authoritative usage rules
-Status: APPROVED direction; exact vector assets and font files **not yet present in this repository**.
+# Branding — official DeBro identity
 
-## Source of truth
-Use the same DeBro brand as the product application. Approved primary navy: **#141B3D**.
-The owner previously approved **three exact SVG logo variants**:
-1. Symbol / icon only
-2. Symbol + wordmark to the right (horizontal)
-3. Symbol + wordmark below (vertical)
+Status: **official logo variants confirmed in Notion**; raw SVG files pending transfer into this repository.
 
-Do not redraw, approximate, stylize, recolor arbitrarily, substitute emoji for the brand icon, or invent additional marks. SVGs are colorable in code where their source allows it. Keep geometry, proportions and clear space intact.
+## Authoritative source
+The active Notion [Brand & Design](https://app.notion.com/p/4172e0ba375781fd806cc68d9d688598) page was updated on 2026-11-17 with three **owner-supplied official vector files**, superseding earlier defective variants. The historical *Brand Strategy Brief — working* is exploratory, not the final identity source.
 
-## Asset handoff
-Before implementing branded UI, the owner should provide the three **final official SVG files** or their existing authoritative repository paths. Place approved originals under `public/branding/` (or a dedicated shared asset package if later agreed), and document their precise filenames here.
-The exact approved typeface and complete palette were previously defined outside this repository but are **not independently verified here**. Do not guess. Capture those values from the approved source before implementing final typography and variants.
+## Approved SVG originals
 
-## Visual principles
-- Professional, clean, approachable fintech; clear hierarchy, generous whitespace, flat/light surfaces with selective navy emphasis.
-- Light primary theme; white/neutrals, restrained navy accents, subtle transitions and microinteractions.
-- Consistency with the app's official identity is more important than mirroring a reference website.
-- Use accessibility-compliant contrast and ensure logos remain legible in dark/light contexts.
-- Responsive treatments must use proper horizontal / vertical variants instead of squashing the logo.
+| File | Official purpose | Original viewBox |
+| --- | --- | --- |
+| `debro-icon.svg` | Icon/monogram alone; favicon, compact identity and avatars | `0 0 1024 1024` |
+| `debro-logo.svg` | Icon on left, DeBro wordmark on right; **primary website header/navigation** | `0 0 2521.63 470.32` |
+| `debro-logo-vertical.svg` | Icon above the wordmark; vertically centered compositions | `0 0 772.49 752.19` |
 
-## Reference sites (inspiration, not assets to copy)
-- https://robinhood.com/us/en/ — straightforward messaging, modern spacing, clear CTAs.
-- https://cocos.capital — approachable consumer-finance communication.
-- https://www.interactivebrokers.com/es/home.php — information hierarchy and clarity of risk communication.
-- https://bullmarket.com.ar and https://www.invertironline.com/ — established financial-navigation patterns.
-Do not copy protected imagery, logos, code, exact layouts or copy.
+These are the **only** approved logo geometries for the institutional website. Do not recreate, trace, simplify, extrapolate or synthesize them from reference screenshots.
 
-## Outstanding assets
-[ ] Three final SVG files verified and included.
-[ ] Official font family and exact weights verified.
-[ ] Remaining official design tokens verified (do not invent a "final" palette).
+### Color application
+- Institutional navy: **`#141B3D`** (approved).
+- The three original SVGs are transparent with **white** (`#FFFFFF` / `#FFF`) fills, suitable for dark surfaces.
+- For light site surfaces, allow **navy** versions created by changing *only* applicable shape `fill` values or parametrizing `currentColor`.
+- Preserve all paths, viewBoxes, fill rules, alignment and proportions. Do not introduce gradients, alter shapes or stretch assets.
+- Verify contrast on both white and navy backgrounds.
+
+### Integration locations
+After obtaining the byte-for-byte original files, store them in:
+- `public/branding/debro-icon.svg`
+- `public/branding/debro-logo.svg`
+- `public/branding/debro-logo-vertical.svg`
+
+Do not create empty placeholders or fabricated SVG files. Once imported, inspect/validate XML, confirm viewBoxes, produce visual snapshots and optionally derive navy variants non-destructively in code; retain originals unchanged.
+
+## Approved UI direction
+- Professional, trustworthy, sober, modern financial product — **not** generic crypto/Web3 aesthetics.
+- Light theme, generous whitespace, strong hierarchy, restrained navy emphasis.
+- English, responsive and accessible. Subtle animation; respect reduced-motion preferences.
+- Match the identity of DeBro's application while keeping this website's codebase separate.
+
+## Typography
+The supplied official SVG wordmark already contains the approved lettering geometry. **Do not replace the wordmark with typed text.**
+The separate typeface for *interface copy* has not been confirmed from the current authoritative Notion branding page. Before coding the final layout, inspect a verified current product design system or request owner confirmation. Do not treat exploratory draft font suggestions as approved.
+
+## Design references (inspiration only)
+- https://robinhood.com/us/en/
+- https://cocos.capital
+- https://www.interactivebrokers.com/es/home.php
+- https://bullmarket.com.ar
+- https://www.invertironline.com/
+
+Use these for hierarchy, simplicity and financial UX conventions. Never copy logos, proprietary images, code or page layouts.
+
+## Outstanding for asset-complete handoff
+- [ ] Transfer the three exact originals from Notion to `public/branding/`; verify their geometry and content.
+- [ ] Confirm UI typeface and weights from a verified source.
+- [ ] Confirm any palette tokens beyond the approved navy; avoid pretending there is a complete finalized palette.
