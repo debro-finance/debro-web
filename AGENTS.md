@@ -19,3 +19,13 @@ Keep implementation small, accessible, responsive, secure and SEO-first. When a 
 
 ## Service context
 Vercel GitHub integration, Neon and Vercel Analytics have been connected by the owner. Reuse existing integrations; do not create duplicate providers or databases. Waitlist emails are collected only for a launch announcement after explicit consent.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

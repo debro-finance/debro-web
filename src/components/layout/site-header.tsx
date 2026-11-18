@@ -1,0 +1,46 @@
+import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
+import { MobileMenu } from "@/components/layout/mobile-menu";
+import { Container } from "@/components/ui/container";
+import { NAV_LINKS } from "@/lib/site";
+
+export function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
+      <Container className="relative flex h-16 items-center justify-between gap-4 lg:h-20">
+        <Link
+          href="/"
+          aria-label="DeBro — home"
+          className="inline-flex shrink-0 items-center rounded-sm"
+        >
+          <Logo preload className="h-[1.35rem] w-auto sm:h-6" />
+        </Link>
+
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-muted-strong transition-colors hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="#waitlist-email"
+            className="hidden h-10 items-center justify-center rounded-full bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent sm:inline-flex"
+          >
+            Join the waitlist
+          </a>
+          <MobileMenu links={NAV_LINKS} />
+        </div>
+      </Container>
+    </header>
+  );
+}
