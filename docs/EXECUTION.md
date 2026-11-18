@@ -1,28 +1,24 @@
 # Execution roadmap — institutional web
-Status: SPECIFICATION READY, implementation NOT AUTHORIZED until owner handoff.
 
-## Already established
-- Organization/repo: `debro-finance/debro-web`.
-- `development` exists; CI and development-only auto-merge have been validated by owner.
-- `main` is protected and is merged by owner manually.
-- GitHub-Vercel, Neon-Vercel integration and Vercel Analytics were configured by owner.
-- Scope and visual direction approved in PRODUCT, DESIGN, BRANDING, ARCHITECTURE, WAITLIST, SEO.
+Status: **implementation complete on `development`; production release owner-gated.**
 
-## Implementation phases for DeepSeek (later; this document is not an execution command)
-1. Foundation: scaffold stable Next.js App Router / TypeScript / Tailwind, root layout, accessible tokens and lint/test/typecheck/build CI. Ensure merge waits for ALL quality jobs.
-2. Brand+UX: ingest the owner's final three SVGs and typeface; produce responsive component system and section layouts. Do not invent or approximate missing assets.
-3. Landing: implement content sections and accurate English copy; avoid unverified financial claims.
-4. Waitlist: Neon migration and safe server-only handler, consent, spam controls, accessibility and tests.
-5. SEO+analytics: metadata, canonical, robots, sitemap, JSON-LD, social cards, Vercel Analytics integration, performance checks, noindex previews.
-6. QA: desktop/tablet/mobile testing, regression checks, production readiness checklist, manual owner review on `main` PR.
+## Completed
+- **Foundation:** Next.js App Router, strict TypeScript, Tailwind CSS 4, self-hosted font, design tokens, official brand assets, navy variants, OG/apple assets, metadata routes, security headers.
+- **CI:** documentation validation, lint, typecheck, unit tests, production build and PostgreSQL integration tests. Auto-merge into `development` waits for all jobs.
+- **Landing:** header, hero, How It Works, Why DeBro, Security & Self-Custody, FAQ, waitlist section and footer with approved-direction copy.
+- **Waitlist:** tracked migration, Neon adapter, server-only handler, consent, normalization, duplicates, honeypot, rate limiting, safe errors, removal script and test suite.
+- **SEO/analytics:** metadata, canonical, OG/Twitter image, favicons, JSON-LD, robots, sitemap, preview noindex and Vercel Analytics.
+- **QA:** responsive screenshots, interactive state checks and Lighthouse runs recorded in `docs/QA.md`.
 
 ## Owner-controlled launch gates
-- Domain acquisition/DNS/TLS and production URL.
-- Legal operator/contact, privacy/terms, risk disclosure, retention and subscriber-rights process.
-- Approved branding assets and exact official font.
-- Vercel plan eligibility for public institutional/commercial use.
-- Confirm public production branch `main`, preview env isolation and final indexing state.
-- No production rollout or automatic merge to `main` without owner approval.
+- [ ] Domain purchase/DNS/TLS and canonical production URL.
+- [ ] Legal operator/contact, privacy policy, terms, risk disclosure, retention and subscriber-rights route.
+- [ ] Final copy/claims approval and final interface typeface confirmation.
+- [ ] Vercel plan eligibility for public commercial use.
+- [ ] Neon production configuration and preview database isolation verified.
+- [ ] Set `WAITLIST_ENABLED=true` and `SITE_INDEXABLE=true` in Vercel Production only after approval.
+- [ ] Owner review and merge of `development` into `main`.
+- [ ] Public launch announcement and email-sending provider (separate future scope).
 
 ## Definition of done
-Code passes CI and QA, claims are verified, UX and branding match source assets, waitlist is private-by-design and works end-to-end, SEO acceptance checks pass, and owner explicitly approves production release.
+Code passes CI and QA, claims are verified, UX and branding match the official assets, the waitlist is private-by-design and works end-to-end, SEO acceptance checks pass, and the owner explicitly approves production release. That final production approval has **not** been granted.

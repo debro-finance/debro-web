@@ -1,60 +1,42 @@
 # Branding — official DeBro identity
 
-Status: **official logo variants imported and verified in this repository** (2026-11-18).
+Status: **official SVG assets present in this repository; provisional UI typeface selected.**
 
 ## Authoritative source
-The active Notion [Brand & Design](https://app.notion.com/p/4172e0ba375781fd806cc68d9d688598) page was updated on 2026-11-17 with three **owner-supplied official vector files**, superseding earlier defective variants. The historical *Brand Strategy Brief — working* is exploratory, not the final identity source.
+The active Notion Brand & Design page was updated on 2026-11-17 with three owner-supplied official vector files, superseding earlier variants. Those exact files are committed here.
 
 ## Approved SVG originals
 
-| File | Official purpose | Original viewBox |
+| File | Purpose | ViewBox |
 | --- | --- | --- |
-| `debro-icon.svg` | Icon/monogram alone; favicon, compact identity and avatars | `0 0 1024 1024` |
-| `debro-logo.svg` | Icon on left, DeBro wordmark on right; **primary website header/navigation** | `0 0 2521.63 470.32` |
-| `debro-logo-vertical.svg` | Icon above the wordmark; vertically centered compositions | `0 0 772.49 752.19` |
+| `public/branding/debro-icon.svg` | Icon/monogram; favicon, compact identity | `0 0 1024 1024` |
+| `public/branding/debro-logo.svg` | Icon + DeBro wordmark; **primary header identity** | `0 0 2521.63 470.32` |
+| `public/branding/debro-logo-vertical.svg` | Icon above wordmark; vertical compositions | `0 0 772.49 752.19` |
 
-These are the **only** approved logo geometries for the institutional website. Do not recreate, trace, simplify, extrapolate or synthesize them from reference screenshots.
+These are the only approved logo geometries. They must not be recreated, traced, simplified or synthesized from screenshots.
 
-### Color application
+### Color application and derived variants
 - Institutional navy: **`#141B3D`** (approved).
-- The three original SVGs are transparent with **white** (`#FFFFFF` / `#FFF`) fills, suitable for dark surfaces.
-- For light site surfaces, allow **navy** versions created by changing *only* applicable shape `fill` values or parametrizing `currentColor`.
-- Preserve all paths, viewBoxes, fill rules, alignment and proportions. Do not introduce gradients, alter shapes or stretch assets.
-- Verify contrast on both white and navy backgrounds.
+- The originals are transparent with white fills for dark surfaces. They remain unchanged.
+- Navy variants are derived by changing **only** the fill value, preserving every path and viewBox:
+  - `debro-icon-navy.svg`
+  - `debro-logo-navy.svg`
+  - `debro-logo-vertical-navy.svg`
+- The site header uses the navy horizontal logo, the prelaunch favicon and apple icon use the navy icon, and the footer uses the original white horizontal logo on navy.
+- `src/app/icon.svg` is the navy icon. `src/app/apple-icon.png` is generated from the official icon on approved navy.
+- `public/branding/og-image.png` (1200×630) embeds the official horizontal logo geometry inside a branded composition. Regenerate with `npm run assets:generate`; the script never redraws the logo.
 
-### Integration locations
-The owner's byte-for-byte original uploaded SVGs have been imported into:
-- `public/branding/debro-icon.svg`
-- `public/branding/debro-logo.svg`
-- `public/branding/debro-logo-vertical.svg`
+## UI typography
+**Inter Variable** is the provisional interface font. It is self-hosted (`src/app/fonts/InterVariable-latin.woff2`, OFL licensed) and loaded through `next/font/local`, so there is no external font request at runtime.
 
-All three SVGs were XML-parsed and checked for their approved viewBoxes, white fills, and absence of scripts or external references. Each committed asset was read back from GitHub and its text content matched the uploaded original. Keep originals unchanged; for a light background, derive navy variants non-destructively through code (fill only) when needed.
+Rationale: broad legibility, a neutral institutional tone, variable weights for hierarchy, a single 47 KB Latin font file, and easy replacement because components use the `--font-inter` token and Tailwind's `font-sans` only. Confirmation of the final product typeface remains an owner/brand decision; replacing it requires swapping one local font file and token.
 
-## Approved UI direction
-- Professional, trustworthy, sober, modern financial product — **not** generic crypto/Web3 aesthetics.
-- Light theme, generous whitespace, strong hierarchy, restrained navy emphasis.
-- English, responsive and accessible. Subtle animation; respect reduced-motion preferences.
-- Match the identity of DeBro's application while keeping this website's codebase separate.
+The SVG wordmark already contains the approved lettering and is never reproduced with type.
 
-## Typography
-The supplied official SVG wordmark already contains the approved lettering geometry. **Do not replace the wordmark with typed text.**
-The separate typeface for *interface copy* has not been confirmed from the current authoritative Notion branding page. Before coding the final layout, inspect a verified current product design system or request owner confirmation. Do not treat exploratory draft font suggestions as approved.
+## Visual direction
+Professional, trustworthy, sober, modern fintech — not generic crypto/Web3 aesthetics. Light theme, generous whitespace, restrained navy emphasis, subtle motion with `prefers-reduced-motion` support.
 
-## Design references (inspiration only)
-- https://robinhood.com/us/en/
-- https://cocos.capital
-- https://www.interactivebrokers.com/es/home.php
-- https://bullmarket.com.ar
-- https://www.invertironline.com/
-
-Use these for hierarchy, simplicity and financial UX conventions. Never copy logos, proprietary images, code or page layouts.
-
-## Asset verification and remaining decisions
-- [x] Transfer the three exact owner-provided SVG originals to `public/branding/`; verify their structure and content.
-- [ ] Confirm UI typeface and weights from a verified source.
-- [ ] Confirm any palette tokens beyond the approved navy; avoid pretending there is a complete finalized palette.
-
-## Uploaded original checksums (SHA-256)
-- `debro-icon.svg`: `2af9e893444443f24c15f6360b82d523889a5c660c6f7515abdca690e8aa16b1`
-- `debro-logo.svg`: `c2d5ee80bb4f19c6bfab4916b42988eb4edb9cfef72da0662403436df810d131`
-- `debro-logo-vertical.svg`: `6e9b30df1227e7e3b5b7fcd290317e3192704c7e945d07d4f7c4f5286de10545`
+## Remaining brand inputs
+- [ ] Owner confirmation of the final interface typeface (provisional Inter remains valid until then).
+- [ ] Any additional official palette tokens beyond `#141B3D`.
+- [ ] Production-domain assets and social/contact identities once verified.

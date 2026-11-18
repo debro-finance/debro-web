@@ -1,26 +1,39 @@
 # UX/UI specification
-Status: APPROVED direction (2026-11-18); full visual execution left to DeepSeek within these limits.
+
+Status: **implemented on `development`; owner visual review pending.**
 
 ## Experience
-Single-page, English-first, responsive institutional landing aimed at prelaunch waitlist conversion. **Light** theme with navy #141B3D, subtle accessible motion, minimalist fintech feel and brand consistency with DeBro app.
+Single-page, English-first, responsive institutional landing aimed at prelaunch waitlist conversion. **Light** theme with approved navy `#141B3D`, subtle accessible motion, minimalist fintech feel and consistency with DeBro's application identity.
 
-## Sections
-Header with logo and anchor links; hero with value proposition and CTA; How it Works; Why DeBro; Security & Self-Custody; FAQ; final waitlist module; footer with verified contact/social and legal links.
+## Implemented sections
+1. Sticky header: official navy horizontal logo, desktop anchor navigation, accessible mobile disclosure menu, prominent Join the waitlist CTA.
+2. Hero: headline, supporting copy, dual CTA and an original navy composition built from CSS/SVG grid, rings, official icon and truthful labels. Explicitly labelled illustrative and prelaunch.
+3. How It Works: three numbered steps, all marked “At launch” with a section-level note that none are available today.
+4. Why DeBro: four benefits in a restrained two-column card grid.
+5. Security & Self-Custody: navy split section with three principles and an explicit risk box.
+6. FAQ: two-column layout with native `details`/`summary` accordion and eight factual answers.
+7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states.
+8. Footer: white logo on navy, anchor navigation, prelaunch status, legal-placeholder notice and risk disclosure. No invented contact or social links.
 
-## Interaction
-- Repeated Join Waitlist buttons navigate/focus the same canonical signup form; do not create parallel databases or inconsistent experiences.
-- Email form: explicit consent checkbox (unchecked by default), client and server validation, loading, success, duplicate (privacy-safe), generic error and rate-limit feedback.
-- Form must not expose emails in analytics, URL query strings, logs, screenshots or front-end storage.
-- Responsive navigation, visible focus states, accessible labels and error descriptions; functional keyboard-only operation.
-- Motion: subtle hover/scroll feedback with `prefers-reduced-motion` support; no expensive scroll-jacking.
-- Accurate illustration: no manufactured trading balances or fake live price views.
-- States before launch must not imply trading is currently possible.
+## Interaction and accessibility
+- Repeated CTAs target the single canonical form; there is one registration implementation and one database.
+- Form: explicit consent unchecked by default, client-side checks, server validation, `aria-invalid`, described-by errors, `role="alert"`, `role="status"`, focus management and `noValidate` for consistent styled feedback.
+- Mobile menu: `aria-expanded`/`aria-controls`, Escape to close, focus moved to the first link and restored to the trigger.
+- Visible focus rings, semantic headings, skip link, touch-friendly controls, no horizontal overflow, native FAQ disclosure.
+- Motion: hero-only entrance animation and hover transitions; all animation and smooth scrolling are disabled under `prefers-reduced-motion: reduce`.
+- Contrast: interface neutrals and white-on-navy text meet WCAG 2.2 AA for their sizes; low-opacity utility text was raised where needed.
 
-## Accessibility and performance
-Target WCAG 2.2 AA where applicable. Mobile-first, fluid layouts, semantic headings, alt text, color contrast, appropriately sized touch targets. Prefer static rendering/server components; minimize client-side JavaScript, layout shifts and third-party assets.
-
-## Content design
-Clear language understandable to non-crypto visitors. Explain 'tokenized' and 'self-custody' without overselling or suggesting the user directly owns underlying shares. Use verified risks and precise claims; user-facing copy is not legal approval.
+## Visual system
+- Design tokens live in `src/app/globals.css` as Tailwind CSS 4 `@theme` variables.
+- Approved brand token: `--color-navy` (`#141B3D`).
+- Interface-only tokens: ink, muted, line, surface, accent, success and danger. These are implementation colors, not new brand decisions.
+- Repetition is controlled: one card style, one button system, consistent 2xl/large radii and section rhythm.
+- Provisional typeface: Inter Variable, self-hosted. See `docs/BRANDING.md`.
 
 ## Acceptance
-Visual QA at mobile/tablet/desktop; all anchors and FAQ interactions work; signup states accessible; correct logos and font once supplied; no broken/footer placeholder links published; no unnecessary animation dependencies.
+- [x] Real rendered QA at mobile, tablet and desktop widths.
+- [x] All anchors and FAQ disclosures work.
+- [x] Waitlist states implemented and exercised.
+- [x] Official logos integrated with preserved geometry.
+- [ ] Owner visual approval and final typeface confirmation.
+- [ ] Privacy, Terms and risk links published once approved.
