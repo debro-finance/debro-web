@@ -42,7 +42,7 @@ The server trims surrounding whitespace and lowercases the entire address before
 | `429 rate_limited` + `Retry-After` | More than 5 valid-route attempts per hashed key in 10 minutes |
 | `503 disabled` / `unavailable` | Collection disabled or database unavailable |
 
-The route never returns raw SQL, stack traces, emails or connection details. The service logs only a generic error name on insert failure.
+The route never returns raw SQL, stack traces, emails or connection details. Insert-failure logs include only the error name, SQLSTATE, safe relation identifier when available, table and constraint; raw messages and SQL parameters are never logged.
 
 ## Anti-abuse
 - Hidden `company` honeypot; filled submissions receive generic success and never reach the database.
@@ -62,6 +62,7 @@ The route never returns raw SQL, stack traces, emails or connection details. The
 ## Environment safety
 - Reuse the Neon integration already attached to the Vercel project; do not create another production database.
 - Preview deployments are non-indexable and should use a Neon branch or separate database. Do not write test records to production.
+- Neon branches are point-in-time snapshots: migrations applied to the parent do not update existing Preview branches. Check the target branch before testing; apply only the tracked migrations missing from that branch, rather than rerunning migrations blindly.
 - Tests run against a disposable local PostgreSQL 16 service in CI.
 - Never commit subscriber emails, connection strings or credentials.
 

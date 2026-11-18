@@ -138,6 +138,35 @@ describe("registerSubscriber", () => {
     expect(result.body).toEqual({ ok: false, error: "unavailable" });
   });
 
+  it("logs the SQLSTATE and a safe missing relation identifier", async () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    const db = makeDb(async () => {
+      throw Object.assign(
+        new Error(
+          'relation "waitlist_subscribers" does not exist for user@example.com',
+        ),
+        { name: "NeonDbError", code: "42P01" },
+      );
+    });
+
+    const result = await submit({ db }, {
+      email: "user@example.com",
+      consent: true,
+    });
+
+    expect(result.status).toBe(503);
+    expect(consoleError.mock.calls[0]?.[1]).toMatchObject({
+      code: "42P01",
+      relation: "waitlist_subscribers",
+    });
+    expect(JSON.stringify(consoleError.mock.calls)).not.toContain(
+      "user@example.com",
+    );
+    expect(JSON.stringify(consoleError.mock.calls)).not.toContain(
+      "does not exist",
+    );
+  });
+
   it("does not leak email or database details when an insert fails", async () => {
     const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
     const db = makeDb(async () => {
