@@ -50,5 +50,11 @@ The form's enabled/disabled presentation is rendered at build time. Changing `WA
 - Non-production and non-approved deployments are `noindex` in both metadata and response headers.
 - `robots.txt` disallows all crawling and `sitemap.xml` is empty until indexing is approved. Once approved on Production, robots allows `/`, publishes the sitemap URL and lists the canonical page.
 
+## Vercel deployment behavior
+- Automatic Git-triggered deployments are enabled only for `main` (Production) and `development` (Preview), configured via root-level `vercel.json` using `git.deploymentEnabled` (`"**": false`, `"main": true`, `"development": true`).
+- Feature branches (`feature/*`, `chore/*`, `fix/*`) do not receive automatic Vercel deployments; PRs still run GitHub Actions CI and auto-merge into `development`.
+- This does not change branch protections, the existing Vercel project, or manual deployment capability.
+- Vercel preview deployments may still be created manually via the Vercel CLI/dashboard if needed.
+
 ## Deferred until go-live
 Domain/DNS/TLS, approved legal disclosures and contact route, production indexing, public collection, announcement email provider, and any paid service or plan change. All remain owner-controlled.
