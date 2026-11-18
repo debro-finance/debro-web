@@ -1,6 +1,6 @@
 # Branding — official DeBro identity
 
-Status: **official logo variants confirmed in Notion**; raw SVG files pending transfer into this repository.
+Status: **official logo variants imported and verified in this repository** (2026-11-18).
 
 ## Authoritative source
 The active Notion [Brand & Design](https://app.notion.com/p/4172e0ba375781fd806cc68d9d688598) page was updated on 2026-11-17 with three **owner-supplied official vector files**, superseding earlier defective variants. The historical *Brand Strategy Brief — working* is exploratory, not the final identity source.
@@ -23,12 +23,12 @@ These are the **only** approved logo geometries for the institutional website. D
 - Verify contrast on both white and navy backgrounds.
 
 ### Integration locations
-After obtaining the byte-for-byte original files, store them in:
+The owner's byte-for-byte original uploaded SVGs have been imported into:
 - `public/branding/debro-icon.svg`
 - `public/branding/debro-logo.svg`
 - `public/branding/debro-logo-vertical.svg`
 
-Do not create empty placeholders or fabricated SVG files. Once imported, inspect/validate XML, confirm viewBoxes, produce visual snapshots and optionally derive navy variants non-destructively in code; retain originals unchanged.
+All three SVGs were XML-parsed and checked for their approved viewBoxes, white fills, and absence of scripts or external references. Each committed asset was read back from GitHub and its text content matched the uploaded original. Keep originals unchanged; for a light background, derive navy variants non-destructively through code (fill only) when needed.
 
 ## Approved UI direction
 - Professional, trustworthy, sober, modern financial product — **not** generic crypto/Web3 aesthetics.
@@ -49,7 +49,12 @@ The separate typeface for *interface copy* has not been confirmed from the curre
 
 Use these for hierarchy, simplicity and financial UX conventions. Never copy logos, proprietary images, code or page layouts.
 
-## Outstanding for asset-complete handoff
-- [ ] Transfer the three exact originals from Notion to `public/branding/`; verify their geometry and content.
+## Asset verification and remaining decisions
+- [x] Transfer the three exact owner-provided SVG originals to `public/branding/`; verify their structure and content.
 - [ ] Confirm UI typeface and weights from a verified source.
 - [ ] Confirm any palette tokens beyond the approved navy; avoid pretending there is a complete finalized palette.
+
+## Uploaded original checksums (SHA-256)
+- `debro-icon.svg`: `2af9e893444443f24c15f6360b82d523889a5c660c6f7515abdca690e8aa16b1`
+- `debro-logo.svg`: `c2d5ee80bb4f19c6bfab4916b42988eb4edb9cfef72da0662403436df810d131`
+- `debro-logo-vertical.svg`: `6e9b30df1227e7e3b5b7fcd290317e3192704c7e945d07d4f7c4f5286de10545`
