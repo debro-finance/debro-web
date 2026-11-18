@@ -93,7 +93,7 @@ export function HeroVisual() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-navy/[0.07] md:border-navy/[0.08]"
-          style={{ width: "70%", height: "70%" }}
+          style={{ width: "64%", height: "64%" }}
         />
         <div
           aria-hidden="true"
@@ -103,11 +103,16 @@ export function HeroVisual() {
 
         {/* Orbiting company logos */}
         {TILES.map((tile, index) => {
+          const isOuterOrbit = index % 2 === 1;
           const delay = -((index / TILES.length) * ORBIT_DURATION);
           return (
             <div
               key={tile.src}
-              className="motion-safe:animate-[orbit_var(--dur)_linear_var(--delay)_infinite] absolute left-[15%] top-[15%] h-[70%] w-[70%]"
+              className={`motion-safe:animate-[orbit_var(--dur)_linear_var(--delay)_infinite] absolute ${
+                isOuterOrbit
+                  ? "left-[6%] top-[6%] h-[88%] w-[88%]"
+                  : "left-[18%] top-[18%] h-[64%] w-[64%]"
+              }`}
               style={
                 {
                   "--dur": `${ORBIT_DURATION}s`,
@@ -115,7 +120,14 @@ export function HeroVisual() {
                 } as React.CSSProperties
               }
             >
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+              <div
+                className="motion-safe:animate-[radial-drift_9s_ease-in-out_var(--pulse-delay)_infinite] absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+                style={
+                  {
+                    "--pulse-delay": `${-index * 1.1}s`,
+                  } as React.CSSProperties
+                }
+              >
                 <div
                   className={`motion-safe:animate-[counter-orbit_var(--dur)_linear_var(--delay)_infinite] flex ${tile.size} items-center justify-center rounded-2xl border border-line bg-white/95 p-2 ring-1 ring-navy/5 backdrop-blur-sm ${tile.shadow} sm:p-2.5`}
                   style={
@@ -141,14 +153,10 @@ export function HeroVisual() {
         {/* Central DeBro monogram — stationary focal point */}
         <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-navy shadow-[0_18px_44px_-18px_rgb(20_27_61/0.35)] ring-1 ring-navy/10 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]">
-            <BrandIcon variant="white" className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16" />
+            <BrandIcon variant="white" className="h-16 w-16 sm:h-20 sm:w-20 md:h-20 md:w-20" />
           </div>
         </div>
       </div>
-
-      <p className="mt-4 text-center text-xs leading-relaxed text-muted">
-        Illustrative companies only. Asset availability is not confirmed.
-      </p>
     </div>
   );
 }

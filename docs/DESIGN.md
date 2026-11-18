@@ -7,7 +7,7 @@ Single-page, English-first, responsive institutional landing aimed at prelaunch 
 
 ## Implemented sections
 1. Sticky header: official navy horizontal logo, desktop anchor navigation, accessible mobile disclosure menu, prominent Join the waitlist CTA. The mobile panel is a fixed, solid-surface dropdown outside the blurred layer, with outside-click and Escape dismissal.
-2. Hero: “A simpler way to invest in tokenized assets.” with concise investing-first copy, dual CTA and an original light orbit composition: the official monogram anchors a precisely aligned, slowly rotating ring of illustrative company logos. No fake charts, prices or portfolio data; explicitly labelled illustrative and prelaunch.
+2. Hero: “A simpler way to invest in tokenized assets.” with concise investing-first copy, dual CTA and an original light orbit composition: the official monogram anchors eight illustrative company logos, evenly alternated between two concentric, slowly rotating rings. No fake charts, prices or portfolio data; explicitly labelled illustrative and prelaunch.
 3. How It Works: three numbered steps (explore → understand → invest), all marked “At launch” with a section-level note that none are available today.
 4. Why DeBro: four benefits in a restrained two-column card grid using neutral icons.
 5. Security & Confidence: navy split section with three principles in investor language and an explicit risk box. Wallet and blockchain mechanics are not repeated here.
