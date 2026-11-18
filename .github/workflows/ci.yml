@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - development
+      - main
+  push:
+    branches:
+      - development
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  foundation:
+    name: Foundation validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify foundational documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s README.md
+          test -s AGENTS.md
+          test -s docs/GITHUB_WORKFLOW.md
+          python3 - <<'PY'
+          from pathlib import Path
+          for name in ['README.md', 'AGENTS.md', 'docs/GITHUB_WORKFLOW.md']:
+              text = Path(name).read_text(encoding='utf-8')
+              assert not any(line.rstrip('\n').endswith(' ') for line in text.splitlines(keepends=True)), f'Trailing whitespace: {name}'
+          print('Foundation documents valid')
+          PY
