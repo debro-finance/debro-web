@@ -3,22 +3,23 @@
 Status: **implemented on `development`; owner visual review pending.**
 
 ## Experience
-Single-page, English-first, responsive institutional landing aimed at prelaunch waitlist conversion. **Light** theme with approved navy `#141B3D`, subtle accessible motion, minimalist fintech feel and consistency with DeBro's application identity.
+Single-page, English-first, responsive institutional landing aimed at prelaunch waitlist conversion. **Light** theme with approved navy `#141B3D`, subtle accessible motion, minimalist fintech feel and consistency with DeBro's application identity. The page leads with investing, simplicity and clarity; blockchain, wallet and self-custody detail is concentrated in the FAQ.
 
 ## Implemented sections
-1. Sticky header: official navy horizontal logo, desktop anchor navigation, accessible mobile disclosure menu, prominent Join the waitlist CTA.
-2. Hero: headline, supporting copy, dual CTA and an original navy composition built from CSS/SVG grid, rings, official icon and truthful labels. Explicitly labelled illustrative and prelaunch.
-3. How It Works: three numbered steps, all marked “At launch” with a section-level note that none are available today.
-4. Why DeBro: four benefits in a restrained two-column card grid.
-5. Security & Self-Custody: navy split section with three principles and an explicit risk box.
-6. FAQ: two-column layout with native `details`/`summary` accordion and eight factual answers.
-7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states.
+1. Sticky header: official navy horizontal logo, desktop anchor navigation, accessible mobile disclosure menu, prominent Join the waitlist CTA. The mobile panel is a fixed, solid-surface dropdown outside the blurred layer, with outside-click and Escape dismissal.
+2. Hero: “A simpler way to invest in tokenized assets.” with concise investing-first copy, dual CTA and an original light folio composition: layered paper-like cards, official monogram, nested aperture and restrained navy/soft-blue accents. No fake charts, prices or portfolio data; explicitly labelled illustrative and prelaunch.
+3. How It Works: three numbered steps (explore → understand → invest), all marked “At launch” with a section-level note that none are available today.
+4. Why DeBro: four benefits in a restrained two-column card grid using neutral icons.
+5. Security & Confidence: navy split section with three principles in investor language and an explicit risk box. Wallet and blockchain mechanics are not repeated here.
+6. FAQ: two-column layout with native `details`/`summary` accordion and ten factual answers, including tokenized assets, wallets, Solana and blockchain.
+7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states. Every waitlist CTA targets the `#waitlist` section, which carries the sticky-header scroll offset.
 8. Footer: white logo on navy, anchor navigation, prelaunch status, legal-placeholder notice and risk disclosure. No invented contact or social links.
 
 ## Interaction and accessibility
-- Repeated CTAs target the single canonical form; there is one registration implementation and one database.
+- Repeated CTAs target the single canonical waitlist section; there is one registration implementation and one database.
+- Anchor targets account for the sticky header (`scroll-padding-top` plus per-section `scroll-margin-top`), so the destination heading and signup area are not cropped.
 - Form: explicit consent unchecked by default, client-side checks, server validation, `aria-invalid`, described-by errors, `role="alert"`, `role="status"`, focus management and `noValidate` for consistent styled feedback.
-- Mobile menu: `aria-expanded`/`aria-controls`, Escape to close, focus moved to the first link and restored to the trigger.
+- Mobile menu: `aria-expanded`/`aria-controls`, conditional panel rendering with explicit layering, Escape/outside-click/link navigation to close, focus moved to the first link and restored to the trigger.
 - Visible focus rings, semantic headings, skip link, touch-friendly controls, no horizontal overflow, native FAQ disclosure.
 - Motion: hero-only entrance animation and hover transitions; all animation and smooth scrolling are disabled under `prefers-reduced-motion: reduce`.
 - Contrast: interface neutrals and white-on-navy text meet WCAG 2.2 AA for their sizes; low-opacity utility text was raised where needed.

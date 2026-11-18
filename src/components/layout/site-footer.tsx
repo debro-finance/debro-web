@@ -18,8 +18,8 @@ export function SiteFooter() {
               <Logo variant="white" className="h-6 w-auto" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
-              A simpler way to explore tokenized financial assets on Solana.
-              Self-custodial by design.
+              A modern investing experience for tokenized financial assets.
+              Designed for clarity.
             </p>
             <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70">
               <span
@@ -61,8 +61,8 @@ export function SiteFooter() {
               Status
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-white/65">
-              DeBro is in active development. Trading, wallet connection and
-              account features are not available yet.
+              DeBro is in active development. Investing and account features
+              are not available yet.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-white/65">
               Privacy Policy and Terms will be published before public signup

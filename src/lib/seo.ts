@@ -36,7 +36,7 @@ export function buildMetadata(): Metadata {
           url: "/branding/og-image.png",
           width: 1200,
           height: 630,
-          alt: "DeBro — a simpler way to explore tokenized assets on Solana.",
+          alt: "DeBro — a simpler way to invest in tokenized assets.",
         },
       ],
     },

@@ -5,7 +5,7 @@ Status: **implementation complete on `development`; production release owner-gat
 ## Completed
 - **Foundation:** Next.js App Router, strict TypeScript, Tailwind CSS 4, self-hosted font, design tokens, official brand assets, navy variants, OG/apple assets, metadata routes, security headers.
 - **CI:** documentation validation, lint, typecheck, unit tests, production build and PostgreSQL integration tests. Auto-merge into `development` waits for all jobs.
-- **Landing:** header, hero, How It Works, Why DeBro, Security & Self-Custody, FAQ, waitlist section and footer with approved-direction copy.
+- **Landing:** header, investing-first hero, How It Works, Why DeBro, Security & Confidence, FAQ, waitlist section and footer. Blockchain, wallet and self-custody detail lives mainly in the FAQ.
 - **Waitlist:** tracked migration, Neon adapter, server-only handler, consent, normalization, duplicates, honeypot, rate limiting, safe errors, removal script and test suite.
 - **SEO/analytics:** metadata, canonical, OG/Twitter image, favicons, JSON-LD, robots, sitemap, preview noindex and Vercel Analytics.
 - **QA:** responsive screenshots, interactive state checks and Lighthouse runs recorded in `docs/QA.md`.

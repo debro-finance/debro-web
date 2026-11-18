@@ -67,6 +67,20 @@ describe("metadata", () => {
     const metadata = buildMetadata();
     expect(metadata.robots).toMatchObject({ index: true, follow: true });
   });
+
+  it("uses investing-first copy without Web3 framing", () => {
+    const metadata = buildMetadata();
+    const shareCopy = JSON.stringify({
+      title: metadata.title,
+      description: metadata.description,
+      openGraph: metadata.openGraph,
+      twitter: metadata.twitter,
+    });
+
+    expect(shareCopy).toMatch(/A simpler way to invest in tokenized assets/);
+    expect(shareCopy).toMatch(/modern investing platform/);
+    expect(shareCopy).not.toMatch(/Solana|self-custodial|on-chain/i);
+  });
 });
 
 describe("structured data", () => {

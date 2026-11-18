@@ -11,9 +11,9 @@ Status: **implemented; production indexing remains owner-gated.**
 
 ## Page metadata and social sharing
 Implemented:
-- Descriptive title and meta description aligned with the prelaunch state.
+- Investing-first title and meta description: “A simpler way to invest in tokenized assets,” with a modern investing platform description rather than blockchain or Web3 framing.
 - Canonical URL, Open Graph and Twitter/X summary-large-image cards.
-- Generated 1200×630 branded OG image using the official logo geometry.
+- Generated 1200×630 branded OG image using the official logo geometry and the investing-first headline.
 - Favicon from the official navy icon and a 180×180 apple icon.
 - `lang="en"`, responsive viewport, theme color and semantic heading hierarchy.
 - JSON-LD `Organization` and `WebSite` with only name, URL, logo, language and description. No address, social profiles, ratings or offers.
@@ -23,7 +23,7 @@ Implemented:
 - All landing content is server-rendered and crawlable; interactive islands are the mobile menu and form only.
 - One self-hosted variable font file preloaded by `next/font`, SVG logos and CSS-only hero composition.
 - No external image, font or analytics dependencies beyond the owner-connected Vercel integration.
-- Automated checks in `tests/unit/seo.test.ts` cover metadata, canonical origin, robots/sitemap behavior, structured data and indexing gates.
+- Automated checks in `tests/unit/seo.test.ts` cover metadata copy, canonical origin, robots/sitemap behavior, structured data and indexing gates. `tests/unit/content.test.ts` guards the investing-first hierarchy and keeps wallet/Solana detail in the FAQ.
 - Live checks (dev/preview vs approved Production) are recorded in `docs/QA.md`.
 
 ## Measured results
