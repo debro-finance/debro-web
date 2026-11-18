@@ -26,6 +26,25 @@ function failure(status: number, error: string, retryAfterSeconds?: number): Wai
   return { status, body: { ok: false, error }, retryAfterSeconds };
 }
 
+function getMissingRelation(dbError: {
+  code?: string;
+  table?: string;
+  message?: string;
+}): string | undefined {
+  if (dbError.code !== "42P01") {
+    return undefined;
+  }
+
+  const relation =
+    dbError.table ??
+    dbError.message?.match(/relation "([^"]+)" does not exist/i)?.[1];
+
+  return relation &&
+    /^[A-Za-z_][A-Za-z0-9_$]*(?:\.[A-Za-z_][A-Za-z0-9_$]*)?$/.test(relation)
+    ? relation
+    : undefined;
+}
+
 export async function registerSubscriber({
   rawBody,
   ipHash,
@@ -72,11 +91,13 @@ export async function registerSubscriber({
       code?: string;
       table?: string;
       constraint?: string;
+      message?: string;
     };
 
     console.error("[waitlist] insert failed", {
       name: dbError.name,
       code: dbError.code,
+      relation: getMissingRelation(dbError),
       table: dbError.table,
       constraint: dbError.constraint,
     });

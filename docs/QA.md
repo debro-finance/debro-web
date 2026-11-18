@@ -80,6 +80,8 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 
 The Vercel preview for PR #6 built and reported **Ready**. It is behind Vercel Authentication, so unauthenticated requests return `302` with `X-Robots-Tag: noindex`; page HTML, `robots.txt` and `sitemap.xml` are not publicly reachable. This is the expected safe state for a non-public prelaunch preview. Full page QA still requires an authenticated deployment URL or `vercel curl`.
 
+The Neon `preview/development` branch was checked directly: `current_schema()` was `public` and `search_path` included `public`, but both `to_regclass('public.waitlist_subscribers')` and `to_regclass('waitlist_subscribers')` were `NULL`. The parent migration did not update this existing Preview snapshot. Applying the tracked `0001_waitlist.sql` to that Preview branch made the deployed waitlist endpoint return `200 {ok:true}` for both a new and duplicate signup; the branch contained exactly one row with consent recorded. The synthetic test row was then removed, and no Production row was written.
+
 ## Visual and interaction QA
 
 - Desktop 1440 px: header, hero composition, section rhythm, FAQ open/close, waitlist section and footer.
@@ -91,7 +93,7 @@ The Vercel preview for PR #6 built and reported **Ready**. It is behind Vercel A
 
 ## Limitations
 
-- No real Neon HTTP round trip was exercised locally; SQL is verified against PostgreSQL 16 and the runtime uses the Neon serverless driver.
+- A real Neon HTTP signup round trip was verified against the isolated Preview branch after applying its missing tracked migration. Production was not written.
 - The Vercel preview is authentication-protected, so its pages were not fetched unauthenticated. Deployment status and the noindex response were verified.
 - No production domain, TLS, redirect or Search Console verification has been performed; these are owner gates.
 - Lighthouse is a single local lab run. Repeat on the deployed production URL before launch and record field CWV after traffic exists.
