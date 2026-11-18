@@ -1,6 +1,7 @@
 import { Section, SectionHeading } from "@/components/ui/section";
 import { ArrowRightIcon, PlusIcon } from "@/components/ui/icons";
 import { FAQ_ITEMS } from "@/content/site";
+import { WAITLIST_HREF } from "@/lib/site";
 
 export function Faq() {
   return (
@@ -14,7 +15,7 @@ export function Faq() {
             description="What DeBro is, what tokenized assets mean, and what to expect before launch."
           />
           <a
-            href="#waitlist"
+            href={WAITLIST_HREF}
             className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-navy"
           >
             Join the waitlist

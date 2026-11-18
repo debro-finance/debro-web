@@ -13,7 +13,7 @@ export function WaitlistSection() {
     >
       <div className="relative overflow-hidden rounded-[2rem] border border-line bg-white shadow-card">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative overflow-hidden bg-navy p-8 text-white sm:p-10 lg:p-12">
+          <div className="relative overflow-hidden bg-navy p-7 text-white sm:p-10 lg:p-12">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full border border-white/[0.08]"
@@ -35,7 +35,9 @@ export function WaitlistSection() {
                 account to create today.
               </p>
 
-              <ul className="mt-8 space-y-3">
+              {/* The list restates the supporting copy; on narrow screens the
+                  form takes priority so it stays visible after anchor jumps. */}
+              <ul className="mt-8 hidden space-y-3 lg:block">
                 {WAITLIST_POINTS.map((point) => (
                   <li
                     key={point}
@@ -49,7 +51,7 @@ export function WaitlistSection() {
                 ))}
               </ul>
 
-              <p className="mt-10 text-xs text-white/55">
+              <p className="mt-6 text-xs text-white/55 lg:mt-10">
                 DeBro is in prelaunch. No investment functionality is available
                 on this site.
               </p>

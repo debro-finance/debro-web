@@ -1,6 +1,6 @@
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
-import { NAV_LINKS } from "@/lib/site";
+import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -47,7 +47,7 @@ export function SiteFooter() {
               ))}
               <li>
                 <a
-                  href="#waitlist"
+                  href={WAITLIST_HREF}
                   className="text-sm text-white/70 transition-colors hover:text-white"
                 >
                   Join the waitlist
