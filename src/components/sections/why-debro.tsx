@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import {
-  KeyIcon,
-  LinkIcon,
+  EyeIcon,
+  LayersIcon,
   SparkIcon,
   UsersIcon,
 } from "@/components/ui/icons";
@@ -10,9 +10,9 @@ import { BENEFITS } from "@/content/site";
 
 const icons: ReactNode[] = [
   <SparkIcon key="spark" className="h-5 w-5" />,
-  <KeyIcon key="key" className="h-5 w-5" />,
-  <LinkIcon key="link" className="h-5 w-5" />,
   <UsersIcon key="users" className="h-5 w-5" />,
+  <EyeIcon key="eye" className="h-5 w-5" />,
+  <LayersIcon key="layers" className="h-5 w-5" />,
 ];
 
 export function WhyDeBro() {
@@ -27,8 +27,8 @@ export function WhyDeBro() {
           <SectionHeading
             id="why-debro-title"
             eyebrow="Why DeBro"
-            title="Built to make tokenized finance feel understandable."
-            description="A familiar investing experience, paired with the transparency and control of self-custody. Designed for people who are new to tokenized assets — and for those who know them well."
+            title="Built to make tokenized investing feel clear."
+            description="A familiar investing experience, designed for people who are new to tokenized assets — and for those who know them well."
           />
         </div>
 

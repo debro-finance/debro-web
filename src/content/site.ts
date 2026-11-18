@@ -1,71 +1,71 @@
 export const HERO = {
-  eyebrow: "Prelaunch · Built on Solana",
-  titleLead: "A simpler way to explore",
+  eyebrow: "Prelaunch · Investing, simplified",
+  titleLead: "A simpler way to invest in",
   titleAccent: "tokenized assets.",
   description:
-    "DeBro is building a self-custodial investing experience for discovering tokenized financial assets on Solana — designed to feel clear from the very first step.",
-  note: "In development. Join the waitlist — no wallet needed.",
+    "DeBro is building a modern investing platform that makes tokenized financial assets easier to understand and explore — with a clear, considered experience from the first step.",
+  note: "In development. Join the waitlist for launch news.",
 } as const;
 
 export const STEPS = [
   {
     number: "01",
-    title: "Discover tokenized assets",
+    title: "Explore tokenized assets",
     description:
-      "Explore a focused selection of tokenized financial assets, explained in plain language. No prior crypto experience required.",
+      "Discover a focused selection of tokenized financial assets, explained in plain language and organized around what matters.",
   },
   {
     number: "02",
-    title: "Connect your wallet",
+    title: "Understand what you're considering",
     description:
-      "When the application becomes available, connect a compatible Solana wallet. You stay in control of your assets throughout.",
+      "Review clear information about each asset, including how it works, what rights a token may carry, and the risks involved.",
   },
   {
     number: "03",
     title: "Invest with clarity",
     description:
-      "Review what you are exploring, understand the risks, and make decisions from one simple, considered experience.",
+      "Make decisions from one considered experience, designed to keep unnecessary complexity out of the way.",
   },
 ] as const;
 
 export const BENEFITS = [
   {
-    title: "A simpler way in",
+    title: "Investing, made clearer",
     description:
-      "A focused interface that explains tokenized assets without assuming years of crypto experience.",
+      "A focused experience that explains tokenized assets without assuming specialist knowledge.",
   },
   {
-    title: "Self-custody at the center",
+    title: "Designed around you",
     description:
-      "Designed around your wallet, so control of your assets stays with you — not with a custodian.",
+      "A familiar, modern interface that keeps clarity and control at the center of every decision.",
   },
   {
-    title: "On-chain transparency",
+    title: "Built on transparency",
     description:
-      "Solana-based transactions can be independently verified, bringing a new level of visibility to investing.",
+      "Clear information and independently verifiable records help you understand what you are considering.",
   },
   {
-    title: "Built for two audiences",
+    title: "For every stage",
     description:
-      "Clear enough for newcomers, with the depth and precision experienced investors expect.",
+      "Clear enough for people new to tokenized assets, with the depth experienced investors expect.",
   },
 ] as const;
 
 export const SECURITY_PRINCIPLES = [
   {
-    title: "Your keys stay yours",
+    title: "You stay in control",
     description:
-      "DeBro is designed not to take custody of your wallet or its private keys. Access is granted through your wallet's own approval flow.",
+      "DeBro is designed so that your assets remain under your control, rather than held by a custodian on your behalf.",
   },
   {
     title: "Every action is explicit",
     description:
-      "Transactions are designed to require your confirmation in your wallet before anything is signed.",
+      "You review and confirm each step before anything happens, with no hidden actions.",
   },
   {
     title: "Transparency, with limits",
     description:
-      "On-chain records are public and verifiable, but they do not remove market, smart-contract, issuer or counterparty risk.",
+      "Public records can be independently verified, but they do not remove market, issuer, technology or counterparty risk.",
   },
 ] as const;
 
@@ -76,7 +76,7 @@ export const FAQ_ITEMS = [
   {
     question: "What is DeBro?",
     answer:
-      "DeBro is building a self-custodial investing experience centered on tokenized financial assets on Solana. The product is in prelaunch: the website is live so you can understand the direction and join the waitlist, but trading and wallet connection are not available yet.",
+      "DeBro is building a modern investing platform focused on tokenized financial assets. It is designed to make this market easier to understand and explore, with a clear experience from the first step. DeBro is in prelaunch: this site is live so you can follow the direction and join the waitlist, but investing and account features are not available yet.",
   },
   {
     question: "What are tokenized financial assets?",
@@ -86,12 +86,22 @@ export const FAQ_ITEMS = [
   {
     question: "How is DeBro different from a traditional investing platform?",
     answer:
-      "DeBro is being designed around self-custody: instead of a platform holding your assets, you use your own wallet and approve each action. Transactions are recorded on Solana, where they can be independently verified. DeBro is in prelaunch, and no DeBro product is live today.",
+      "DeBro is being designed around self-custody: instead of a platform holding your assets, you use your own wallet and approve each action. Transactions are recorded on Solana, where they can be independently verified. This approach is intended to give you more direct control, and it comes with responsibilities and risks that we will explain clearly. DeBro is in prelaunch, and no DeBro product is live today.",
   },
   {
     question: "Do I need a crypto wallet?",
     answer:
-      "Not to join the waitlist. When the application launches, you will need a compatible Solana wallet to explore tokenized assets. We will share supported wallet guidance ahead of launch.",
+      "Not to join the waitlist. When the application launches, you will need a compatible Solana wallet to use DeBro. We will share supported wallet guidance ahead of launch.",
+  },
+  {
+    question: "Why does DeBro use blockchain?",
+    answer:
+      "Blockchain infrastructure allows tokenized assets to be issued, transferred and recorded in a way that can be independently verified. DeBro uses Solana for this purpose. Most visitors will not need to understand the technical details to use the experience, but we will explain them clearly for anyone who wants to.",
+  },
+  {
+    question: "Is DeBro a crypto trading platform?",
+    answer:
+      "DeBro is focused on tokenized financial assets, not speculative crypto trading. The underlying settlement uses blockchain technology, but the experience is designed around investing: understanding what you are considering and making a considered decision.",
   },
   {
     question: "When is DeBro launching?",
@@ -117,6 +127,6 @@ export const FAQ_ITEMS = [
 
 export const WAITLIST_POINTS = [
   "One email when DeBro launches",
-  "No wallet or account required",
+  "No account required to join",
   "No newsletters or recurring marketing",
 ] as const;

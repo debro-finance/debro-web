@@ -1,16 +1,12 @@
 import type { ReactNode } from "react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import {
-  EyeIcon,
-  KeyIcon,
-  ShieldAlertIcon,
-} from "@/components/ui/icons";
+import { CheckIcon, EyeIcon, LockIcon } from "@/components/ui/icons";
 import { RISK_DISCLOSURE, SECURITY_PRINCIPLES } from "@/content/site";
 
 const icons: ReactNode[] = [
-  <KeyIcon key="key" className="h-5 w-5" />,
+  <LockIcon key="lock" className="h-5 w-5" />,
+  <CheckIcon key="check" className="h-5 w-5" />,
   <EyeIcon key="eye" className="h-5 w-5" />,
-  <ShieldAlertIcon key="shield" className="h-5 w-5" />,
 ];
 
 export function Security() {
@@ -33,9 +29,9 @@ export function Security() {
         <div>
           <SectionHeading
             id="security-title"
-            eyebrow="Security & self-custody"
-            title="Your wallet. Your control."
-            description="DeBro is being built around self-custody: your wallet holds the keys, and every transaction is approved by you — not by a custodian holding assets on your behalf."
+            eyebrow="Security & confidence"
+            title="Control, without the complexity."
+            description="DeBro is designed to keep you in control of your assets, with clear information and explicit confirmation before any action — not a custodian holding assets on your behalf."
             tone="light"
           />
 

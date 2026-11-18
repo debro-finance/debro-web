@@ -1,6 +1,6 @@
 # DeBro — Institutional Website
 
-The official prelaunch website for **DeBro**, a self-custodial experience for exploring tokenized financial assets on Solana.
+The official prelaunch website for **DeBro**, a modern investing platform that simplifies access to tokenized financial assets.
 
 This repository contains the single-page institutional landing site planned for **debro.finance**. The product application is a separate repository and host (`app.debro.finance`); no trading, wallet connection or account features belong here.
 
@@ -15,8 +15,8 @@ This repository contains the single-page institutional landing site planned for 
 ## What is implemented
 
 - Responsive header with official horizontal logo, anchor navigation, mobile menu and repeated **Join the waitlist** CTA.
-- Hero with an original CSS/SVG brand composition (no fabricated trading interface).
-- How It Works, Why DeBro, Security & Self-Custody, FAQ and Waitlist sections.
+- Investing-first hero with an original CSS/SVG folio composition (no fabricated trading interface or portfolio data).
+- How It Works, Why DeBro, Security & Confidence, FAQ and Waitlist sections. Blockchain, wallet and self-custody details live mainly in the FAQ.
 - Accessible FAQ using native `details`/`summary`.
 - Waitlist form with explicit consent, loading, success, duplicate-safe, validation and error states, plus a honeypot.
 - Server-side waitlist route with Zod validation, lowercase normalization, parameterized SQL, unique-email handling, in-memory rate limiting and safe error responses.

@@ -1,101 +1,71 @@
-import { BrandIcon } from "@/components/brand/logo";
-import { KeyIcon, LayersIcon } from "@/components/ui/icons";
+import { BrandIcon, Logo } from "@/components/brand/logo";
 
 export function HeroVisual() {
   return (
-    <div className="relative mx-auto w-full max-w-[520px]">
+    <div className="relative mx-auto w-full max-w-[500px]">
       <div
         aria-hidden="true"
-        className="absolute -inset-5 rounded-[3rem] bg-accent-soft/80 blur-2xl sm:-inset-8"
+        className="pointer-events-none absolute -inset-6 rounded-[3rem] bg-[radial-gradient(circle_at_60%_35%,#eef1fd_0%,transparent_70%)] sm:-inset-8"
       />
 
-      <div className="relative rounded-[2rem] bg-gradient-to-b from-navy-soft to-navy p-2 shadow-float ring-1 ring-navy/10">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[1.65rem] border border-white/10 bg-navy">
-          <div aria-hidden="true" className="pattern-grid absolute inset-0 opacity-70" />
-          <div
-            aria-hidden="true"
-            className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-28 -left-20 h-64 w-64 rounded-full bg-white/5 blur-3xl"
-          />
+      <div className="relative pb-2 pt-12">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-7 bottom-10 top-1 -rotate-[6deg] overflow-hidden rounded-[2rem] bg-navy shadow-float"
+        >
+          <div className="pattern-grid absolute inset-0 opacity-30" />
+          <div className="absolute inset-x-8 top-5 h-px bg-white/15" />
+        </div>
 
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 hidden items-center justify-center sm:flex"
-          >
-            <div className="relative flex h-[64%] w-[64%] items-center justify-center rounded-full border border-white/10">
-              <div className="absolute inset-[15%] rounded-full border border-white/10" />
-              <div className="absolute inset-[31%] rounded-full border border-white/10 bg-white/[0.03]" />
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-sm">
-                <BrandIcon variant="white" className="h-11 w-11" />
-              </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-3 bottom-6 top-7 rotate-[3deg] rounded-[2rem] border border-white bg-accent-soft shadow-card"
+        />
+
+        <div className="relative mt-12 rounded-[2rem] border border-line bg-white p-5 shadow-float sm:p-7">
+          <div className="flex items-center justify-between gap-4">
+            <Logo className="h-5 w-auto" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted">
               <span
                 aria-hidden="true"
-                className="absolute left-[8%] top-[32%] h-2 w-2 rounded-full bg-accent/80 ring-4 ring-accent/10"
+                className="h-1.5 w-1.5 rounded-full bg-accent"
+              />
+              Prelaunch
+            </span>
+          </div>
+
+          <div className="mt-6 rounded-[1.5rem] border border-line bg-surface px-5 py-7 text-center sm:px-6 sm:py-8">
+            <div className="relative mx-auto flex h-32 w-32 items-center justify-center rounded-[1.6rem] border border-navy/10 bg-white shadow-sm sm:h-36 sm:w-36">
+              <div
+                aria-hidden="true"
+                className="absolute inset-3 rounded-[1.2rem] border border-navy/10"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-7 rounded-[0.85rem] border border-navy/10 bg-surface"
               />
               <span
                 aria-hidden="true"
-                className="absolute bottom-[14%] right-[18%] h-1.5 w-1.5 rounded-full bg-white/50"
+                className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-accent/70"
               />
+              <BrandIcon className="relative h-10 w-10" />
             </div>
-          </div>
 
-          <div className="absolute inset-0 flex items-center justify-center sm:hidden">
-            <div className="flex h-24 w-24 items-center justify-center rounded-full border border-white/15 bg-white/[0.06]">
-              <BrandIcon variant="white" className="h-11 w-11" />
-            </div>
-          </div>
-
-          <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3 py-1.5 text-[0.7rem] font-medium text-white/75 backdrop-blur-sm">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-emerald-300"
-            />
-            Built on Solana
-          </div>
-
-          <div className="absolute right-4 top-16 hidden w-[11.5rem] rounded-2xl border border-white/60 bg-white p-3.5 shadow-float sm:block sm:top-20 sm:w-[12.5rem]">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent">
-              <KeyIcon className="h-4 w-4" />
-            </div>
-            <p className="mt-2.5 text-sm font-semibold text-ink">
-              Self-custody
+            <p className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
+              Investing, simplified
             </p>
-            <p className="mt-0.5 text-xs leading-snug text-muted">
-              Your wallet, your control.
+            <p className="mx-auto mt-2 max-w-[15rem] text-balance text-xl font-semibold tracking-[-0.02em] text-ink">
+              Tokenized assets, made approachable.
             </p>
           </div>
 
-          <div className="absolute bottom-16 left-4 hidden w-[12rem] rounded-2xl border border-white/10 bg-white/[0.08] p-3.5 backdrop-blur-md sm:bottom-20 sm:block sm:w-[13rem]">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white">
-              <LayersIcon className="h-4 w-4" />
-            </div>
-            <p className="mt-2.5 text-sm font-semibold text-white">
-              Tokenized assets
-            </p>
-            <p className="mt-0.5 text-xs leading-snug text-white/60">
-              A clearer view of what you explore.
-            </p>
-          </div>
-
-          <div className="absolute inset-x-0 bottom-[4.5rem] px-6 text-center sm:hidden">
-            <p className="text-sm font-semibold text-white">
-              Your wallet. Your control.
-            </p>
-            <p className="mt-1 text-xs text-white/60">
-              Tokenized assets on Solana
-            </p>
-          </div>
-
-          <p className="absolute bottom-4 right-4 text-[0.6rem] font-medium uppercase tracking-[0.16em] text-white/55">
-            Prelaunch
+          <p className="mt-5 text-center text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
+            Discover · Understand · Decide
           </p>
         </div>
       </div>
 
-      <p className="mt-5 text-center text-xs text-muted">
+      <p className="relative mt-6 text-center text-xs text-muted">
         Illustrative composition. DeBro is in prelaunch.
       </p>
     </div>

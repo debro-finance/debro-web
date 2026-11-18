@@ -1,10 +1,10 @@
 export const SITE_NAME = "DeBro";
 
 export const SITE_TITLE =
-  "DeBro — A simpler way to explore tokenized assets";
+  "DeBro — A simpler way to invest in tokenized assets";
 
 export const SITE_DESCRIPTION =
-  "DeBro is building a self-custodial experience to discover tokenized financial assets on Solana. Join the waitlist for launch news.";
+  "DeBro is building a modern investing platform that makes tokenized financial assets easier to understand and explore. Join the waitlist for launch news.";
 
 export const SITE_LOCALE = "en";
 

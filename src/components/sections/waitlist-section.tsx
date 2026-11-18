@@ -31,8 +31,8 @@ export function WaitlistSection() {
                 Be first to know when DeBro launches.
               </h2>
               <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-white/65 sm:text-base">
-                One email when availability opens. No newsletters, no wallet
-                required, and no account to create today.
+                One email when availability opens. No newsletters, and no
+                account to create today.
               </p>
 
               <ul className="mt-8 space-y-3">
