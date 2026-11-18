@@ -61,6 +61,10 @@ Notes:
 - The hero opacity animation was removed and the header logo changed from `priority` preload to a lightweight preload/fetch-priority hint to bring LCP from 2.6 s to 0.9 s.
 - Mobile Lighthouse was not run separately; layout and interaction were checked at 390 px. Field CWV must be reviewed on the deployed domain.
 
+## Preview deployment
+
+The Vercel preview for PR #6 built and reported **Ready**. It is behind Vercel Authentication, so unauthenticated requests return `302` with `X-Robots-Tag: noindex`; page HTML, `robots.txt` and `sitemap.xml` are not publicly reachable. This is the expected safe state for a non-public prelaunch preview. Full page QA still requires an authenticated deployment URL or `vercel curl`.
+
 ## Visual and interaction QA
 
 - Desktop 1440 px: header, hero composition, section rhythm, FAQ open/close, waitlist section and footer.
@@ -72,7 +76,8 @@ Notes:
 
 ## Limitations
 
-- No real Neon HTTP round trip or Vercel preview deployment was exercised locally; SQL is verified against PostgreSQL 16 and the runtime uses the Neon serverless driver.
+- No real Neon HTTP round trip was exercised locally; SQL is verified against PostgreSQL 16 and the runtime uses the Neon serverless driver.
+- The Vercel preview is authentication-protected, so its pages were not fetched unauthenticated. Deployment status and the noindex response were verified.
 - No production domain, TLS, redirect or Search Console verification has been performed; these are owner gates.
 - Lighthouse is a single local lab run. Repeat on the deployed production URL before launch and record field CWV after traffic exists.
 - Copy, claims, legal pages, final typeface and the privacy/retention policy still require owner approval.
