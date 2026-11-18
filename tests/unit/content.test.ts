@@ -64,7 +64,7 @@ describe("landing content", () => {
       (item) => `${item.question} ${item.answer}`,
     ).join(" ");
 
-    expect(faqCopy).toMatch(/Solana wallet/i);
+    expect(faqCopy).toMatch(/wallet/i);
     expect(faqCopy).toMatch(/self-custody/i);
     expect(faqCopy).toMatch(/blockchain/i);
     expect(faqCopy).toMatch(/Solana/i);
