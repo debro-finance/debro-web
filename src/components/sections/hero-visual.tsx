@@ -1,72 +1,124 @@
-import { BrandIcon, Logo } from "@/components/brand/logo";
+import Image from "next/image";
+
+type Tile = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  size: string;
+  position: string;
+  rotate: string;
+  delay: string;
+  duration: string;
+};
+
+const TILES: Tile[] = [
+  {
+    src: "/assets/companies/aapl.svg",
+    alt: "Apple",
+    width: 475,
+    height: 475,
+    size: "h-20 w-20 sm:h-24 sm:w-24",
+    position: "left-[4%] top-[6%]",
+    rotate: "-rotate-6",
+    delay: "0s",
+    duration: "6s",
+  },
+  {
+    src: "/assets/companies/msft.svg",
+    alt: "Microsoft",
+    width: 48,
+    height: 48,
+    size: "h-16 w-16 sm:h-20 sm:w-20",
+    position: "right-[6%] top-[2%]",
+    rotate: "rotate-3",
+    delay: "0.4s",
+    duration: "7s",
+  },
+  {
+    src: "/assets/companies/nvda.svg",
+    alt: "NVIDIA",
+    width: 64,
+    height: 64,
+    size: "h-24 w-24 sm:h-28 sm:w-28",
+    position: "left-[2%] top-[42%]",
+    rotate: "-rotate-3",
+    delay: "0.8s",
+    duration: "6.5s",
+  },
+  {
+    src: "/assets/companies/v.svg",
+    alt: "Visa",
+    width: 750,
+    height: 471,
+    size: "h-14 w-24 sm:h-16 sm:w-[7.5rem]",
+    position: "right-[4%] top-[34%]",
+    rotate: "rotate-2",
+    delay: "1.2s",
+    duration: "7.5s",
+  },
+  {
+    src: "/assets/companies/amzn.svg",
+    alt: "Amazon",
+    width: 64,
+    height: 64,
+    size: "h-20 w-20 sm:h-22 sm:w-22",
+    position: "left-[18%] bottom-[8%]",
+    rotate: "-rotate-4",
+    delay: "0.2s",
+    duration: "6.2s",
+  },
+  {
+    src: "/assets/companies/tsla.svg",
+    alt: "Tesla",
+    width: 64,
+    height: 64,
+    size: "h-20 w-20 sm:h-24 sm:w-24",
+    position: "right-[14%] bottom-[4%]",
+    rotate: "rotate-5",
+    delay: "1s",
+    duration: "7s",
+  },
+];
 
 export function HeroVisual() {
   return (
-    <div className="relative mx-auto w-full max-w-[500px]">
+    <div className="relative mx-auto w-full max-w-[520px]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-6 rounded-[3rem] bg-[radial-gradient(circle_at_60%_35%,#eef1fd_0%,transparent_70%)] sm:-inset-8"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-[3rem] bg-[radial-gradient(circle_at_50%_40%,#eef1fd_0%,transparent_72%)]"
       />
 
-      <div className="relative pb-2 pt-12">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-7 bottom-10 top-1 -rotate-[6deg] overflow-hidden rounded-[2rem] bg-navy shadow-float"
-        >
-          <div className="pattern-grid absolute inset-0 opacity-30" />
-          <div className="absolute inset-x-8 top-5 h-px bg-white/15" />
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-3 bottom-6 top-7 rotate-[3deg] rounded-[2rem] border border-white bg-accent-soft shadow-card"
-        />
-
-        <div className="relative mt-12 rounded-[2rem] border border-line bg-white p-5 shadow-float sm:p-7">
-          <div className="flex items-center justify-between gap-4">
-            <Logo className="h-5 w-auto" />
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted">
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-accent"
+      <div className="relative aspect-[5/4.6] w-full">
+        {TILES.map((tile, index) => (
+          <div
+            key={tile.src}
+            className={`absolute ${tile.position} ${tile.rotate}`}
+          >
+            <div
+              className={`motion-safe:animate-[float_var(--dur)_ease-in-out_var(--delay)_infinite] flex ${tile.size} items-center justify-center rounded-2xl border border-line bg-white/95 p-3 shadow-[0_12px_32px_-16px_rgb(20_27_61/0.22)] ring-1 ring-navy/5 backdrop-blur-sm sm:p-4`}
+              style={
+                {
+                  "--dur": tile.duration,
+                  "--delay": tile.delay,
+                } as React.CSSProperties
+              }
+            >
+              <Image
+                src={tile.src}
+                alt={tile.alt}
+                width={tile.width}
+                height={tile.height}
+                className="h-full w-full object-contain"
+                loading={index < 2 ? "eager" : "lazy"}
               />
-              Prelaunch
-            </span>
-          </div>
-
-          <div className="mt-6 rounded-[1.5rem] border border-line bg-surface px-5 py-7 text-center sm:px-6 sm:py-8">
-            <div className="relative mx-auto flex h-32 w-32 items-center justify-center rounded-[1.6rem] border border-navy/10 bg-white shadow-sm sm:h-36 sm:w-36">
-              <div
-                aria-hidden="true"
-                className="absolute inset-3 rounded-[1.2rem] border border-navy/10"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-7 rounded-[0.85rem] border border-navy/10 bg-surface"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-accent/70"
-              />
-              <BrandIcon className="relative h-10 w-10" />
             </div>
-
-            <p className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
-              Investing, simplified
-            </p>
-            <p className="mx-auto mt-2 max-w-[15rem] text-balance text-xl font-semibold tracking-[-0.02em] text-ink">
-              Tokenized assets, made approachable.
-            </p>
           </div>
-
-          <p className="mt-5 text-center text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
-            Discover · Understand · Decide
-          </p>
-        </div>
+        ))}
       </div>
 
-      <p className="relative mt-6 text-center text-xs text-muted">
-        Illustrative composition. DeBro is in prelaunch.
+      <p className="mt-4 text-center text-xs leading-relaxed text-muted">
+        Illustrative companies only. Asset availability is not confirmed.
       </p>
     </div>
   );

@@ -86,12 +86,12 @@ export const FAQ_ITEMS = [
   {
     question: "How is DeBro different from a traditional investing platform?",
     answer:
-      "DeBro is being designed around self-custody: instead of a platform holding your assets, you use your own wallet and approve each action. Transactions are recorded on Solana, where they can be independently verified. This approach is intended to give you more direct control, and it comes with responsibilities and risks that we will explain clearly. DeBro is in prelaunch, and no DeBro product is live today.",
+      "DeBro is being designed around self-custody for those who want it: if you connect a compatible wallet, you approve each action yourself rather than a platform holding your assets on your behalf. You can also sign in with email or Google without a wallet. Transactions are recorded on Solana, where they can be independently verified. This approach is intended to give you more direct control, and it comes with responsibilities and risks that we will explain clearly. DeBro is in prelaunch, and no DeBro product is live today.",
   },
   {
     question: "Do I need a crypto wallet?",
     answer:
-      "Not to join the waitlist. When the application launches, you will need a compatible Solana wallet to use DeBro. We will share supported wallet guidance ahead of launch.",
+      "No. DeBro is designed to make getting started simple. You'll be able to sign in with your email or Google account, without needing to set up a crypto wallet yourself. If you already use a compatible wallet, you'll also have the option to connect it. This describes planned launch functionality; DeBro is in prelaunch and none of these sign-in options are available today.",
   },
   {
     question: "Why does DeBro use blockchain?",
