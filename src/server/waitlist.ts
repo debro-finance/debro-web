@@ -1,16 +1,12 @@
+import { MAX_WAITLIST_BODY_BYTES, parseWaitlistPayload } from "@/lib/waitlist/validation";
+
 import type { RateLimiter } from "@/lib/waitlist/rate-limit";
-import {
-  MAX_WAITLIST_BODY_BYTES,
-  parseWaitlistPayload,
-} from "@/lib/waitlist/validation";
 
 export type WaitlistDb = {
   insertSubscriber(email: string): Promise<{ inserted: boolean }>;
 };
 
-export type WaitlistBody =
-  | { ok: true }
-  | { ok: false; error: string };
+export type WaitlistBody = { ok: true } | { ok: false; error: string };
 
 export type WaitlistResult = {
   status: number;
@@ -26,11 +22,7 @@ export type RegisterSubscriberInput = {
   limiter: RateLimiter;
 };
 
-function failure(
-  status: number,
-  error: string,
-  retryAfterSeconds?: number,
-): WaitlistResult {
+function failure(status: number, error: string, retryAfterSeconds?: number): WaitlistResult {
   return { status, body: { ok: false, error }, retryAfterSeconds };
 }
 
@@ -75,10 +67,19 @@ export async function registerSubscriber({
   } catch (error) {
     // Deliberately log only a generic identifier: never the email, SQL params
     // or connection details.
-    console.error(
-      "[waitlist] insert failed",
-      error instanceof Error ? error.name : "unknown_error",
-    );
+    const dbError = error as {
+      name?: string;
+      code?: string;
+      table?: string;
+      constraint?: string;
+    };
+
+    console.error("[waitlist] insert failed", {
+      name: dbError.name,
+      code: dbError.code,
+      table: dbError.table,
+      constraint: dbError.constraint,
+    });
     return failure(503, "unavailable");
   }
 }
