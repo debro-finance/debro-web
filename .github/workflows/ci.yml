@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - development
+      - main
+  push:
+    branches:
+      - development
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  foundation:
+    name: Foundation validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify foundational documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s README.md
+          test -s AGENTS.md
+          test -s docs/GITHUB_WORKFLOW.md
+          python3 - <<'PY'
+          from pathlib import Path
+          for name in ['README.md', 'AGENTS.md', 'docs/GITHUB_WORKFLOW.md']:
+              text = Path(name).read_text(encoding='utf-8')
+              assert not any(line.rstrip('\n').endswith(' ') for line in text.splitlines(keepends=True)), f'Trailing whitespace: {name}'
+          print('Foundation documents valid')
+          PY
+
+  quality:
+    name: Lint, typecheck, tests and build
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+
+  database:
+    name: Database integration tests
+    runs-on: ubuntu-latest
+    env:
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/debro_test
+      NEXT_TELEMETRY_DISABLED: "1"
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: debro_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d debro_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Apply tracked migrations
+        run: npm run db:migrate
+      - name: Integration tests
+        run: npm run test:db
+
+  merge-development:
+    name: Auto-merge into development
+    needs: [foundation, quality, database]
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.base.ref == 'development' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Merge verified internal PR into development
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Do not merge a different revision if new commits arrived during CI.
+          current_head="$(gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.head.sha')"
+          if [ "$current_head" != "$EXPECTED_HEAD" ]; then
+            echo "PR head changed during CI; refusing stale merge."
+            exit 1
+          fi
+          gh pr merge "$PR_NUMBER" --repo "$REPO" --squash --delete-branch --match-head-commit "$EXPECTED_HEAD"
