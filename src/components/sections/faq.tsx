@@ -12,7 +12,7 @@ export function Faq() {
             id="faq-title"
             eyebrow="FAQ"
             title="Questions, answered plainly."
-            description="Explore tokenized assets, access options, availability and risk."
+            description="Explore the investment universe, access options and how the platform works."
           />
           <a
             href={WAITLIST_HREF}

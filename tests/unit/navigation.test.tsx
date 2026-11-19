@@ -5,6 +5,7 @@ import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { SiteHeader } from "@/components/layout/site-header";
 import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
 
 beforeEach(() => {
@@ -98,6 +99,18 @@ describe("mobile navigation", () => {
         .getByRole("link", { name: "Join the waitlist" })
         .getAttribute("href"),
     ).toBe(WAITLIST_HREF);
+  });
+});
+
+describe("header navigation", () => {
+  it("uses the DeBro mark as a back-to-top link", () => {
+    render(<SiteHeader />);
+
+    expect(
+      screen.getByRole("link", { name: "DeBro — back to top" }).getAttribute(
+        "href",
+      ),
+    ).toBe("#main");
   });
 });
 

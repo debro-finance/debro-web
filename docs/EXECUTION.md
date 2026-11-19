@@ -12,11 +12,12 @@ Status: **implementation complete on `development`; production release owner-gat
 
 ## Owner-controlled launch gates
 - [ ] Domain purchase/DNS/TLS and canonical production URL.
-- [ ] Legal operator/contact, privacy policy, terms, risk disclosure, retention and subscriber-rights route.
+- [ ] Confirm legal operator/contact, privacy notice, terms, risk disclosure, retention and subscriber-rights route; see `docs/PRIVACY-DRAFT.md`.
+- [ ] The owner reports waitlist collection is currently active. Decide whether to pause further collection until the privacy requirements and handling process are approved; this task did not change collection settings.
 - [ ] Final copy/claims approval and final interface typeface confirmation.
 - [ ] Vercel plan eligibility for public commercial use.
 - [ ] Neon production configuration and preview database isolation verified.
-- [ ] Set `WAITLIST_ENABLED=true` and `SITE_INDEXABLE=true` in Vercel Production only after approval.
+- [ ] Keep indexing owner-gated; do not change the existing waitlist setting without the owner's decision on the privacy requirements.
 - [ ] Owner review and merge of `development` into `main`.
 - [ ] Public launch announcement and email-sending provider (separate future scope).
 

@@ -1,20 +1,22 @@
+"use client";
+
+import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
+
+import { Container } from "@/components/ui/container";
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { MobileMenu } from "@/components/layout/mobile-menu";
-import { Container } from "@/components/ui/container";
-import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white">
       <Container className="relative flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Link
-          href="/"
-          aria-label="DeBro — home"
-          className="inline-flex shrink-0 items-center rounded-sm"
-        >
-          <Logo preload className="h-[1.35rem] w-auto sm:h-6" />
-        </Link>
+        <Logo
+          preload
+          className="h-[1.35rem] w-auto sm:h-6 cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          
+        />
 
         <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-8">

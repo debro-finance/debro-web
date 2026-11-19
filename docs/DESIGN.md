@@ -8,12 +8,12 @@ Single-page, English-first, responsive institutional landing aimed at prelaunch 
 ## Implemented sections
 1. Sticky header: official navy horizontal logo, desktop anchor navigation, accessible mobile disclosure menu, prominent Join the waitlist CTA. The mobile panel is a fixed, solid-surface dropdown outside the blurred layer, with outside-click and Escape dismissal.
 2. Hero: “A simpler way to invest in tokenized assets.” with concise investing-first copy, dual CTA and an original light orbit composition: the official monogram anchors eight illustrative company logos, evenly alternated between two concentric, slowly rotating rings. No fake charts, prices or portfolio data; explicitly labelled illustrative and prelaunch.
-3. How It Works: a progressive three-step journey (explore → understand → invest), horizontally connected on desktop and vertically sequenced on mobile.
-4. Why DeBro: an asymmetric editorial composition with a prominent navy unified-experience feature and two unnumbered supporting benefits for clarity and user control/portability.
-5. Security & Transparency: navy section with a concise trust statement, three compact unnumbered principles and a separate, understated risk disclosure.
-6. FAQ: two-column layout with native `details`/`summary` accordion and ten factual answers, including asset rights, planned access methods, risks, Solana and availability.
-7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states. Every waitlist CTA targets the `#waitlist` section, which carries the sticky-header scroll offset.
-8. Footer: white logo on navy, anchor navigation, prelaunch status, legal-placeholder notice and risk disclosure. No invented contact or social links.
+3. How It Works: the progressive discover → invest → stay in control journey, horizontally connected on desktop and vertically sequenced on mobile.
+4. Why DeBro: the asymmetric editorial composition with the target-universe highlight and two supporting benefits for simplicity and supported asset portability.
+5. Security & Transparency: the navy composition with three positive confidence/control principles and one concise, separate risk disclosure.
+6. FAQ: two-column layout with native `details`/`summary` accordion and nine answers about tokenized-stock exposure, the target asset universe, supported transfers, eligibility, planned access, risks and the waitlist.
+7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states. It discloses the single-email purpose, no-newsletter policy and outstanding privacy-notice details. Every waitlist CTA targets the `#waitlist` section, which carries the sticky-header scroll offset.
+8. Footer: white logo on navy, anchor navigation, prelaunch status, waitlist/privacy status and risk disclosure. No invented contact or social links.
 
 ## Interaction and accessibility
 - Repeated CTAs target the single canonical waitlist section; there is one registration implementation and one database.
@@ -37,4 +37,4 @@ Single-page, English-first, responsive institutional landing aimed at prelaunch 
 - [x] Waitlist states implemented and exercised.
 - [x] Official logos integrated with preserved geometry.
 - [ ] Owner visual approval and final typeface confirmation.
-- [ ] Privacy, Terms and risk links published once approved.
+- [ ] Privacy notice and any needed Terms/risk links published after owner and counsel approval; waitlist collection status is an owner decision while this is pending.

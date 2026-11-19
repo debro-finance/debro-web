@@ -146,8 +146,8 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
       </p>
       {!enabled ? (
         <p className="rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted-strong">
-          Public signup opens at launch, once our privacy disclosures are
-          final. Check back here for the announcement.
+          Waitlist registration is currently unavailable. Please check back for
+          updates.
         </p>
       ) : null}
 
@@ -188,8 +188,8 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
             className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-navy disabled:cursor-not-allowed"
           />
           <span>
-            I agree to receive a one-time email about DeBro&apos;s launch. No
-            newsletters.
+            I agree to receive one email announcing DeBro&apos;s availability.
+            No newsletters or recurring marketing.
           </span>
         </label>
       </div>
@@ -231,14 +231,14 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
         ) : enabled ? (
           "Join the waitlist"
         ) : (
-          "Waitlist opens soon"
+          "Waitlist unavailable"
         )}
       </button>
 
       <p id="waitlist-note" className="text-xs leading-relaxed text-muted">
-        We use your email only to announce DeBro&apos;s availability. No
-        newsletters or recurring marketing. We&apos;ll include a removal option
-        in every message we send.
+        The privacy notice is not yet published. The responsible entity,
+        contact method, retention period, removal process, and applicable
+        disclosures still require confirmation.
       </p>
     </form>
   );

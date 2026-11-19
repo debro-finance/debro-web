@@ -12,17 +12,28 @@ export function Security() {
         <SectionHeading
           id="security-title"
           eyebrow="Security & transparency"
-          title="Clarity is part of trust."
-          description="Trust begins with clear information about an asset, its legal structure and the responsibilities involved."
+          title="Built for confidence and control."
+          description="A modern approach to investing, combining transparency, simplicity and greater freedom over how you manage your assets."
           tone="light"
         />
 
         <ul className="mt-12 grid gap-7 border-y border-white/15 py-7 sm:grid-cols-3 sm:divide-x sm:divide-white/15 sm:py-9">
-          {SECURITY_PRINCIPLES.map((principle) => (
-            <li key={principle.title} className="sm:px-6 sm:first:pl-0 sm:last:pr-0">
-              <h3 className="text-base font-semibold text-white sm:text-lg">
-                {principle.title}
-              </h3>
+          {SECURITY_PRINCIPLES.map((principle, index) => (
+            <li
+              key={principle.title}
+              className="sm:px-6 sm:first:pl-0 sm:last:pr-0"
+            >
+              <div className="flex items-baseline gap-3">
+                <span
+                  aria-hidden="true"
+                  className="text-xs font-medium tabular-nums tracking-[0.12em] text-white/40"
+                >
+                  0{index + 1}
+                </span>
+                <h3 className="text-base font-semibold text-white sm:text-lg">
+                  {principle.title}
+                </h3>
+              </div>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
                 {principle.description}
               </p>

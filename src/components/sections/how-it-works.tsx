@@ -11,8 +11,8 @@ export function HowItWorks() {
       <SectionHeading
         id="how-it-works-title"
         eyebrow="How it works"
-        title="Explore. Understand. Invest."
-        description="A considered journey from discovering an opportunity to making an informed decision."
+        title="Discover. Invest. Stay in control."
+        description="From exploring opportunities to managing your investments, everything in one seamless experience."
       />
 
       <ol className="mt-14 grid gap-10 lg:grid-cols-3 lg:gap-8">

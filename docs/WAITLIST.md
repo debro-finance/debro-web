@@ -1,6 +1,6 @@
 # Waitlist functional & data specification
 
-Status: **implemented and tested; public production collection remains disabled until owner approval.**
+Status: **implemented and tested; owner reports the shared-database waitlist is currently accepting registrations. Privacy notice and handling details require owner/counsel review.**
 
 ## Use and scope
 - Single opt-in email signup; explicit consent to be contacted about **DeBro launch availability** only.
@@ -52,11 +52,13 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 - Limitation: the limiter is per serverless instance and resets on recycle. It is an appropriate low-cost deterrent for this small prelaunch list, not a distributed abuse guarantee.
 
 ## Consent, retention and deletion
-- The site does not publish unapproved legal text, contact details or social links.
+- Consent is limited to one email announcing DeBro availability; no newsletters or recurring marketing.
+- The website identifies that its privacy notice is not yet published and that the responsible entity, contact method, retention period, removal process and applicable disclosures still require confirmation. See `docs/PRIVACY-DRAFT.md`; it is not approved publication copy.
 - `npm run waitlist:remove -- --email <address>` marks a subscriber unsubscribed.
 - `npm run waitlist:remove -- --email <address> --delete` permanently removes the row.
 - Both scripts print only an affected count, never the address or subscriber data.
-- Public collection stays disabled (`WAITLIST_ENABLED` unset/`false`) until the legal operator identity, privacy disclosures, retention policy, rights-request route and cross-border processing are approved.
+- There is no automatic expiry or public removal-request interface. The removal script is an operator tool; the owner must establish and publish a monitored request channel, handler and retention/deletion policy.
+- The owner reports public collection is currently active. This refinement did not inspect deployed environment settings or change them. The owner must decide promptly whether to pause further collection while disclosures and request handling are completed; only the owner should change the existing collection control.
 - Announcement email sending is out of scope. Any future sending must honor the consent purpose and opt-outs.
 
 ## Environment safety

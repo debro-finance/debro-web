@@ -4,7 +4,7 @@ export const SITE_TITLE =
   "DeBro — A simpler way to invest in tokenized assets";
 
 export const SITE_DESCRIPTION =
-  "DeBro is building a modern investing platform for tokenized financial assets, bringing discovery and relevant information into one considered experience.";
+  "A modern investing platform for tokenized stocks and financial assets. Discover global opportunities with greater simplicity and control over supported assets.";
 
 export const SITE_LOCALE = "en";
 

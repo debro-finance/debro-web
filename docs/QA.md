@@ -76,9 +76,9 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 - `/favicon.ico` returns 200 as `image/x-icon` with 16, 32 and 48 px entries derived from `debro-icon-navy.svg`; `/icon.svg` and `/apple-icon.png` remain available without conflicting icon metadata.
 - Lighthouse remained at Performance 100, Accessibility 100, Best Practices 96, SEO 100 for the indexable configuration.
 
-## Current institutional refinement QA
+## Final content and product-positioning refinement QA
 
-The investing-first content, distinct section compositions and corrected product FAQ were rechecked locally. Current automated checks:
+The approved hero, process, benefit, trust and FAQ copy were checked against the requested wording. The current automated checks are:
 
 | Check | Command | Result |
 | --- | --- | --- |
@@ -90,15 +90,13 @@ The investing-first content, distinct section compositions and corrected product
 
 Browser review:
 
-- Responsive widths: 320, 390, 768, 1024 and 1440 px. At each width, document and body scroll widths matched the document client width; no horizontal overflow.
-- Loaded all 11 page images after scrolling through the page, including below-the-fold imagery.
-- How It Works uses a connected three-step journey; Why DeBro emphasizes one primary benefit with two supporting points; Security & Transparency uses compact principles and a distinct risk disclosure.
-- Checked the desktop and tablet section layouts, plus mobile FAQ and waitlist layout.
-- On mobile, the menu opened with focus on its first link, Escape closed it and returned focus to the trigger, and following a menu link closed the menu and navigated to the section.
-- FAQ disclosures remained usable; opening the second item closed the first.
-- Reduced-motion preference disables animation and smooth scrolling.
-- Database-disabled development and production previews used `DATABASE_URL=` and `WAITLIST_ENABLED=false`; the production server returned HTTP 200 and the form stayed disabled. No signup was submitted and no database was accessed.
-- The browser reported the expected local Vercel Analytics script 404.
+- Responsive widths: 390, 768 and 1440 px; document width matched viewport at each size with no horizontal overflow or overlapping content.
+- How It Works retained the connected three-step layout; Why DeBro retained its asymmetric navy feature and supporting points; Security retained its navy background, compact numbered principles and separate risk disclosure.
+- All nine FAQ items rendered, and the accessible single-open-item accordion behavior was exercised.
+- Waitlist controls and CTA destinations were checked. No signup was submitted and no database or deployment setting was accessed.
+- `prefers-reduced-motion` continues to disable animation and smooth scrolling.
+- Local preview used `DATABASE_URL=` and `WAITLIST_ENABLED=false`; production build and server smoke test passed with signup disabled. The browser reported the expected local Vercel Analytics script 404.
+- The page explicitly identifies that the privacy notice is not published and lists the responsible-entity, contact, retention, removal and applicable-disclosure details still requiring confirmation. An internal, unapproved draft is in `docs/PRIVACY-DRAFT.md`.
 
 ## Preview deployment
 

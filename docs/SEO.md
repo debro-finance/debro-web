@@ -13,11 +13,11 @@ Status: **implemented; production indexing remains owner-gated.**
 Implemented:
 - Investing-first title and meta description: “A simpler way to invest in tokenized assets,” with a modern investing platform description rather than blockchain or Web3 framing.
 - Canonical URL, Open Graph and Twitter/X summary-large-image cards.
-- Generated 1200×630 branded OG image using the official logo geometry and the investing-first headline.
+- Generated 1200×630 branded OG image using the official logo geometry, investing-first headline and global-opportunities tagline.
 - Favicon from the official navy icon and a 180×180 apple icon.
 - `lang="en"`, responsive viewport, theme color and semantic heading hierarchy.
 - JSON-LD `Organization` and `WebSite` with only name, URL, logo, language and description. No address, social profiles, ratings or offers.
-- No broken Privacy/Terms links: those pages will be linked when approved, and the footer states they will be published before public signup opens.
+- No placeholder Privacy/Terms links are published. The waitlist is reported active, while the privacy notice remains unpublished; the form and footer disclose this status and the owner-confirmation gaps. See `docs/PRIVACY-DRAFT.md`.
 
 ## Technical quality
 - All landing content is server-rendered and crawlable; interactive islands are the mobile menu and form only.

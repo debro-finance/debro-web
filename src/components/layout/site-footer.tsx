@@ -1,9 +1,10 @@
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
-import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
+import { isWaitlistEnabled, NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const waitlistEnabled = isWaitlistEnabled();
 
   return (
     <footer className="bg-navy text-white">
@@ -18,8 +19,8 @@ export function SiteFooter() {
               <Logo variant="white" className="h-6 w-auto" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
-              One considered place to explore tokenized financial assets and
-              understand what they may represent.
+              Explore global investment opportunities in tokenized stocks and
+              financial assets.
             </p>
             <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70">
               <span
@@ -58,11 +59,12 @@ export function SiteFooter() {
 
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
-              Before launch
+              Waitlist privacy
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-white/65">
-              Privacy Policy and Terms will be published before public signup
-              opens.
+              {waitlistEnabled
+                ? "Waitlist registration is open for one launch-availability email only; there are no newsletters. Our privacy notice is not yet published, and key details still require confirmation."
+                : "Waitlist registration is currently unavailable. Our privacy notice is not yet published, and key details still require confirmation."}
             </p>
           </div>
         </div>

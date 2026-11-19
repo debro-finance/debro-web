@@ -3,120 +3,114 @@ export const HERO = {
   titleLead: "A simpler way to invest in",
   titleAccent: "tokenized assets.",
   description:
-    "DeBro is building a modern investing experience that brings tokenized financial assets together. Explore opportunities, understand what a token may represent, and review relevant information in one considered place.",
-  note: "In development. Investing functionality is not yet available.",
+    "Discover a new way to invest in tokenized stocks and financial assets. DeBro brings global investment opportunities together in one simple, modern platform — designed to make investing more accessible and give you greater control over your assets.",
+  note: "DeBro is in development. Investing is not available yet.",
 } as const;
 
 export const STEPS = [
   {
     number: "01",
-    title: "Explore",
+    title: "Discover",
     description:
-      "Discover information about tokenized financial assets in one planned experience, without needing to start with specialist terminology.",
+      "Explore tokenized stocks, ETFs and other financial assets from a growing universe of investment opportunities.",
   },
   {
     number: "02",
-    title: "Understand",
+    title: "Invest",
     description:
-      "Learn how an asset is structured, what rights a token may carry, and which risks to consider before making a decision.",
+      "Buy and sell tokenized assets through an intuitive platform designed to make investing simple and accessible.",
   },
   {
     number: "03",
-    title: "Invest",
+    title: "Stay in control",
     description:
-      "Review the information and decide whether an opportunity is right for you.",
+      "Manage your portfolio and transfer supported tokenized assets to compatible wallets, with the flexibility to move beyond DeBro.",
   },
 ] as const;
 
 export const BENEFITS = [
   {
-    title: "A unified investing experience",
+    title: "1,400+ assets. One platform.",
     description:
-      "Bring discovery and relevant asset information into one considered destination, rather than piecing together unfamiliar details.",
+      "DeBro is working toward bringing more than 1,400 tokenized financial assets together, including stocks and ETFs, making it easier to explore investment opportunities from one place.",
   },
   {
-    title: "Clarity before decisions",
-    description:
-      "Understand an asset's structure, potential rights and risks in plain language before considering any investment action.",
+    title: "Investing made simple",
+    description: "Experience financial markets through a familiar and intuitive platform.",
   },
   {
-    title: "User control and asset portability",
+    title: "Your assets. Your freedom.",
     description:
-      "Manage eligible tokens directly, with control and portability shaped by each asset and network.",
+      "Take greater control of your investments with the ability to transfer supported tokenized assets to other compatible wallets, rather than keeping everything inside one platform.",
   },
 ] as const;
 
 export const SECURITY_PRINCIPLES = [
   {
-    title: "Understand the structure",
+    title: "Invest with confidence",
     description:
-      "Rights depend on the issuer, asset and legal structure. Review the terms that apply to each investment.",
+      "Enjoy a clear, intuitive investing experience designed to put the information you need within reach.",
   },
   {
-    title: "Make informed decisions",
+    title: "Stay in control",
     description:
-      "The experience is designed to make asset information and each investing step clear.",
+      "Manage your investments from one place, with visibility and control at the center of the experience.",
   },
   {
-    title: "Control carries responsibility",
+    title: "Freedom beyond DeBro",
     description:
-      "Where users manage access directly, they are responsible for protecting that access.",
+      "Transfer supported tokenized assets to compatible wallets and enjoy greater flexibility beyond a single platform.",
   },
 ] as const;
 
 export const RISK_DISCLOSURE =
-  "Digital assets can be volatile and may lose value. A token may not provide direct ownership of an underlying financial asset; rights depend on its issuer and legal structure. Market, issuer, liquidity, legal and technology risks vary by product. This website is not investment advice or an offer to buy or sell financial instruments.";
+  "Tokenized assets involve risk and may lose value. A tokenized stock is not necessarily equivalent to direct ownership of traditional shares. This is not investment advice or an offer to buy or sell financial instruments.";
 
 export const FAQ_ITEMS = [
   {
     question: "What is DeBro?",
     answer:
-      "DeBro is building a modern investing platform focused on tokenized financial assets, bringing discovery and plain-language context into one considered experience.",
+      "DeBro is building a modern investing platform for tokenized stocks and other financial assets, bringing global investment opportunities together in one simple, familiar experience.",
   },
   {
     question: "What are tokenized financial assets?",
     answer:
-      "They are digital tokens issued on a blockchain and designed to represent rights or exposure related to a financial asset. The legal rights depend on the issuer and structure; holding a token is not automatically the same as owning the underlying asset.",
+      "Tokenized stocks provide exposure to shares through digital tokens, but are not necessarily equivalent to direct ownership of traditional shares. The rights associated with a token depend on its issuer and structure.",
   },
   {
-    question: "What rights do tokenized assets provide?",
+    question: "What can I invest in with DeBro?",
     answer:
-      "Rights are set by the asset's issuer and legal structure. A token may not provide direct ownership, voting rights, income or a claim on an underlying asset. Review the specific terms for any asset before making a decision.",
+      "DeBro is being built to provide access to a broad range of tokenized financial assets, including stocks and ETFs. Our goal is to expand toward more than 1,400 assets over time. The available selection will grow as the platform develops.",
   },
   {
-    question: "How is DeBro different from a traditional investing platform?",
+    question: "Can I transfer my assets outside DeBro?",
     answer:
-      "DeBro is being designed around tokenized financial assets, bringing discovery and plain-language context into one considered investing experience.",
+      "Yes. DeBro is designed to let you transfer supported tokenized assets to compatible wallets, giving you greater flexibility in how you manage your holdings. Asset-specific restrictions may apply.",
   },
   {
-    question: "How can I access DeBro?",
+    question: "Can I use DeBro from anywhere in the world?",
     answer:
-      "DeBro is being designed to make investing accessible without requiring prior experience with crypto wallets. You'll be able to sign in using your email or Google account, or connect an existing compatible wallet. Wallets will work behind the scenes for users who choose a simpler sign-in experience, while those who prefer managing their own wallet can connect it directly.",
+      "DeBro is designed for investors around the world. Availability of certain assets and services may vary by country, local regulations and eligibility requirements.",
   },
   {
-    question: "What are the risks?",
+    question: "Do I need a crypto wallet?",
     answer:
-      "Risks can include changes in value, limited liquidity, issuer or counterparty failure, legal uncertainty and technology issues. Token rights vary, and a token may not provide direct ownership of an underlying asset. Review asset-specific terms and risks before making an investment decision.",
+      "No crypto experience is required. DeBro will support signing in with email or Google, as well as connecting an existing compatible wallet. Wallet functionality will work behind the scenes for users choosing the simpler sign-in experience.",
   },
   {
     question: "Why does DeBro use blockchain?",
     answer:
-      "DeBro uses Solana as the underlying infrastructure for tokenized assets. This enables digital assets to be transferred and transactions to be independently verified. Our goal is to make that technology work seamlessly in the background, so you can focus on investing rather than understanding blockchain.",
+      "Blockchain enables tokenized assets to move between compatible wallets and supports independently verifiable transactions. DeBro uses Solana as its underlying infrastructure, while keeping the investing experience simple and familiar.",
   },
   {
-    question: "When and where will DeBro be available?",
+    question: "What are the risks?",
     answer:
-      "DeBro is currently in development, with plans to make the platform accessible to investors across multiple markets. Availability will depend on local regulations, eligibility requirements and supported assets. Join the waitlist to receive an email when DeBro launches.",
+      "Like traditional stocks and other financial investments, tokenized assets are subject to market fluctuations. Their value can rise or fall based on company performance, economic conditions, and broader market movements. Additional considerations may apply depending on the tokenized asset and its issuer.",
   },
   {
     question: "What happens after I join the waitlist?",
     answer:
-      "With your consent, we plan to send one email when DeBro's availability is announced. Joining does not create an account or guarantee access.",
-  },
-  {
-    question: "How is my email used?",
-    answer:
-      "Your email is collected only for a launch-availability announcement, based on the consent shown in the form. It is not for newsletters or recurring marketing. The full privacy information will be published before public collection opens.",
+      "With your consent, we use your email only to send one launch-availability email. We do not send newsletters or recurring marketing. Joining does not create an account or guarantee access. ",
   },
 ] as const;
 
