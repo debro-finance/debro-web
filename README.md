@@ -83,10 +83,10 @@ npm run lint
 npm run typecheck
 npm test          # unit and route tests
 npm run build
-npm run test:db   # requires TEST_DATABASE_URL and applied migrations
+npm run test:db   # only with a local debro_test PostgreSQL database
 ```
 
-`npm run test:db` is also run in CI against a PostgreSQL 16 service container.
+`npm run test:db` rejects non-loopback, non-`debro_test` URLs before connecting and is run in CI against a disposable PostgreSQL 16 service container. Never point `TEST_DATABASE_URL` at Neon or the shared waitlist database.
 
 ## Project structure
 
@@ -108,7 +108,7 @@ docs/                 Product, design, architecture, waitlist, SEO and QA docs
 
 - Vercel is connected to this repository by the owner; Neon and Vercel Analytics are already integrated. Do not create duplicate projects, databases or analytics providers.
 - PRs target `development` and auto-merge after all CI jobs pass. The owner alone merges `development` into `main`.
-- Preview deployments are non-indexable and must not write to production subscriber data.
+- The `development` Preview is non-indexable but intentionally shares the existing waitlist database with Production; automated tests must use the isolated local database only.
 - Production collection and indexing require explicit environment flags and owner approval.
 
 ## Release gates (owner-controlled)

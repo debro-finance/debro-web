@@ -3,7 +3,7 @@ import { MAX_WAITLIST_BODY_BYTES, parseWaitlistPayload } from "@/lib/waitlist/va
 import type { RateLimiter } from "@/lib/waitlist/rate-limit";
 
 export type WaitlistDb = {
-  insertSubscriber(email: string): Promise<{ inserted: boolean }>;
+  insertSubscriber(email: string): Promise<"inserted" | "duplicate">;
 };
 
 export type WaitlistBody = { ok: true } | { ok: false; error: string };
@@ -81,8 +81,12 @@ export async function registerSubscriber({
   }
 
   try {
-    await db.insertSubscriber(parsed.payload.email);
-    return { status: 200, body: { ok: true } };
+    const outcome = await db.insertSubscriber(parsed.payload.email);
+    if (outcome === "inserted" || outcome === "duplicate") {
+      return { status: 200, body: { ok: true } };
+    }
+
+    throw new Error("Waitlist insert outcome was not confirmed");
   } catch (error) {
     // Deliberately log only a generic identifier: never the email, SQL params
     // or connection details.
