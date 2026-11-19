@@ -3,7 +3,6 @@ import Image from "next/image";
 
 type Tile = {
   src: string;
-  alt: string;
   width: number;
   height: number;
   size: string;
@@ -13,7 +12,6 @@ type Tile = {
 const TILES: Tile[] = [
   {
     src: "/assets/companies/aapl.svg",
-    alt: "Apple",
     width: 475,
     height: 475,
     size: "h-14 w-14 sm:h-16 sm:w-16 md:h-[4.5rem] md:w-[4.5rem]",
@@ -21,7 +19,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/msft.svg",
-    alt: "Microsoft",
     width: 48,
     height: 48,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -29,7 +26,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/nvda.svg",
-    alt: "NVIDIA",
     width: 64,
     height: 64,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -37,7 +33,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/v.svg",
-    alt: "Visa",
     width: 750,
     height: 471,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -45,7 +40,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/amzn.svg",
-    alt: "Amazon",
     width: 64,
     height: 64,
     size: "h-14 w-14 sm:h-16 sm:w-16 md:h-[4.5rem] md:w-[4.5rem]",
@@ -53,7 +47,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/tsla.svg",
-    alt: "Tesla",
     width: 64,
     height: 64,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -61,7 +54,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/ko.svg",
-    alt: "Coca-Cola",
     width: 64,
     height: 64,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -69,7 +61,6 @@ const TILES: Tile[] = [
   },
   {
     src: "/assets/companies/mcd.svg",
-    alt: "McDonald's",
     width: 512,
     height: 512,
     size: "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16",
@@ -81,27 +72,21 @@ const ORBIT_DURATION = 64; // seconds per full revolution
 
 export function HeroVisual() {
   return (
-    <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[440px] md:max-w-[520px]">
-      {/* Soft background halo */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#eef1fd_0%,#eef1fd_40%,transparent_72%)] sm:h-[340px] sm:w-[340px] md:h-[400px] md:w-[400px]"
-      />
-
-      <div className="relative aspect-square w-full">
-        {/* Orbit guide rings */}
+    <figure className="relative mx-auto w-full max-w-[340px] sm:max-w-[440px] md:max-w-[520px]">
+      <div aria-hidden="true" className="relative aspect-square w-full">
         <div
-          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,#eef1fd_0%,#eef1fd_40%,transparent_72%)] sm:h-[340px] sm:w-[340px] md:h-[400px] md:w-[400px]"
+        />
+
+        <div
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-navy/[0.07] md:border-navy/[0.08]"
           style={{ width: "64%", height: "64%" }}
         />
         <div
-          aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-navy/[0.04]"
           style={{ width: "88%", height: "88%" }}
         />
 
-        {/* Orbiting company logos */}
         {TILES.map((tile, index) => {
           const isOuterOrbit = index % 2 === 1;
           const delay = -((index / TILES.length) * ORBIT_DURATION);
@@ -139,7 +124,7 @@ export function HeroVisual() {
                 >
                   <Image
                     src={tile.src}
-                    alt={tile.alt}
+                    alt=""
                     width={tile.width}
                     height={tile.height}
                     className="h-full w-full object-contain"
@@ -150,13 +135,15 @@ export function HeroVisual() {
           );
         })}
 
-        {/* Central DeBro monogram — stationary focal point */}
         <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-navy shadow-[0_18px_44px_-18px_rgb(20_27_61/0.35)] ring-1 ring-navy/10 sm:h-28 sm:w-28 md:h-[7.5rem] md:w-[7.5rem]">
             <BrandIcon variant="white" className="h-16 w-16 sm:h-20 sm:w-20 md:h-20 md:w-20" />
           </div>
         </div>
       </div>
-    </div>
+      <figcaption className="mt-1 text-center text-xs leading-relaxed text-muted">
+        Illustrative company marks only · No specific assets are being offered
+      </figcaption>
+    </figure>
   );
 }

@@ -14,10 +14,10 @@ Status: APPROVED product direction (2026-11-18); refined investing-first positio
 ## Information architecture — single-page landing
 1. Header: official DeBro mark; anchored navigation; prominent **Join Waitlist** CTA.
 2. Hero: investing-first value proposition, short supporting text and CTA; a minimal branded composition, not invented trading screens, portfolio data or price charts. Headline: “A simpler way to invest in tokenized assets.”
-3. How It Works: concise steps (explore -> understand -> invest), explicitly label not-yet-available steps as coming soon. Do not imply investing is live.
+3. How It Works: a concise planned journey (explore -> understand -> invest). Keep one clear statement elsewhere that investing functionality is not yet available; do not imply investing is live.
 4. Why DeBro: clarity, simplicity, transparency and depth for different experience levels; no return, fee or performance promises.
-5. Security & Confidence: explain control, explicit confirmations and transparency in investor language, with an explicit risk box. Technical wallet and blockchain details belong in the FAQ.
-6. FAQ: what DeBro is; tokenized assets; how it differs from a traditional platform; wallet and blockchain expectations; Solana; availability; launch timing; waitlist privacy.
+5. Security & Confidence: explain asset structure, informed decisions and responsibilities in investor language, with a separate, understated risk disclosure. Technical wallet and blockchain details belong in the FAQ.
+6. FAQ: what DeBro is; tokenized assets and their rights; how it differs from a traditional platform; planned sign-in and wallet access; why it uses Solana; multi-market availability and eligibility; waitlist privacy.
 7. Waitlist: one email field, explicit launch-notification consent, accessible result/error states.
 8. Footer: official socials/contact **only when confirmed**, Privacy Policy / Terms and relevant risk disclosures.
 

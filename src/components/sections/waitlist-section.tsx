@@ -31,8 +31,8 @@ export function WaitlistSection() {
                 Be first to know when DeBro launches.
               </h2>
               <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-white/65 sm:text-base">
-                One email when availability opens. No newsletters, and no
-                account to create today.
+                One launch-availability email with your consent. Expressing
+                interest does not create a product account.
               </p>
 
               {/* The list restates the supporting copy; on narrow screens the
@@ -51,10 +51,6 @@ export function WaitlistSection() {
                 ))}
               </ul>
 
-              <p className="mt-6 text-xs text-white/55 lg:mt-10">
-                DeBro is in prelaunch. No investment functionality is available
-                on this site.
-              </p>
             </div>
           </div>
 

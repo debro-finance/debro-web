@@ -6,44 +6,38 @@ export function HowItWorks() {
     <Section
       id="how-it-works"
       labelledBy="how-it-works-title"
-      className="border-t border-line/70"
+      className="border-t border-line/70 bg-white"
     >
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <SectionHeading
-          id="how-it-works-title"
-          eyebrow="How it works"
-          title="A clear path from discovery to decision."
-          description="DeBro is in prelaunch. This is how the experience is being designed — none of these steps are available today."
-        />
-        <p className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-muted-strong">
-          <span
-            aria-hidden="true"
-            className="h-1.5 w-1.5 rounded-full bg-amber-500"
-          />
-          Planned for launch
-        </p>
-      </div>
+      <SectionHeading
+        id="how-it-works-title"
+        eyebrow="How it works"
+        title="Explore. Understand. Invest."
+        description="A considered journey from discovering an opportunity to making an informed decision."
+      />
 
-      <ol className="mt-12 grid gap-4 md:grid-cols-3">
-        {STEPS.map((step) => (
+      <ol className="mt-14 grid gap-10 lg:grid-cols-3 lg:gap-8">
+        {STEPS.map((step, index) => (
           <li
             key={step.number}
-            className="group relative flex flex-col rounded-2xl border border-line bg-white p-6 shadow-card transition-colors hover:border-line-strong sm:p-7"
+            className="relative grid grid-cols-[4rem_1fr] gap-x-5 gap-y-3 lg:grid-cols-1 lg:gap-y-6"
           >
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-sm font-semibold tracking-[0.14em] text-accent">
-                {step.number}
-              </span>
-              <span className="rounded-full bg-surface px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted">
-                At launch
-              </span>
+            <span className="relative z-10 text-5xl font-medium tabular-nums tracking-[-0.06em] text-navy/25 sm:text-6xl lg:text-7xl">
+              {step.number}
+            </span>
+            <div className="pt-1 lg:pt-0">
+              <h3 className="text-xl font-semibold tracking-[-0.02em] text-ink sm:text-2xl">
+                {step.title}
+              </h3>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted sm:text-base">
+                {step.description}
+              </p>
             </div>
-            <h3 className="mt-8 text-lg font-semibold tracking-[-0.015em] text-ink">
-              {step.title}
-            </h3>
-            <p className="mt-2.5 text-sm leading-relaxed text-muted">
-              {step.description}
-            </p>
+            {index < STEPS.length - 1 ? (
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-[1.85rem] top-12 bottom-[-2.5rem] w-px bg-line lg:left-[5.5rem] lg:right-[-1rem] lg:top-[2.55rem] lg:bottom-auto lg:h-px lg:w-auto"
+              />
+            ) : null}
           </li>
         ))}
       </ol>

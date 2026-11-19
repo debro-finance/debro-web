@@ -2,7 +2,7 @@
 
 Status: **implementation QA complete; production deployment QA remains owner-gated.**
 
-Last run: 2026-11-18, local macOS build of the refinement branch.
+Last comprehensive QA: 2026-11-18; current refinement checks are listed below.
 
 ## What was verified
 
@@ -18,8 +18,8 @@ Last run: 2026-11-18, local macOS build of the refinement branch.
 | --- | --- | --- |
 | Typecheck | `npm run typecheck` | Pass |
 | Lint | `npm run lint` | Pass |
-| Unit tests | `npm test` | 46 passed (7 files) |
-| Production build | `npm run build` | Pass |
+| Unit tests | `npm test` | 48 passed (7 files) |
+| Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
 | DB integration tests | `TEST_DATABASE_URL=… npm run test:db` | 5 passed (1 file) |
 
 Integration tests ran against a local PostgreSQL 16 container (`debro-test-pg`, port 5433) using the tracked migration in `db/migrations/`. They cover persistence, normalization, consent storage, duplicate handling and the removal script. They are the same tests CI runs against a PostgreSQL service container.
@@ -75,6 +75,30 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 - Mobile menu opens on a real coordinate tap at 390 px, closes on Escape with focus returning to the trigger, on outside pointer interaction, and on navigation-link follow. The panel is a solid-surface fixed dropdown outside the blurred header layer.
 - `/favicon.ico` returns 200 as `image/x-icon` with 16, 32 and 48 px entries derived from `debro-icon-navy.svg`; `/icon.svg` and `/apple-icon.png` remain available without conflicting icon metadata.
 - Lighthouse remained at Performance 100, Accessibility 100, Best Practices 96, SEO 100 for the indexable configuration.
+
+## Current institutional refinement QA
+
+The investing-first content, distinct section compositions and corrected product FAQ were rechecked locally. Current automated checks:
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Lint | `npm run lint` | Pass |
+| Typecheck | `npm run typecheck` | Pass |
+| Unit tests | `npm test` | 48 passed (7 files) |
+| Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
+| Brand assets | `npm run assets:generate` | Pass |
+
+Browser review:
+
+- Responsive widths: 320, 390, 768, 1024 and 1440 px. At each width, document and body scroll widths matched the document client width; no horizontal overflow.
+- Loaded all 11 page images after scrolling through the page, including below-the-fold imagery.
+- How It Works uses a connected three-step journey; Why DeBro emphasizes one primary benefit with two supporting points; Security & Transparency uses compact principles and a distinct risk disclosure.
+- Checked the desktop and tablet section layouts, plus mobile FAQ and waitlist layout.
+- On mobile, the menu opened with focus on its first link, Escape closed it and returned focus to the trigger, and following a menu link closed the menu and navigated to the section.
+- FAQ disclosures remained usable; opening the second item closed the first.
+- Reduced-motion preference disables animation and smooth scrolling.
+- Database-disabled development and production previews used `DATABASE_URL=` and `WAITLIST_ENABLED=false`; the production server returned HTTP 200 and the form stayed disabled. No signup was submitted and no database was accessed.
+- The browser reported the expected local Vercel Analytics script 404.
 
 ## Preview deployment
 

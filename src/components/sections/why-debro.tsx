@@ -1,19 +1,5 @@
-import type { ReactNode } from "react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import {
-  EyeIcon,
-  LayersIcon,
-  SparkIcon,
-  UsersIcon,
-} from "@/components/ui/icons";
 import { BENEFITS } from "@/content/site";
-
-const icons: ReactNode[] = [
-  <SparkIcon key="spark" className="h-5 w-5" />,
-  <UsersIcon key="users" className="h-5 w-5" />,
-  <EyeIcon key="eye" className="h-5 w-5" />,
-  <LayersIcon key="layers" className="h-5 w-5" />,
-];
 
 export function WhyDeBro() {
   return (
@@ -22,29 +8,35 @@ export function WhyDeBro() {
       labelledBy="why-debro-title"
       className="border-y border-line/70 bg-surface"
     >
-      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionHeading
-            id="why-debro-title"
-            eyebrow="Why DeBro"
-            title="Built to make tokenized investing feel clear."
-            description="A familiar investing experience, designed for people who are new to tokenized assets — and for those who know them well."
-          />
-        </div>
+      <SectionHeading
+        id="why-debro-title"
+        eyebrow="Why DeBro"
+        title="Investing, brought into focus."
+        description="A unified experience, shaped around clarity and meaningful choice."
+      />
 
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {BENEFITS.map((benefit, index) => (
-            <li
-              key={benefit.title}
-              className="rounded-2xl border border-line bg-white p-6 shadow-card"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                {icons[index]}
-              </div>
-              <h3 className="mt-5 text-base font-semibold tracking-[-0.01em] text-ink">
+      <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-12">
+        <article className="flex min-h-[24rem] flex-col justify-between rounded-[1.75rem] bg-navy p-7 text-white sm:p-10 lg:col-span-7 lg:min-h-[30rem] lg:p-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+            The experience
+          </p>
+          <div className="mt-16 max-w-xl">
+            <h3 className="text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
+              {BENEFITS[0].title}
+            </h3>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
+              {BENEFITS[0].description}
+            </p>
+          </div>
+        </article>
+
+        <ul className="flex flex-col justify-center divide-y divide-line-strong border-y border-line-strong lg:col-span-5">
+          {BENEFITS.slice(1).map((benefit) => (
+            <li key={benefit.title} className="py-7 sm:py-9">
+              <h3 className="text-lg font-semibold tracking-[-0.015em] text-ink sm:text-xl">
                 {benefit.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
                 {benefit.description}
               </p>
             </li>

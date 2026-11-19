@@ -12,7 +12,7 @@ export function Faq() {
             id="faq-title"
             eyebrow="FAQ"
             title="Questions, answered plainly."
-            description="What DeBro is, what tokenized assets mean, and what to expect before launch."
+            description="Explore tokenized assets, access options, availability and risk."
           />
           <a
             href={WAITLIST_HREF}
