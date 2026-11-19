@@ -53,6 +53,25 @@ export function SiteFooter() {
                   className="brightness-0 invert"
                 />
               </a>
+              <a
+                href="mailto:hello@debro.finance"
+                aria-label="Email DeBro at hello@debro.finance"
+                className="inline-flex size-10 items-center justify-center rounded-full text-white/70 transition hover:bg-white/10 hover:text-white focus-visible:outline-white"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="size-5"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+              </a>
             </nav>
           </div>
 

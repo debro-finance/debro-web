@@ -23,13 +23,19 @@ describe("marketing sections", () => {
         name: "DeBro on Instagram",
         href: "https://www.instagram.com/debro.finance/",
       },
+      {
+        name: "Email DeBro at hello@debro.finance",
+        href: "mailto:hello@debro.finance",
+      },
     ];
 
     for (const { name, href } of socialLinks) {
       const link = screen.getByRole("link", { name });
       expect(link.getAttribute("href")).toBe(href);
-      expect(link.getAttribute("target")).toBe("_blank");
-      expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+      if (href.startsWith("https://")) {
+        expect(link.getAttribute("target")).toBe("_blank");
+        expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+      }
     }
   });
 
