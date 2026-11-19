@@ -11,6 +11,28 @@ afterEach(() => {
 });
 
 describe("marketing sections", () => {
+  it("links to DeBro's social profiles in a new tab", () => {
+    render(<SiteFooter />);
+
+    const socialLinks = [
+      {
+        name: "DeBro on X",
+        href: "https://x.com/debrofinance",
+      },
+      {
+        name: "DeBro on Instagram",
+        href: "https://www.instagram.com/debro.finance/",
+      },
+    ];
+
+    for (const { name, href } of socialLinks) {
+      const link = screen.getByRole("link", { name });
+      expect(link.getAttribute("href")).toBe(href);
+      expect(link.getAttribute("target")).toBe("_blank");
+      expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    }
+  });
+
   it("keeps Security & Transparency focused on its three principles", () => {
     render(
       <>

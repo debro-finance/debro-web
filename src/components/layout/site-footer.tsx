@@ -1,4 +1,5 @@
 import { NAV_LINKS, WAITLIST_HREF } from "@/lib/site";
+import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/brand/logo";
@@ -21,6 +22,38 @@ export function SiteFooter() {
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
               Prelaunch
             </p>
+            <nav aria-label="Social media" className="mt-4 flex items-center gap-2">
+              <a
+                href="https://x.com/debrofinance"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DeBro on X"
+                className="inline-flex size-10 items-center justify-center rounded-full opacity-70 transition hover:bg-white/10 hover:opacity-100 focus-visible:outline-white"
+              >
+                <Image
+                  src="/assets/social/x.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="brightness-0 invert"
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/debro.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DeBro on Instagram"
+                className="inline-flex size-10 items-center justify-center rounded-full opacity-70 transition hover:bg-white/10 hover:opacity-100 focus-visible:outline-white"
+              >
+                <Image
+                  src="/assets/social/instragram.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="brightness-0 invert"
+                />
+              </a>
+            </nav>
           </div>
 
           <nav aria-label="Footer">
