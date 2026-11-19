@@ -235,9 +235,14 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
       </button>
 
       <p id="waitlist-note" className="text-xs leading-relaxed text-muted">
-        The privacy notice is not yet published. The responsible entity,
-        contact method, retention period, removal process, and applicable
-        disclosures still require confirmation.
+        We use your email only to announce DeBro&apos;s launch. Read our{" "}
+        <a
+          href="/waitlist-privacy"
+          className="font-medium text-navy underline underline-offset-2"
+        >
+          Waitlist Privacy notice
+        </a>
+        .
       </p>
     </form>
   );

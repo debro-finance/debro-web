@@ -1,37 +1,31 @@
-# Waitlist privacy notice — owner and counsel draft
+# Waitlist privacy — publication and operations checklist
 
-**Status: DRAFT FOR OWNER/COUNSEL REVIEW — NOT APPROVED OR READY TO PUBLISH.**
+**Status: The exact notice copy supplied by the owner is implemented at `/waitlist-privacy`. This is not a representation that the notice has received formal legal approval. Do not infer a responsible entity or contact channel.**
 
-This draft deliberately contains confirmation fields. Do not publish it, link to it as the privacy policy, or replace a placeholder with an assumption. Applicable privacy requirements depend on the responsible entity, where people are located, and the actual service and data flows; obtain appropriate legal review.
+## What the current implementation does
 
-## Proposed notice copy
+- The signup form requests an email address and explicit consent. Its hidden `company` field is an anti-abuse honeypot and is not stored.
+- The API validates and normalizes the email. The database row contains an internal ID, email, subscription status, consent timestamp and record timestamp; there are no account credentials, names, wallet details or financial data in the waitlist schema.
+- New and duplicate signups receive the same generic response. A salted hash of the request IP is held only as a key in the in-memory rate limiter; the application does not persist that key. Provider-side access logs and telemetry were not inspected.
+- The root layout includes Vercel Analytics. The owner/counsel must verify its actual data flows and determine whether the notice’s limited technical-information and service-provider statements adequately cover them.
+- No email-sending system or account creation is implemented. The one-time launch email is an operational commitment, not an existing automated workflow.
 
-> **Waitlist privacy**
->
-> **Who is responsible.** The controller/responsible entity is **[CONFIRM full legal entity name, legal form, and jurisdiction of registration]**. You can contact us about privacy or your waitlist information at **[CONFIRM monitored privacy contact method and any required postal address]**.
->
-> **What we use your information for.** If you join the waitlist, we use your email address and signup/consent record to manage your request and send one email announcing DeBro's availability. We do not send newsletters or recurring marketing. Joining the waitlist does not create a product account or guarantee eligibility or access.
->
-> **Information and service providers.** The waitlist database stores a normalized email address, consent timestamp, record timestamp, and subscription status. **[CONFIRM the legal identities, processing roles, locations, subprocessors, and contractual safeguards for the database, hosting, analytics, email delivery, and any other providers.]** The application also uses a short-lived, in-memory hashed request key for abuse prevention; confirm hosting and service logs and disclose any additional technical information those services process.
->
-> **Legal basis and choices.** **[COUNSEL/OWNER TO CONFIRM the applicable legal basis, consent wording and withdrawal process for each relevant jurisdiction.]** You may withdraw consent using **[CONFIRM a working contact/request method]**. Withdrawal does not affect processing that occurred before withdrawal.
->
-> **Retention and deletion.** We keep waitlist information for **[CONFIRM a specific period or objective retention criteria]**, then **[CONFIRM deletion or anonymization process and timing, including backups and provider copies]**. To request removal or exercise applicable rights, contact **[CONFIRM monitored channel and responsible handler]**. **[CONFIRM applicable rights, response process/deadlines, and regulator complaint information.]**
->
-> **International processing and other disclosures.** **[CONFIRM whether information is processed or accessed outside the user's location, and disclose any required transfer safeguards.]** **[COUNSEL TO CONFIRM any other notices required for the markets in which the site collects information.]**
+## Required publication and operational decisions
 
-## Confirm before publication
+- Confirm the responsible legal entity and jurisdiction. Do not add a name until the owner confirms the exact legal identity.
+- Designate a real, monitored privacy contact and request handler. The notice refers to a designated privacy contact, but the site currently provides no contact channel and the API has no request route. Do not invent an email address or contact details.
+- Obtain appropriate legal review for applicable jurisdictions, consent, request handling, service-provider disclosures and the notice as a whole. Owner approval of this provided copy is not legal approval.
+- Confirm actual provider roles, locations, subprocessors and technical logs, including Neon, Vercel and Vercel Analytics.
+- Establish and test the single launch-announcement process, limited to subscribers with recorded consent. There is no sender in this repository.
+- After the announcement is sent, an authorized operator must permanently delete the waitlist records. The existing operator command permanently deletes one address at a time:
 
-- Responsible legal entity, its registration jurisdiction, and the required controller/operator identification.
-- A monitored privacy contact and a practical, documented process for withdrawal, removal, access and other applicable requests. The existing removal script is an operator tool, not a public request channel.
-- A retention period or objective criteria, including when a signup is considered stale and how deletion propagates to backups and service providers. The current schema has no automatic expiry.
-- Applicable legal basis, consent and notice requirements, rights, complaint routes, and any jurisdiction- or age-related restrictions. Do not infer these from this draft.
-- Actual provider identities, roles, data locations, subprocessors, terms, and transfer safeguards for Neon, Vercel, Vercel Analytics, and any future email delivery. Verify provider logs and any data beyond the waitlist table.
-- The announcement-email workflow and unsubscribe/removal mechanism before promising a working option in an email. Email sending is not implemented in this repository.
-- Whether any additional terms or operational disclosures are needed for the waitlist itself.
+  ```sh
+  npm run waitlist:remove -- --email <address> --delete
+  ```
 
-## Current status and owner decision
+  Run it once for every record, then reconcile successful affected-row counts against the authorized pre-deletion inventory. The command without `--delete` only changes status to `unsubscribed` and does not satisfy the published deletion commitment. Do not use this command with production data until the owner authorizes the operation.
+- There is no automated post-announcement cleanup or bulk-delete command. Neon backup, point-in-time recovery, provider log and service-copy retention are not established by this repository. Before relying on the deletion promise, the owner must confirm those retention periods and purge/expiry behavior with the providers, account for copies, and ensure the policy text and actual process agree.
 
-The owner reports that waitlist registration currently accepts signups and persists them to the existing shared Neon database. This local review did not access or independently verify the deployed services. The website now tells visitors that the privacy notice is not yet published and identifies the unresolved categories; it does not invent an entity, contact, retention period, or request route.
+## Release status
 
-**Owner action:** promptly decide whether to pause further public collection while the notice and handling process are completed. If a pause is required, the owner must use the existing operational control and verify the resulting deployment. This change does not alter `WAITLIST_ENABLED`, the database, the API, or collection behavior.
+This local implementation did not inspect or change Neon, Vercel settings, deployed collection controls, provider-side analytics or subscriber data. The owner reports the existing waitlist accepts registrations. The notice page is implemented, but publication requirements above—including legal identity, monitored contact, service-provider/analytics review, legal review and deletion/backup operations—remain open. No changes were made to registration behavior or collection settings.

@@ -19,6 +19,7 @@ This repository contains the single-page institutional landing site planned for 
 - How It Works, Why DeBro, Security & Transparency, FAQ and Waitlist sections. Blockchain, wallet and self-custody details live mainly in the FAQ.
 - Accessible FAQ using native `details`/`summary`.
 - Waitlist form with explicit consent, loading, success, duplicate-safe, validation and error states, plus a honeypot.
+- Dedicated Waitlist Privacy page at `/waitlist-privacy`, linked from the footer and waitlist form; outstanding publication and deletion requirements are tracked in `docs/PRIVACY-DRAFT.md`.
 - Server-side waitlist route with Zod validation, lowercase normalization, parameterized SQL, unique-email handling, in-memory rate limiting and safe error responses.
 - Neon-compatible server-only database adapter, tracked SQL migrations and an operator removal script.
 - Metadata, canonical URL, Open Graph/Twitter cards, generated 1200×630 OG image, favicons, JSON-LD, `robots.txt` and `sitemap.xml`.

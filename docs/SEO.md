@@ -17,7 +17,7 @@ Implemented:
 - Favicon from the official navy icon and a 180×180 apple icon.
 - `lang="en"`, responsive viewport, theme color and semantic heading hierarchy.
 - JSON-LD `Organization` and `WebSite` with only name, URL, logo, language and description. No address, social profiles, ratings or offers.
-- No placeholder Privacy/Terms links are published. The waitlist is reported active, while the privacy notice remains unpublished; the form and footer disclose this status and the owner-confirmation gaps. See `docs/PRIVACY-DRAFT.md`.
+- The owner-provided Waitlist Privacy notice is implemented at `/waitlist-privacy` and linked from the waitlist form and footer. Its page metadata has a dedicated title, description and canonical path. This does not imply formal legal approval; responsible-entity/contact, provider/analytics disclosures, legal review and deletion/backup operations remain owner requirements. See `docs/PRIVACY-DRAFT.md`.
 
 ## Technical quality
 - All landing content is server-rendered and crawlable; interactive islands are the mobile menu and form only.

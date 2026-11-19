@@ -19,14 +19,14 @@ Status: APPROVED product direction (2026-11-18); refined investing-first positio
 5. Security & Transparency: focus on the planned transparent, verifiable infrastructure and clearly presented portfolio activity. Keep the financial-risk disclosure in the footer and a concise market-fluctuation comparison in the FAQ. Do not imply guaranteed security, direct ownership of shares, completed audits, regulatory approval or unrestricted transfer.
 6. FAQ: explain tokenized-stock exposure vs direct share ownership, the evolving target asset universe, competitive positioning, eligible transfers, geographic eligibility, planned email/Google and wallet access, blockchain and relevant risks.
 7. Waitlist: one email field, explicit launch-notification consent, accessible result/error states.
-8. Footer: official socials/contact **only when confirmed**, Privacy Policy / Terms and relevant risk disclosures.
+8. Footer: official socials/contact **only when confirmed**, the Waitlist Privacy notice, Privacy Policy / Terms when approved, and relevant risk disclosures.
 
 ## Conversion and lifecycle
 - Primary CTA throughout: **Join Waitlist**; repeated in header, hero, FAQ and closing section, with one reusable registration implementation.
 - All waitlist CTAs point to the waitlist **section**, never directly to the email input, so the heading and signup area are framed correctly below the sticky header.
 - Signup: single opt-in (no confirmation email); confirmation appears on site; no newsletter or periodic product updates.
 - Collected emails will be used **only once/for communications necessary to announce DeBro availability** under the disclosed consent purpose; no unrelated marketing. Do not silently extend this purpose.
-- The owner reports that the waitlist currently accepts registrations and persists them in the existing shared Neon database. The privacy notice, responsible entity/contact, retention, removal-request handling and applicable disclosures remain owner/counsel actions. See `docs/PRIVACY-DRAFT.md`. Do not change collection settings in this repository without owner direction.
+- The owner reports that the waitlist currently accepts registrations and persists them in the existing shared Neon database. The owner-provided notice copy is implemented at `/waitlist-privacy`; the responsible entity, a real monitored privacy contact, legal review, provider/analytics disclosures, and operational deletion/backup handling remain owner/counsel actions. See `docs/PRIVACY-DRAFT.md`. Do not change collection settings in this repository without owner direction.
 - Replace CTA with **Launch App** only after owner approval and production readiness; keep app host separate.
 
 ## Initial copy direction (superseded by current landing copy)
@@ -40,4 +40,4 @@ Avoid "stocks directly", "regulated broker", "available everywhere", "risk free"
 No trading, wallet connection, checkout, portfolio views, account creation, blog, community features, newsletters, crypto price data or financial advice in this repository.
 
 ## Release prerequisites
-Owner-approved wording, actual official brand assets, privacy/terms/risk text appropriate for operating jurisdictions, lawful processing of subscriber emails, domain procurement and verified Vercel production configuration. The owner should promptly decide whether to pause current public waitlist collection until the privacy requirements and request handling are finalized. Keep Production indexing and investing functionality owner-gated.
+Owner-approved wording, actual official brand assets, privacy/terms/risk text reviewed for operating jurisdictions, confirmed responsible entity and privacy contact, functioning request handling, documented post-announcement deletion including backups, lawful processing of subscriber emails, domain procurement and verified Vercel production configuration. The owner should promptly decide whether to pause current public waitlist collection until the privacy requirements and request handling are finalized. Keep Production indexing and investing functionality owner-gated.

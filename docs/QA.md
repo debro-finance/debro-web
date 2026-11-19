@@ -18,7 +18,7 @@ Last comprehensive QA: 2026-11-18; the 2026-11-19 marketing copy refinement is r
 | --- | --- | --- |
 | Typecheck | `npm run typecheck` | Pass |
 | Lint | `npm run lint` | Pass |
-| Unit tests | `npm test` | 51 passed, 1 failed (8 files; existing navigation label assertion mismatch) |
+| Unit tests | `npm test` | 55 passed, 1 failed (9 files; existing navigation label assertion mismatch) |
 | Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
 | DB integration tests | `TEST_DATABASE_URL=… npm run test:db` | 5 passed (1 file) |
 
@@ -118,6 +118,24 @@ Verified against the requested wording:
 | Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
 
 No database, waitlist backend, environment settings, deployment or visual design were changed.
+
+## Waitlist privacy page QA (2026-11-19)
+
+- Added `/waitlist-privacy` with the owner-provided notice copy, official logo, responsive white/navy document layout, page-specific title/description/canonical/Open Graph/Twitter metadata, and homepage links.
+- Footer and form links target `/waitlist-privacy`. The form fields and consent behavior remain unchanged.
+- Rendering tests verify all supplied notice paragraphs and list items, the two links, footer/form wording, metadata, semantic headings, and the unchanged consent checkbox.
+- Browser check at 320, 390, 768 and 1440 px found no horizontal overflow. The skip link, header/main landmarks and page title were checked at 390 px.
+- Production-build smoke test returned HTTP 200 with the page title `Waitlist Privacy · DeBro`, canonical URL `https://debro.finance/waitlist-privacy`, and the expected non-indexable prelaunch metadata.
+- No signup was submitted. No database, subscriber data, provider settings, or deployment was accessed.
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Lint | `npm run lint` | Pass |
+| Typecheck | `npm run typecheck` | Pass |
+| Unit tests | `npm test` | 55 passed, 1 failed; existing `navigation.test.tsx` logo aria-label expectation does not match `SiteHeader` |
+| Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass; `/waitlist-privacy` statically generated |
+
+Operational verification found no automated launch email, post-announcement deletion, bulk deletion, or public privacy-contact route. The existing removal command deletes one record at a time; backup/service-copy retention is provider-dependent and unverified. These requirements and the outstanding legal entity/contact review are documented in `docs/PRIVACY-DRAFT.md`.
 
 ## Preview deployment
 

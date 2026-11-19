@@ -1,12 +1,12 @@
 # Waitlist functional & data specification
 
-Status: **implemented and tested; owner reports the shared-database waitlist is currently accepting registrations. Privacy notice and handling details require owner/counsel review.**
+Status: **implemented and tested; owner reports the shared-database waitlist is currently accepting registrations. The owner-provided notice is implemented at `/waitlist-privacy`; responsible-entity and contact details, service-provider disclosures, and the legal review remain outstanding.**
 
 ## Use and scope
 - Single opt-in email signup; explicit consent to be contacted about **DeBro launch availability** only.
 - No newsletters, progress marketing, promotional campaigns or verification email.
 - English form with accessible consent text, loading, success, duplicate and error states.
-- No account, wallet or other personal data is collected.
+- The signup form asks for an email address and consent only. It does not collect a name, account credentials, wallet details or financial information. A hidden `company` honeypot field is included for abuse prevention and is not stored.
 - Duplicate and new submissions return the same generic success response, so membership is not exposed.
 
 ## Data model
@@ -53,13 +53,16 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 
 ## Consent, retention and deletion
 - Consent is limited to one email announcing DeBro availability; no newsletters or recurring marketing.
-- The website identifies that its privacy notice is not yet published and that the responsible entity, contact method, retention period, removal process and applicable disclosures still require confirmation. See `docs/PRIVACY-DRAFT.md`; it is not approved publication copy.
+- The owner-provided notice is implemented in the application at `/waitlist-privacy`. Its copy approval does not constitute legal approval. The responsible legal entity and a real, monitored privacy contact still require owner confirmation; the notice currently refers to a “designated privacy contact” but no contact channel exists in the implementation.
 - `npm run waitlist:remove -- --email <address>` marks a subscriber unsubscribed.
 - `npm run waitlist:remove -- --email <address> --delete` permanently removes the row.
 - Both scripts print only an affected count, never the address or subscriber data.
-- There is no automatic expiry or public removal-request interface. The removal script is an operator tool; the owner must establish and publish a monitored request channel, handler and retention/deletion policy.
-- The owner reports public collection is currently active. This refinement did not inspect deployed environment settings or change them. The owner must decide promptly whether to pause further collection while disclosures and request handling are completed; only the owner should change the existing collection control.
-- Announcement email sending is out of scope. Any future sending must honor the consent purpose and opt-outs.
+- There is no automatic expiry, post-announcement deletion, bulk-delete operation, email sender or public removal-request interface. The removal script is an operator tool that deletes one address at a time.
+- **Required after the single launch announcement:** an authorized operator must remove every waitlist row using the `--delete` operation, verify the affected-row count and confirm completion. Do not use the default unsubscribe operation when the notice requires deletion. Do not run this against the shared database as part of this copy change.
+- **Backups and service copies:** the application does not control or verify Neon backup, point-in-time recovery, log, or provider-copy retention. Before publication/launch, the owner must confirm how long deleted records can persist in backups and service logs, arrange any required expiry/purge process, and ensure the published commitment is operationally accurate.
+- The owner reports public collection is currently active. This local review did not access deployed settings or change collection. The owner should ensure the privacy contact, request handling, retention, backup treatment and any required provider disclosures are ready before relying on the notice.
+- Email sending is not implemented. Any future sender must send only the single launch announcement to subscribers with the recorded consent and must not automatically create accounts or repurpose the waitlist.
+- Vercel Analytics is mounted in the root layout. The owner/counsel must verify its actual data flows and whether the notice’s technical-information and service-provider language is sufficient; this review did not inspect provider-side telemetry or logs.
 
 ## Environment safety
 - Reuse the Neon integration already attached to the Vercel project; do not create another production database.
