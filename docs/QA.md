@@ -2,7 +2,7 @@
 
 Status: **implementation QA complete; production deployment QA remains owner-gated.**
 
-Last comprehensive QA: 2026-11-18; current refinement checks are listed below.
+Last comprehensive QA: 2026-11-18; the 2026-11-19 marketing copy refinement is recorded below.
 
 ## What was verified
 
@@ -18,7 +18,7 @@ Last comprehensive QA: 2026-11-18; current refinement checks are listed below.
 | --- | --- | --- |
 | Typecheck | `npm run typecheck` | Pass |
 | Lint | `npm run lint` | Pass |
-| Unit tests | `npm test` | 48 passed (7 files) |
+| Unit tests | `npm test` | 51 passed, 1 failed (8 files; existing navigation label assertion mismatch) |
 | Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
 | DB integration tests | `TEST_DATABASE_URL=… npm run test:db` | 5 passed (1 file) |
 
@@ -76,9 +76,9 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 - `/favicon.ico` returns 200 as `image/x-icon` with 16, 32 and 48 px entries derived from `debro-icon-navy.svg`; `/icon.svg` and `/apple-icon.png` remain available without conflicting icon metadata.
 - Lighthouse remained at Performance 100, Accessibility 100, Best Practices 96, SEO 100 for the indexable configuration.
 
-## Final content and product-positioning refinement QA
+## Previous content and product-positioning refinement QA (2026-11-18)
 
-The approved hero, process, benefit, trust and FAQ copy were checked against the requested wording. The current automated checks are:
+This record is retained as historical QA; the 2026-11-19 marketing copy refinement below supersedes its content notes.
 
 | Check | Command | Result |
 | --- | --- | --- |
@@ -97,6 +97,27 @@ Browser review:
 - `prefers-reduced-motion` continues to disable animation and smooth scrolling.
 - Local preview used `DATABASE_URL=` and `WAITLIST_ENABLED=false`; production build and server smoke test passed with signup disabled. The browser reported the expected local Vercel Analytics script 404.
 - The page explicitly identifies that the privacy notice is not published and lists the responsible-entity, contact, retention, removal and applicable-disclosure details still requiring confirmation. An internal, unapproved draft is in `docs/PRIVACY-DRAFT.md`.
+
+## Final marketing copy refinement QA (2026-11-19)
+
+Verified against the requested wording:
+
+- The hero description and social metadata use the investing-first copy; the prelaunch note and CTA are unchanged.
+- How It Works keeps its existing three steps and copy. Why DeBro retains its global-access statement and asterisk; the primary benefit has no adjacent disclaimer.
+- The secondary benefits describe planned email/Google or compatible-wallet onboarding and eligible asset portability without technical caveats.
+- Security & Transparency retains its navy layout and three principles, with no promotional risk block; the footer disclosure remains.
+- The investment-universe/catalog qualification appears once in its FAQ answer. The FAQ adds the traditional-broker comparison and keeps risk concise.
+- The waitlist heading and supporting copy are updated; the existing form and one-time consent remain, with the no-newsletter policy stated once in the waitlist section.
+- Focused rendering tests verify the security purpose, footer disclosure, waitlist copy and single consent mention.
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Lint | `npm run lint` | Pass |
+| Typecheck | `npm run typecheck` | Pass |
+| Unit tests | `npm test` | 51 passed, 1 failed; `navigation.test.tsx` expects “DeBro — back to top” while `SiteHeader` exposes “Scroll to top” |
+| Production build | `DATABASE_URL= WAITLIST_ENABLED=false npm run build` | Pass |
+
+No database, waitlist backend, environment settings, deployment or visual design were changed.
 
 ## Preview deployment
 

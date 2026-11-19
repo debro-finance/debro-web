@@ -11,7 +11,7 @@ Status: **implemented; production indexing remains owner-gated.**
 
 ## Page metadata and social sharing
 Implemented:
-- Investing-first title and meta description: “A simpler way to invest in tokenized assets,” with a modern investing platform description rather than blockchain or Web3 framing.
+- Investing-first title and the matching hero description: “Discover tokenized stocks, ETFs, and investment opportunities from around the world. DeBro brings investing, portfolio management, and greater freedom over your assets together in one intuitive platform.”
 - Canonical URL, Open Graph and Twitter/X summary-large-image cards.
 - Generated 1200×630 branded OG image using the official logo geometry, investing-first headline and global-opportunities tagline.
 - Favicon from the official navy icon and a 180×180 apple icon.

@@ -10,8 +10,8 @@ Single-page, English-first, responsive institutional landing aimed at prelaunch 
 2. Hero: “A simpler way to invest in tokenized assets.” with concise investing-first copy, dual CTA and an original light orbit composition: the official monogram anchors eight illustrative company logos, evenly alternated between two concentric, slowly rotating rings. No fake charts, prices or portfolio data; explicitly labelled illustrative and prelaunch.
 3. How It Works: the progressive discover → invest → stay in control journey, horizontally connected on desktop and vertically sequenced on mobile.
 4. Why DeBro: the asymmetric editorial composition with the target-universe highlight and two supporting benefits for simplicity and supported asset portability.
-5. Security & Transparency: the navy composition with three positive confidence/control principles and one concise, separate risk disclosure.
-6. FAQ: two-column layout with native `details`/`summary` accordion and nine answers about tokenized-stock exposure, the target asset universe, supported transfers, eligibility, planned access, risks and the waitlist.
+5. Security & Transparency: the navy composition with three principles focused on verifiability, clear portfolio presentation and unobtrusive technology; the risk disclosure remains in the footer and concise FAQ.
+6. FAQ: two-column layout with native `details`/`summary` accordion and ten answers about tokenized-stock exposure, the evolving target asset universe, competitive positioning, supported transfers, eligibility, planned access, risks and the waitlist.
 7. Waitlist: navy invitation panel plus one shared form with consent, validation, loading, generic success, duplicate-safe and error states. It discloses the single-email purpose, no-newsletter policy and outstanding privacy-notice details. Every waitlist CTA targets the `#waitlist` section, which carries the sticky-header scroll offset.
 8. Footer: white logo on navy, anchor navigation, prelaunch status, waitlist/privacy status and risk disclosure. No invented contact or social links.
 

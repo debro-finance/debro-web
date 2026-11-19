@@ -3,7 +3,7 @@ export const HERO = {
   titleLead: "A simpler way to invest in",
   titleAccent: "tokenized assets.",
   description:
-    "Discover a new way to invest in tokenized stocks and financial assets. DeBro brings global investment opportunities together in one simple, modern platform — designed to make investing more accessible and give you greater control over your assets.",
+    "Discover tokenized stocks, ETFs, and investment opportunities from around the world. DeBro brings investing, portfolio management, and greater freedom over your assets together in one intuitive platform.",
   note: "DeBro is in development. Investing is not available yet.",
 } as const;
 
@@ -32,45 +32,48 @@ export const BENEFITS = [
   {
     title: "1,400+ assets. One platform.",
     description:
-      "DeBro is working toward bringing more than 1,400 tokenized financial assets together, including stocks and ETFs, making it easier to explore investment opportunities from one place.",
+      "Explore a broad investment universe of tokenized stocks, ETFs, and other financial assets — all from one platform.",
   },
   {
-    title: "Investing made simple",
-    description: "Experience financial markets through a familiar and intuitive platform.",
+    title: "Get started your way",
+    description:
+      "Sign in with email or Google, or connect your existing compatible wallet. No crypto experience required.",
   },
   {
     title: "Your assets. Your freedom.",
     description:
-      "Take greater control of your investments with the ability to transfer supported tokenized assets to other compatible wallets, rather than keeping everything inside one platform.",
+      "Take your investments beyond DeBro. Transfer eligible tokenized assets to compatible wallets and enjoy greater freedom over how you manage your holdings.",
   },
 ] as const;
 
 export const SECURITY_PRINCIPLES = [
   {
-    title: "Invest with confidence",
+    title: "Verifiable by design",
     description:
-      "Enjoy a clear, intuitive investing experience designed to put the information you need within reach.",
+      "Transactions recorded on Solana can be independently verified, bringing greater transparency to investment activity.",
   },
   {
-    title: "Stay in control",
+    title: "Your portfolio, clearly presented",
     description:
-      "Manage your investments from one place, with visibility and control at the center of the experience.",
+      "Follow your investments, positions, and activity from one intuitive experience.",
   },
   {
-    title: "Freedom beyond DeBro",
+    title: "Technology in the background",
     description:
-      "Transfer supported tokenized assets to compatible wallets and enjoy greater flexibility beyond a single platform.",
+      "DeBro brings blockchain-powered financial infrastructure into a familiar investing experience, without requiring technical expertise.",
   },
 ] as const;
-
-export const RISK_DISCLOSURE =
-  "Tokenized assets involve risk and may lose value. A tokenized stock is not necessarily equivalent to direct ownership of traditional shares. This is not investment advice or an offer to buy or sell financial instruments.";
 
 export const FAQ_ITEMS = [
   {
     question: "What is DeBro?",
     answer:
       "DeBro is building a modern investing platform for tokenized stocks and other financial assets, bringing global investment opportunities together in one simple, familiar experience.",
+  },
+  {
+    question: "Why choose DeBro over a traditional broker?",
+    answer:
+      "DeBro combines a familiar investing experience with the possibilities of tokenized financial assets. Explore a broad investment universe, access your account without crypto experience, and enjoy greater flexibility to transfer eligible assets beyond the platform.",
   },
   {
     question: "What are tokenized financial assets?",
@@ -80,7 +83,7 @@ export const FAQ_ITEMS = [
   {
     question: "What can I invest in with DeBro?",
     answer:
-      "DeBro is being built to provide access to a broad range of tokenized financial assets, including stocks and ETFs. Our goal is to expand toward more than 1,400 assets over time. The available selection will grow as the platform develops.",
+      "DeBro is building toward 1,400+ tokenized assets, including stocks and ETFs. The available catalog will evolve as the platform develops.",
   },
   {
     question: "Can I transfer my assets outside DeBro?",
@@ -105,17 +108,15 @@ export const FAQ_ITEMS = [
   {
     question: "What are the risks?",
     answer:
-      "Like traditional stocks and other financial investments, tokenized assets are subject to market fluctuations. Their value can rise or fall based on company performance, economic conditions, and broader market movements. Additional considerations may apply depending on the tokenized asset and its issuer.",
+      "Like traditional investments, tokenized assets are subject to market fluctuations and can lose value.",
   },
   {
     question: "What happens after I join the waitlist?",
     answer:
-      "With your consent, we use your email only to send one launch-availability email. We do not send newsletters or recurring marketing. Joining does not create an account or guarantee access. ",
+      "With your consent, we use your email only to send one launch-availability email. Joining does not create an account.",
   },
 ] as const;
 
 export const WAITLIST_POINTS = [
-  "One launch-availability email",
   "No product account needed to express interest",
-  "No newsletter or recurring marketing",
 ] as const;

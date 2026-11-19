@@ -28,11 +28,11 @@ export function WaitlistSection() {
                 id="waitlist-title"
                 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-white sm:text-4xl"
               >
-                Be first to know when DeBro launches.
+                Be part of what&apos;s next in investing.
               </h2>
               <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-white/65 sm:text-base">
-                One launch-availability email with your consent. Expressing
-                interest does not create a product account.
+                Join the DeBro waitlist and be among the first to hear when our
+                new investing experience launches.
               </p>
 
               {/* The list restates the supporting copy; on narrow screens the

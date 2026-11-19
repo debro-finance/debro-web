@@ -78,7 +78,7 @@ describe("metadata", () => {
     });
 
     expect(shareCopy).toMatch(/A simpler way to invest in tokenized assets/);
-    expect(shareCopy).toMatch(/modern investing platform/);
+    expect(shareCopy).toMatch(/tokenized stocks, ETFs, and investment opportunities/);
     expect(shareCopy).not.toMatch(/Solana|self-custodial|on-chain/i);
   });
 });

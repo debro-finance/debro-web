@@ -1,5 +1,5 @@
 import { Section, SectionHeading } from "@/components/ui/section";
-import { RISK_DISCLOSURE, SECURITY_PRINCIPLES } from "@/content/site";
+import { SECURITY_PRINCIPLES } from "@/content/site";
 
 export function Security() {
   return (
@@ -12,8 +12,8 @@ export function Security() {
         <SectionHeading
           id="security-title"
           eyebrow="Security & transparency"
-          title="Built for confidence and control."
-          description="A modern approach to investing, combining transparency, simplicity and greater freedom over how you manage your assets."
+          title="Transparency without complexity."
+          description="Modern financial technology, designed to make investing more transparent while keeping the experience simple and familiar."
           tone="light"
         />
 
@@ -40,15 +40,6 @@ export function Security() {
             </li>
           ))}
         </ul>
-
-        <div className="mt-8 grid gap-3 sm:grid-cols-[10rem_1fr] sm:gap-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
-            Risk, in context
-          </p>
-          <p className="max-w-4xl text-sm leading-relaxed text-white/65 sm:text-base">
-            {RISK_DISCLOSURE}
-          </p>
-        </div>
       </div>
     </Section>
   );

@@ -127,8 +127,7 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
           You&apos;re on the list.
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          We&apos;ll email you when DeBro launches. No newsletters and no
-          recurring marketing.
+          We&apos;ll email you when DeBro launches.
         </p>
       </div>
     );

@@ -16,7 +16,7 @@ This repository contains the single-page institutional landing site planned for 
 
 - Responsive header with official horizontal logo, anchor navigation, mobile menu and repeated **Join the waitlist** CTA.
 - Investing-first hero with an original CSS/SVG folio composition (no fabricated trading interface or portfolio data).
-- How It Works, Why DeBro, Security & Confidence, FAQ and Waitlist sections. Blockchain, wallet and self-custody details live mainly in the FAQ.
+- How It Works, Why DeBro, Security & Transparency, FAQ and Waitlist sections. Blockchain, wallet and self-custody details live mainly in the FAQ.
 - Accessible FAQ using native `details`/`summary`.
 - Waitlist form with explicit consent, loading, success, duplicate-safe, validation and error states, plus a honeypot.
 - Server-side waitlist route with Zod validation, lowercase normalization, parameterized SQL, unique-email handling, in-memory rate limiting and safe error responses.

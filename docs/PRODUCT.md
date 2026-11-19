@@ -15,9 +15,9 @@ Status: APPROVED product direction (2026-11-18); refined investing-first positio
 1. Header: official DeBro mark; anchored navigation; prominent **Join Waitlist** CTA.
 2. Hero: investing-first value proposition, short supporting text and CTA; a minimal branded composition, not invented trading screens, portfolio data or price charts. Headline: “A simpler way to invest in tokenized assets.”
 3. How It Works: present the planned journey as discover → invest → stay in control; the hero says clearly that investing is not available yet.
-4. Why DeBro: lead with a target universe of 1,400+ tokenized assets (including stocks and ETFs), clearly not a guaranteed launch catalog; emphasize simplicity and supported asset portability. Qualify global availability in the FAQ.
-5. Security & Transparency: focus on the planned benefits of confidence, visibility and control, with one concise financial-risk disclosure. Do not imply guaranteed security, direct ownership of shares, completed audits, regulatory approval or unrestricted transfer.
-6. FAQ: explain tokenized-stock exposure vs direct share ownership, target asset selection, supported transfers, geographic eligibility, planned email/Google and wallet access, blockchain and relevant risks.
+4. Why DeBro: lead with the 1,400+ investment-universe headline and describe tokenized stocks, ETFs and other financial assets; explain that DeBro is building toward 1,400+ tokenized assets and that the available catalog will evolve once in the investment-universe FAQ. Highlight planned email/Google or compatible-wallet onboarding and eligible asset portability. Qualify global availability in the FAQ.
+5. Security & Transparency: focus on the planned transparent, verifiable infrastructure and clearly presented portfolio activity. Keep the financial-risk disclosure in the footer and a concise market-fluctuation comparison in the FAQ. Do not imply guaranteed security, direct ownership of shares, completed audits, regulatory approval or unrestricted transfer.
+6. FAQ: explain tokenized-stock exposure vs direct share ownership, the evolving target asset universe, competitive positioning, eligible transfers, geographic eligibility, planned email/Google and wallet access, blockchain and relevant risks.
 7. Waitlist: one email field, explicit launch-notification consent, accessible result/error states.
 8. Footer: official socials/contact **only when confirmed**, Privacy Policy / Terms and relevant risk disclosures.
 
