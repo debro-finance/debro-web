@@ -4,7 +4,7 @@ export function Logo({
   variant = "navy",
   className = "h-6 w-auto sm:h-7",
   preload = false,
-  ...props
+
 }: {
   variant?: "navy" | "white";
   className?: string;
@@ -21,7 +21,7 @@ export function Logo({
       preload={preload}
       fetchPriority={preload ? "high" : "auto"}
       className={className}
-      {...props}
+
     />
   );
 }
