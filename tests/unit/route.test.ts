@@ -21,10 +21,11 @@ vi.mock("@/lib/site", async (importOriginal) => {
 const { POST } = await import("@/app/api/waitlist/route");
 
 function makeDb(implementation?: WaitlistDb["insertSubscriber"]) {
+  const insertSubscriber: WaitlistDb["insertSubscriber"] =
+    implementation ?? (async () => "inserted");
+
   return {
-    insertSubscriber: vi.fn(
-      implementation ?? (async () => ({ inserted: true })),
-    ),
+    insertSubscriber: vi.fn(insertSubscriber),
   };
 }
 

@@ -36,7 +36,7 @@ The server trims surrounding whitespace and lowercases the entire address before
 
 | Status | Meaning |
 | --- | --- |
-| `200 {ok:true}` | New or duplicate registration, or honeypot absorption (never reveals which) |
+| `200 {ok:true}` | Successful insert, verified existing duplicate, or honeypot absorption (never reveals which) |
 | `400 invalid_email` / `consent_required` / `invalid_request` | Safe validation failure |
 | `413 invalid_request` | Body over 4 KB |
 | `429 rate_limited` + `Retry-After` | More than 5 valid-route attempts per hashed key in 10 minutes |
@@ -61,8 +61,8 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 
 ## Environment safety
 - Reuse the Neon integration already attached to the Vercel project; do not create another production database.
-- Preview deployments are non-indexable and should use a Neon branch or separate database. Do not write test records to production.
-- Neon branches are point-in-time snapshots: migrations applied to the parent do not update existing Preview branches. Check the target branch before testing; apply only the tracked migrations missing from that branch, rather than rerunning migrations blindly.
+- `main` and `development` must use the same existing Neon project, branch, database and `public` schema as explicitly configured in Vercel. Disable automatic Neon preview-branch overrides for these environments; do not create new databases or branches.
+- Automated database tests accept only the local `debro_test` database and must never connect to the shared Neon database.
 - Tests run against a disposable local PostgreSQL 16 service in CI.
 - Never commit subscriber emails, connection strings or credentials.
 

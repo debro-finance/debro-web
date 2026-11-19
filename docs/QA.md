@@ -80,7 +80,7 @@ Verified in the browser (Orca embedded browser, 1440 px desktop and 390 px mobil
 
 The Vercel preview for PR #6 built and reported **Ready**. It is behind Vercel Authentication, so unauthenticated requests return `302` with `X-Robots-Tag: noindex`; page HTML, `robots.txt` and `sitemap.xml` are not publicly reachable. This is the expected safe state for a non-public prelaunch preview. Full page QA still requires an authenticated deployment URL or `vercel curl`.
 
-The Neon `preview/development` branch was checked directly: `current_schema()` was `public` and `search_path` included `public`, but both `to_regclass('public.waitlist_subscribers')` and `to_regclass('waitlist_subscribers')` were `NULL`. The parent migration did not update this existing Preview snapshot. Applying the tracked `0001_waitlist.sql` to that Preview branch made the deployed waitlist endpoint return `200 {ok:true}` for both a new and duplicate signup; the branch contained exactly one row with consent recorded. The synthetic test row was then removed, and no Production row was written.
+Historical Preview incident: the Neon `preview/development` branch had `current_schema() = public` and a search path including `public`, but both qualified and unqualified table lookups were `NULL`. Applying the tracked migration to that historical Preview branch restored signup there. This does not establish that the current `main` and `development` Vercel runtimes use the same Neon branch; verify their effective environment-variable bindings before treating the shared-database requirement as satisfied.
 
 ## Visual and interaction QA
 
@@ -93,7 +93,8 @@ The Neon `preview/development` branch was checked directly: `current_schema()` w
 
 ## Limitations
 
-- A real Neon HTTP signup round trip was verified against the isolated Preview branch after applying its missing tracked migration. Production was not written.
+- A prior Neon HTTP signup round trip was verified against the historical isolated Preview branch, not the shared branch required by the current architecture decision.
+- Current `main`/`development` Vercel database bindings and API-to-shared-Neon persistence are unverified; account access to Vercel and Neon is required. The local `.env` database is not evidence of deployed runtime configuration.
 - The Vercel preview is authentication-protected, so its pages were not fetched unauthenticated. Deployment status and the noindex response were verified.
 - No production domain, TLS, redirect or Search Console verification has been performed; these are owner gates.
 - Lighthouse is a single local lab run. Repeat on the deployed production URL before launch and record field CWV after traffic exists.

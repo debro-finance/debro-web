@@ -1,5 +1,8 @@
 import { neon } from "@neondatabase/serverless";
-import { INSERT_SUBSCRIBER_SQL } from "@/lib/waitlist/sql";
+import {
+  FIND_SUBSCRIBER_SQL,
+  INSERT_SUBSCRIBER_SQL,
+} from "@/lib/waitlist/sql";
 import type { WaitlistDb } from "@/server/waitlist";
 
 let cached: WaitlistDb | null | undefined;
@@ -20,7 +23,18 @@ export function getWaitlistDb(): WaitlistDb | null {
   cached = {
     async insertSubscriber(email: string) {
       const rows = await sql.query(INSERT_SUBSCRIBER_SQL, [email]);
-      return { inserted: rows.length > 0 };
+      if (rows.length > 0) {
+        return "inserted";
+      }
+
+      const existing = await sql.query(FIND_SUBSCRIBER_SQL, [email]);
+      if (existing.length > 0) {
+        return "duplicate";
+      }
+
+      throw Object.assign(new Error("Waitlist insert was not persisted"), {
+        code: "WAITLIST_INSERT_NOT_PERSISTED",
+      });
     },
   };
 

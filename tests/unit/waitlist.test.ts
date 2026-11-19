@@ -8,9 +8,7 @@ import {
 } from "@/server/waitlist";
 
 function makeDb(
-  implementation: WaitlistDb["insertSubscriber"] = async () => ({
-    inserted: true,
-  }),
+  implementation: WaitlistDb["insertSubscriber"] = async () => "inserted",
 ): WaitlistDb & { insertSubscriber: ReturnType<typeof vi.fn> } {
   return { insertSubscriber: vi.fn(implementation) };
 }
@@ -73,7 +71,7 @@ describe("registerSubscriber", () => {
   });
 
   it("returns a generic success for duplicate registrations", async () => {
-    const db = makeDb(async () => ({ inserted: false }));
+    const db = makeDb(async () => "duplicate");
     const result = await submit({ db });
 
     expect(result).toEqual({ status: 200, body: { ok: true } });

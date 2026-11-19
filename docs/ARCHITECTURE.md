@@ -19,8 +19,8 @@ Status: **implemented on `development`; production release owner-gated.**
 1. Client submits JSON: `email`, `consent`, hidden `company` honeypot.
 2. Route enforces a 4 KB body limit and derives a hashed client key from `x-forwarded-for`/`x-real-ip`.
 3. `src/server/waitlist.ts` validates, checks the honeypot, applies the in-memory limiter, and calls a narrow database interface.
-4. `src/server/db.ts` uses `@neondatabase/serverless` over HTTP with a parameterized conflict-safe insert.
-5. Success and duplicate submissions both return the same generic response. Failures return safe codes without SQL, stack traces or PII.
+4. `src/server/db.ts` uses `@neondatabase/serverless` over HTTP with a parameterized conflict-safe insert into `public.waitlist_subscribers`; zero-row inserts require a follow-up check confirming the duplicate exists.
+5. Successful inserts, verified duplicates and honeypot submissions return the same generic response. Database failures return safe codes without SQL, stack traces or PII.
 
 The service depends on a `WaitlistDb` interface, so unit tests and PostgreSQL integration tests exercise the same behavior without importing the Neon adapter.
 
