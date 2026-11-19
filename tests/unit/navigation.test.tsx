@@ -107,10 +107,10 @@ describe("header navigation", () => {
     render(<SiteHeader />);
 
     expect(
-      screen.getByRole("link", { name: "DeBro — back to top" }).getAttribute(
+      screen.getByRole("link", { name: "Scroll to top" }).getAttribute(
         "href",
       ),
-    ).toBe("#main");
+    ).toBe("#");
   });
 });
 

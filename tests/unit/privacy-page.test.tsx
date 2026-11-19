@@ -32,7 +32,8 @@ describe("waitlist privacy page", () => {
       "We keep your email address only for the purpose of notifying you when DeBro launches.",
       "After the launch announcement has been sent, we will delete the waitlist records. The list will not be retained or repurposed as a customer or marketing database.",
       "You may also request removal of your email before the launch.",
-      "Yes. You can request that your email address be removed from the waitlist at any time through our designated privacy contact.",
+      "Yes. You can request the removal of your email address from the DeBro waitlist at any time by contacting us at privacy@debro.finance.",
+      "We will use your request solely to process the removal of your information and confirm once it has been completed.",
       "No. Joining the waitlist simply means you will receive the launch announcement. It does not create an account or automatically grant access to the platform.",
     ];
 
@@ -64,6 +65,9 @@ describe("waitlist privacy page", () => {
 
     expect(screen.getAllByRole("link", { name: "Return to homepage" })).toHaveLength(2);
     expect(screen.getByRole("link", { name: "DeBro home" }).getAttribute("href")).toBe("/");
+    expect(screen.getByRole("link", { name: "privacy@debro.finance" }).getAttribute("href")).toBe(
+      "mailto:privacy@debro.finance",
+    );
   });
 
   it("uses page-specific title, description and canonical metadata", () => {
@@ -90,9 +94,14 @@ describe("privacy notice entry points", () => {
 
     expect(privacyLink.getAttribute("href")).toBe("/waitlist-privacy");
     expect(
-      privacyLink.previousElementSibling?.textContent?.replace(/\s+/g, " ").trim(),
+      privacyLink.parentElement?.querySelector("p")?.textContent
+        ?.replace(/\s+/g, " ")
+        .trim(),
     ).toBe(
       "Your email is kept private and used exclusively to announce DeBro's launch. No newsletters, advertising, or account creation. Your information will be deleted after the launch announcement.",
+    );
+    expect(screen.getByRole("link", { name: "privacy@debro.finance" }).getAttribute("href")).toBe(
+      "mailto:privacy@debro.finance",
     );
   });
 
