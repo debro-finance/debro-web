@@ -35,13 +35,13 @@ describe("landing content", () => {
     expect(SITE_DESCRIPTION).toBe(HERO.description);
     expect(HERO.note).toBe("DeBro is in development. Investing is not available yet.");
     expect(STEPS.map((step) => step.description)).toEqual([
-      "Explore tokenized stocks, ETFs and other financial assets from a growing universe of investment opportunities.",
-      "Buy and sell tokenized assets through an intuitive platform designed to make investing simple and accessible.",
-      "Manage your portfolio and transfer supported tokenized assets to compatible wallets, with the flexibility to move beyond DeBro.",
+      "Go beyond the ticker. Explore tokenized assets, understand the businesses behind them, and evaluate investment opportunities with greater clarity.",
+      "A straightforward experience designed to make investing easier to understand.",
+      "Follow your portfolio and manage your tokenized assets in one place.",
     ]);
     expect(BENEFITS).toEqual([
       {
-        title: "1,400+ assets. One platform.",
+        title: "1,400+ assets.\nOne platform.",
         description:
           "Explore a broad investment universe of tokenized stocks, ETFs, and other financial assets — all from one platform.",
       },
@@ -124,7 +124,7 @@ describe("landing content", () => {
 
   it("uses three distinct investing pillars", () => {
     expect(BENEFITS.map((benefit) => benefit.title)).toEqual([
-      "1,400+ assets. One platform.",
+      "1,400+ assets.\nOne platform.",
       "Get started your way",
       "Your assets. Your freedom.",
     ]);

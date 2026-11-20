@@ -18,15 +18,25 @@ const ERROR_MESSAGES: Record<string, string> = {
   invalid_request: "We couldn't process that request. Please try again.",
 };
 
-export function WaitlistForm({ enabled }: { enabled: boolean }) {
+export function WaitlistForm({
+  enabled,
+  idPrefix = "waitlist",
+}: {
+  enabled: boolean;
+  idPrefix?: string;
+}) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const emailRef = useRef<HTMLInputElement>(null);
   const consentRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
+  const emailId = `${idPrefix}-email`;
+  const companyId = `${idPrefix}-company`;
+  const errorId = `${idPrefix}-error`;
+  const noteId = `${idPrefix}-note`;
 
   const loading = status.kind === "loading";
   const error = status.kind === "error" ? status : null;
-  const describedBy = error ? "waitlist-note waitlist-error" : "waitlist-note";
+  const describedBy = error ? `${noteId} ${errorId}` : noteId;
 
   useEffect(() => {
     if (status.kind === "success") {
@@ -147,12 +157,12 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
       ) : null}
 
       <div>
-        <label htmlFor="waitlist-email" className="block text-sm font-medium text-ink">
+        <label htmlFor={emailId} className="block text-sm font-medium text-ink">
           Email address
         </label>
         <input
           ref={emailRef}
-          id="waitlist-email"
+          id={emailId}
           name="email"
           type="email"
           inputMode="email"
@@ -190,13 +200,13 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
         aria-hidden="true"
         className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden"
       >
-        <label htmlFor="waitlist-company">Company</label>
-        <input id="waitlist-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor={companyId}>Company</label>
+        <input id={companyId} name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {error ? (
         <p
-          id="waitlist-error"
+          id={errorId}
           role="alert"
           className="rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm text-danger"
         >
@@ -221,7 +231,7 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
         )}
       </button>
 
-      <p id="waitlist-note" className="text-xs leading-relaxed text-muted">
+      <p id={noteId} className="text-xs leading-relaxed text-muted">
         We use your email only to announce DeBro&apos;s launch. Read our{" "}
         <a href="/waitlist-privacy" className="font-medium text-navy underline underline-offset-2">
           Waitlist Privacy notice

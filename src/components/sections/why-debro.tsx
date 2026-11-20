@@ -7,7 +7,7 @@ export function WhyDeBro() {
     <Section
       id="why-debro"
       labelledBy="why-debro-title"
-      className="border-y border-line/70 bg-surface"
+      className="border-y border-line/70 bg-white"
     >
       <SectionHeading
         id="why-debro-title"
@@ -23,13 +23,17 @@ export function WhyDeBro() {
       />
 
       <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-12">
-        <article className="flex min-h-[24rem] flex-col justify-around rounded-[1.75rem] bg-navy p-7 text-white sm:p-10 lg:col-span-7 lg:min-h-[30rem] lg:p-12">
+        <article className="flex min-h-[24rem] flex-col justify-around bg-navy p-7 text-white sm:p-10 lg:col-span-7 lg:min-h-[30rem] lg:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
             Investment universe
           </p>
           <div className="mt-16 max-w-xl align-middle">
-            <h3 className="text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-              {BENEFITS[0].title}
+            <h3 className="max-w-xl text-balance text-[clamp(3rem,5vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">
+              {BENEFITS[0].title.split("\n").map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h3>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
               {BENEFITS[0].description}
