@@ -123,7 +123,7 @@ export function WaitlistForm({
     return (
       <div
         role="status"
-        className="flex h-full min-h-72 flex-col items-start justify-center rounded-2xl border border-line bg-surface p-7"
+        className="flex h-full min-h-72 flex-col items-start justify-center rounded border border-line bg-surface p-7"
       >
         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-success/10 text-success">
           <CheckIcon className="h-5 w-5" />
@@ -151,7 +151,7 @@ export function WaitlistForm({
         {loading ? "Submitting your waitlist signup." : ""}
       </p>
       {!enabled ? (
-        <p className="rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted-strong">
+        <p className="rounded border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted-strong">
           Waitlist registration is currently unavailable. Please check back for updates.
         </p>
       ) : null}
@@ -173,7 +173,7 @@ export function WaitlistForm({
           aria-invalid={error?.field === "email" ? true : undefined}
           aria-describedby={describedBy}
           placeholder="you@example.com"
-          className="mt-2 block h-12 w-full rounded-xl border border-line-strong bg-white px-4 text-base text-ink shadow-sm transition-colors placeholder:text-muted hover:border-navy/25 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted"
+          className="mt-2 block h-12 w-full rounded border border-line-strong bg-white px-4 text-base text-ink transition-colors placeholder:text-muted hover:border-navy/25 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10 disabled:cursor-not-allowed disabled:bg-surface disabled:text-muted"
         />
       </div>
 
@@ -208,7 +208,7 @@ export function WaitlistForm({
         <p
           id={errorId}
           role="alert"
-          className="rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm text-danger"
+          className="rounded border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm text-danger"
         >
           {error.message}
         </p>
@@ -217,7 +217,7 @@ export function WaitlistForm({
       <button
         type="submit"
         disabled={!enabled || loading}
-        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-navy px-6 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded bg-navy px-6 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? (
           <>

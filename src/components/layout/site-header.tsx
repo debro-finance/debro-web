@@ -30,7 +30,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href={WAITLIST_HREF}
-            className="hidden h-10 items-center justify-center rounded-full bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent sm:inline-flex"
+            className="hidden h-10 items-center justify-center rounded bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent sm:inline-flex"
           >
             Join the waitlist
           </a>
