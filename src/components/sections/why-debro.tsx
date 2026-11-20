@@ -23,7 +23,7 @@ export function WhyDeBro() {
       />
 
       <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-12">
-        <article className="flex min-h-[24rem] flex-col justify-around bg-navy p-7 text-white sm:p-10 lg:col-span-7 lg:min-h-[30rem] lg:p-12">
+        <article className="flex min-h-[24rem] flex-col justify-around rounded bg-navy p-7 text-white sm:p-10 lg:col-span-7 lg:min-h-[30rem] lg:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
             Investment universe
           </p>

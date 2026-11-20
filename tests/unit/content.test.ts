@@ -6,9 +6,8 @@ import {
   STEPS,
   WAITLIST_POINTS,
 } from "@/content/site";
-import { describe, expect, it } from "vitest";
-
 import { NAV_LINKS, SITE_DESCRIPTION } from "@/lib/site";
+import { describe, expect, it } from "vitest";
 
 describe("landing content", () => {
   it("has a unique, complete FAQ", () => {
@@ -33,7 +32,6 @@ describe("landing content", () => {
       "Discover tokenized stocks, ETFs, and investment opportunities from around the world. DeBro brings investing, portfolio management, and greater freedom over your assets together in one intuitive platform.",
     );
     expect(SITE_DESCRIPTION).toBe(HERO.description);
-    expect(HERO.note).toBe("DeBro is in development. Investing is not available yet.");
     expect(STEPS.map((step) => step.description)).toEqual([
       "Go beyond the ticker. Explore tokenized assets, understand the businesses behind them, and evaluate investment opportunities with greater clarity.",
       "A straightforward experience designed to make investing easier to understand.",
@@ -111,8 +109,7 @@ describe("landing content", () => {
     );
     expect(WAITLIST_POINTS).toEqual(["No product account needed to express interest"]);
     expect(
-      FAQ_ITEMS.find((item) => item.question === "What happens after I join the waitlist?")
-        ?.answer,
+      FAQ_ITEMS.find((item) => item.question === "What happens after I join the waitlist?")?.answer,
     ).toBe(
       "With your consent, we use your email only to send one launch-availability email. Joining does not create an account.",
     );
@@ -142,7 +139,6 @@ describe("landing content", () => {
 
     expect(copy).not.toMatch(/q[1-4]\s*20\d{2}|launching on/i);
     expect(answers).not.toMatch(/available worldwide|globally available|in every country/i);
-    expect(HERO.note).toMatch(/in development/i);
   });
 
   it("leads with investing rather than crypto infrastructure", () => {
@@ -187,7 +183,9 @@ describe("landing content", () => {
       (item) => item.question === "What can I invest in with DeBro?",
     )?.answer;
 
-    expect(copy).not.toMatch(/building toward|catalog will evolve|not a guaranteed launch catalog/i);
+    expect(copy).not.toMatch(
+      /building toward|catalog will evolve|not a guaranteed launch catalog/i,
+    );
     expect(investmentFaq).toBe(
       "DeBro is building toward 1,400+ tokenized assets, including stocks and ETFs. The available catalog will evolve as the platform develops.",
     );

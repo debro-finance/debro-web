@@ -18,7 +18,7 @@ export function SiteFooter() {
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
               Explore global investment opportunities in tokenized stocks and financial assets.
             </p>
-            <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70">
+            <p className="mt-5 inline-flex items-center gap-2 rounded border border-white/15 px-3 py-1 text-xs font-medium text-white/70">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
               Prelaunch
             </p>

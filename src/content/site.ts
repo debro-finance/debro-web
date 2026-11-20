@@ -4,7 +4,6 @@ export const HERO = {
   titleAccent: "tokenized assets.",
   description:
     "Discover tokenized stocks, ETFs, and investment opportunities from around the world. DeBro brings investing, portfolio management, and greater freedom over your assets together in one intuitive platform.",
-  note: "DeBro is in development. Investing is not available yet.",
 } as const;
 
 export const STEPS = [
@@ -17,14 +16,12 @@ export const STEPS = [
   {
     number: "02",
     title: "Invest",
-    description:
-      "A straightforward experience designed to make investing easier to understand.",
+    description: "A straightforward experience designed to make investing easier to understand.",
   },
   {
     number: "03",
     title: "Stay in control",
-    description:
-      "Follow your portfolio and manage your tokenized assets in one place.",
+    description: "Follow your portfolio and manage your tokenized assets in one place.",
   },
 ] as const;
 
@@ -54,8 +51,7 @@ export const SECURITY_PRINCIPLES = [
   },
   {
     title: "Your portfolio, clearly presented",
-    description:
-      "Follow your investments, positions, and activity from one intuitive experience.",
+    description: "Follow your investments, positions, and activity from one intuitive experience.",
   },
   {
     title: "Technology in the background",
@@ -117,6 +113,4 @@ export const FAQ_ITEMS = [
   },
 ] as const;
 
-export const WAITLIST_POINTS = [
-  "No product account needed to express interest",
-] as const;
+export const WAITLIST_POINTS = ["No product account needed to express interest"] as const;

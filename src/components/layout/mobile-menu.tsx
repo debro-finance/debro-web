@@ -109,7 +109,7 @@ export function MobileMenu({ links }: { links: readonly NavLink[] }) {
               <a
                 href={WAITLIST_HREF}
                 onClick={() => setOpen(false)}
-                className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-full bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent"
+                className="mt-4 inline-flex h-11 w-full items-center justify-center rounded bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft focus-visible:outline-accent"
               >
                 Join the waitlist
               </a>
