@@ -12,17 +12,9 @@ export function WaitlistSection() {
       className="flex min-h-[100svh] items-center border-t border-line/70 bg-navy"
       containerClassName="py-8"
     >
-      <div className="relative overflow-hidden rounded-[2rem] border border-line bg-white shadow-card">
+      <div className="relative overflow-hidden rounded-[1rem] border border-line bg-white">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
           <div className="relative overflow-hidden bg-navy p-7 text-white sm:p-10 lg:p-12">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full border border-white/[0.08]"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl"
-            />
             <div className="relative">
               <Eyebrow tone="light">Join the waitlist</Eyebrow>
               <h2
