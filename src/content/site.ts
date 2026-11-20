@@ -12,7 +12,7 @@ export const STEPS = [
     number: "01",
     title: "Discover",
     description:
-      "Explore tokenized stocks and ETFs through a simple, intuitive experience.",
+      "Go beyond the ticker. Explore tokenized assets, understand the businesses behind them, and evaluate investment opportunities with greater clarity.",
   },
   {
     number: "02",
@@ -30,7 +30,7 @@ export const STEPS = [
 
 export const BENEFITS = [
   {
-    title: "1,400+ assets. One platform.",
+    title: "1,400+ assets.\nOne platform.",
     description:
       "Explore a broad investment universe of tokenized stocks, ETFs, and other financial assets — all from one platform.",
   },
