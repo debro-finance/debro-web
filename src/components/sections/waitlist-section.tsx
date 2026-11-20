@@ -9,7 +9,8 @@ export function WaitlistSection() {
     <Section
       id="waitlist"
       labelledBy="waitlist-title"
-      className="border-t border-line/70 bg-surface"
+      className="flex min-h-[100svh] items-center border-t border-line/70 bg-navy"
+      containerClassName="py-8"
     >
       <div className="relative overflow-hidden rounded-[2rem] border border-line bg-white shadow-card">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
