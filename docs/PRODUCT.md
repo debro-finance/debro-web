@@ -33,7 +33,7 @@ Status: APPROVED product direction (2026-11-18); refined investing-first positio
 - Headline: "A simpler way to invest in tokenized assets."
 - Subline: "DeBro is building a modern investing platform that makes tokenized financial assets easier to understand and explore."
 - CTA: "Join the waitlist"
-- Confirmation: "You're on the list. We'll email you when DeBro launches."
+- Confirmation: "You're on the list. We'll email you when DeBro launches. Follow us on social media so you don't miss any news or updates."
 Avoid "stocks directly", "regulated broker", "available everywhere", "risk free", "bank-grade security" and guarantees unless specifically substantiated.
 
 ## Explicit non-goals

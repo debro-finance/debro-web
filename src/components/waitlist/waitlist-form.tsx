@@ -11,8 +11,7 @@ type Status =
 
 const ERROR_MESSAGES: Record<string, string> = {
   invalid_email: "Enter a valid email address.",
-  consent_required:
-    "Please confirm that we may email you about DeBro's launch.",
+  consent_required: "Please confirm that we may email you about DeBro's launch.",
   rate_limited: "Too many attempts. Please try again in a few minutes.",
   disabled: "The waitlist is not open yet.",
   unavailable: "We couldn't save your signup. Please try again shortly.",
@@ -129,32 +128,26 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
         <p className="mt-2 text-sm leading-relaxed text-muted">
           We&apos;ll email you when DeBro launches.
         </p>
+        <p className="mt-4 text-sm leading-relaxed text-muted">
+          Follow us on social media so you don&apos;t miss any news or updates.
+        </p>
       </div>
     );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      aria-busy={loading}
-      noValidate
-      className="space-y-5"
-    >
+    <form onSubmit={handleSubmit} aria-busy={loading} noValidate className="space-y-5">
       <p className="sr-only" role="status" aria-live="polite">
         {loading ? "Submitting your waitlist signup." : ""}
       </p>
       {!enabled ? (
         <p className="rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted-strong">
-          Waitlist registration is currently unavailable. Please check back for
-          updates.
+          Waitlist registration is currently unavailable. Please check back for updates.
         </p>
       ) : null}
 
       <div>
-        <label
-          htmlFor="waitlist-email"
-          className="block text-sm font-medium text-ink"
-        >
+        <label htmlFor="waitlist-email" className="block text-sm font-medium text-ink">
           Email address
         </label>
         <input
@@ -187,8 +180,8 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
             className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-navy disabled:cursor-not-allowed"
           />
           <span>
-            I agree to receive one email announcing DeBro&apos;s availability.
-            No newsletters or recurring marketing.
+            I agree to receive one email announcing DeBro&apos;s availability. No newsletters or
+            recurring marketing.
           </span>
         </label>
       </div>
@@ -198,13 +191,7 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
         className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden"
       >
         <label htmlFor="waitlist-company">Company</label>
-        <input
-          id="waitlist-company"
-          name="company"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-        />
+        <input id="waitlist-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {error ? (
@@ -236,10 +223,7 @@ export function WaitlistForm({ enabled }: { enabled: boolean }) {
 
       <p id="waitlist-note" className="text-xs leading-relaxed text-muted">
         We use your email only to announce DeBro&apos;s launch. Read our{" "}
-        <a
-          href="/waitlist-privacy"
-          className="font-medium text-navy underline underline-offset-2"
-        >
+        <a href="/waitlist-privacy" className="font-medium text-navy underline underline-offset-2">
           Waitlist Privacy notice
         </a>
         .
