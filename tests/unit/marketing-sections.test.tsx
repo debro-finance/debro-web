@@ -4,6 +4,7 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Security } from "@/components/sections/security";
 import { WaitlistSection } from "@/components/sections/waitlist-section";
+import { HowItWorks } from "@/components/sections/how-it-works";
 import { SiteFooter } from "@/components/layout/site-footer";
 
 afterEach(() => {
@@ -11,6 +12,15 @@ afterEach(() => {
 });
 
 describe("marketing sections", () => {
+  it("renders the three immersive product stories and one contextual waitlist CTA", () => {
+    render(<HowItWorks />);
+
+    expect(screen.getByText("Discover what's possible.")).toBeTruthy();
+    expect(screen.getByText("Invest without complexity.")).toBeTruthy();
+    expect(screen.getByText("Stay in control.")).toBeTruthy();
+    expect(screen.getAllByText("Get early access")).toHaveLength(1);
+  });
+
   it("links to DeBro's social profiles in a new tab", () => {
     render(<SiteFooter />);
 

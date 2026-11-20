@@ -12,19 +12,19 @@ export const STEPS = [
     number: "01",
     title: "Discover",
     description:
-      "Explore tokenized stocks, ETFs and other financial assets from a growing universe of investment opportunities.",
+      "Explore tokenized stocks and ETFs through a simple, intuitive experience.",
   },
   {
     number: "02",
     title: "Invest",
     description:
-      "Buy and sell tokenized assets through an intuitive platform designed to make investing simple and accessible.",
+      "A straightforward experience designed to make investing easier to understand.",
   },
   {
     number: "03",
     title: "Stay in control",
     description:
-      "Manage your portfolio and transfer supported tokenized assets to compatible wallets, with the flexibility to move beyond DeBro.",
+      "Follow your portfolio and manage your tokenized assets in one place.",
   },
 ] as const;
 

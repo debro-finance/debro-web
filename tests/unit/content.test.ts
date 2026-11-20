@@ -35,9 +35,9 @@ describe("landing content", () => {
     expect(SITE_DESCRIPTION).toBe(HERO.description);
     expect(HERO.note).toBe("DeBro is in development. Investing is not available yet.");
     expect(STEPS.map((step) => step.description)).toEqual([
-      "Explore tokenized stocks, ETFs and other financial assets from a growing universe of investment opportunities.",
-      "Buy and sell tokenized assets through an intuitive platform designed to make investing simple and accessible.",
-      "Manage your portfolio and transfer supported tokenized assets to compatible wallets, with the flexibility to move beyond DeBro.",
+      "Explore tokenized stocks and ETFs through a simple, intuitive experience.",
+      "A straightforward experience designed to make investing easier to understand.",
+      "Follow your portfolio and manage your tokenized assets in one place.",
     ]);
     expect(BENEFITS).toEqual([
       {
