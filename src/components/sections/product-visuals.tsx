@@ -6,24 +6,35 @@ const DISCOVER_SECTIONS = [
   {
     eyebrow: "EXPLORE",
     title: "Find your next opportunity.",
-    description: "Discover companies, stocks, and ETFs across a growing universe of tokenized assets.",
+    description:
+      "Discover companies, stocks, and ETFs across a growing universe of tokenized assets.",
   },
   {
     eyebrow: "RESEARCH",
     title: "Look beyond the ticker.",
-    description: "Get to know the companies behind the assets through company information and market context.",
+    description:
+      "Get to know the companies behind the assets through company information and market context.",
   },
   {
     eyebrow: "EVALUATE",
     title: "Invest with greater perspective.",
-    description: "Review relevant information and assess opportunities before making your own investment decisions.",
+    description:
+      "Review relevant information and assess opportunities before making your own investment decisions.",
   },
 ] as const;
 
 const INVEST_STEPS = [
-  { number: "01", title: "Select an asset", description: "Choose from a wide range of tokenized stocks and ETFs." },
+  {
+    number: "01",
+    title: "Select an asset",
+    description: "Choose from a wide range of tokenized stocks and ETFs.",
+  },
   { number: "02", title: "Set an amount", description: "Decide how much to invest." },
-  { number: "03", title: "Review and confirm", description: "Check the details before proceeding." },
+  {
+    number: "03",
+    title: "Review and confirm",
+    description: "Check the details before proceeding.",
+  },
 ] as const;
 
 const ALLOCATIONS = [
@@ -39,10 +50,7 @@ export function DiscoverVisual() {
     <figure aria-label="Discover investment opportunities" className="w-full">
       <div className="border-y border-line">
         {DISCOVER_SECTIONS.map((section, index) => (
-          <div
-            key={section.eyebrow}
-            className={`${index > 0 ? "border-t border-line" : ""} py-8`}
-          >
+          <div key={section.eyebrow} className={`${index > 0 ? "border-t border-line" : ""} py-8`}>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               {section.eyebrow}
             </p>
@@ -76,20 +84,13 @@ export function InvestVisual() {
                 {step.number}
               </span>
               <div>
-                <h4 className="text-lg font-semibold tracking-[-0.015em] text-ink">
-                  {step.title}
-                </h4>
-                <p className="mt-1 text-sm leading-relaxed text-muted">
-                  {step.description}
-                </p>
+                <h4 className="text-lg font-semibold tracking-[-0.015em] text-ink">{step.title}</h4>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{step.description}</p>
               </div>
             </li>
           ))}
         </ol>
       </div>
-      <figcaption className="mt-3 text-xs text-muted">
-        Illustrative only. No live prices or trades.
-      </figcaption>
     </figure>
   );
 }
@@ -123,7 +124,7 @@ export function ControlVisual() {
   return (
     <figure aria-label="Illustrative portfolio overview" className="w-full">
       <div className="border-y border-line py-6">
-        <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div ref={chartRef} className="relative size-40 shrink-0 sm:size-44">
             <svg
               aria-hidden="true"
@@ -139,14 +140,11 @@ export function ControlVisual() {
                 strokeWidth="11"
               />
               {ALLOCATIONS.map((allocation, index) => {
-                const length =
-                  (allocation.value / 100) * DONUT_CIRCUMFERENCE;
-                const offset =
-                  -ALLOCATIONS.slice(0, index).reduce(
-                    (total, previous) =>
-                      total + (previous.value / 100) * DONUT_CIRCUMFERENCE,
-                    0,
-                  );
+                const length = (allocation.value / 100) * DONUT_CIRCUMFERENCE;
+                const offset = -ALLOCATIONS.slice(0, index).reduce(
+                  (total, previous) => total + (previous.value / 100) * DONUT_CIRCUMFERENCE,
+                  0,
+                );
                 return (
                   <circle
                     key={allocation.name}
@@ -160,14 +158,19 @@ export function ControlVisual() {
                     strokeDasharray={`${hasEntered ? length : 0} ${DONUT_CIRCUMFERENCE}`}
                     strokeDashoffset={offset}
                     style={{
-                      transition:
-                        "stroke-dasharray 900ms cubic-bezier(0.22, 1, 0.36, 1)",
+                      transition: "stroke-dasharray 900ms cubic-bezier(0.22, 1, 0.36, 1)",
                       transitionDelay: hasEntered ? `${index * 110}ms` : "0ms",
                     }}
                   />
                 );
               })}
             </svg>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-[0.5rem] font-semibold uppercase tracking-[0.14em] text-muted sm:text-[0.55rem]">
+                PORTFOLIO
+              </span>
+              <span className="mt-0.5 text-sm font-semibold text-navy sm:text-base">Overview</span>
+            </div>
           </div>
           <ul className="w-full min-w-0 space-y-4 sm:w-auto">
             {ALLOCATIONS.map((allocation) => (

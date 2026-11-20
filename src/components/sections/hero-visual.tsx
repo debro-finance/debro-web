@@ -112,7 +112,7 @@ export function HeroVisual() {
                 }
               >
                 <div
-                  className={`motion-safe:animate-[counter-orbit_var(--dur)_linear_var(--delay)_infinite] flex ${tile.size} items-center justify-center rounded-2xl border border-line bg-white/95 p-2 ring-1 ring-navy/5 backdrop-blur-sm ${tile.shadow} sm:p-2.5`}
+                  className={`motion-safe:animate-[counter-orbit_var(--dur)_linear_var(--delay)_infinite] flex ${tile.size} items-center justify-center rounded border border-line bg-white/95 p-2 ring-1 ring-navy/5 backdrop-blur-sm ${tile.shadow} sm:p-2.5`}
                   style={
                     {
                       "--dur": `${ORBIT_DURATION}s`,

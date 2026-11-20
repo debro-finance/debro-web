@@ -4,15 +4,13 @@ type Variant = "primary" | "secondary" | "light" | "outline-light";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-navy text-white hover:bg-navy-soft focus-visible:outline-accent",
+  primary: "bg-navy text-white hover:bg-navy-soft focus-visible:outline-accent",
   secondary:
     "border border-line-strong bg-white text-ink hover:border-navy/30 hover:bg-surface focus-visible:outline-accent",
-  light:
-    "bg-white text-navy hover:bg-accent-soft focus-visible:outline-white",
+  light: "bg-white text-navy hover:bg-accent-soft focus-visible:outline-white",
   "outline-light":
     "border border-white/25 text-white hover:border-white/50 hover:bg-white/10 focus-visible:outline-white",
 };
@@ -31,9 +29,7 @@ export function buttonClasses({
   size?: Size;
   className?: string;
 } = {}): string {
-  return [base, variants[variant], sizes[size], className]
-    .filter(Boolean)
-    .join(" ");
+  return [base, variants[variant], sizes[size], className].filter(Boolean).join(" ");
 }
 
 type ButtonLinkProps = {
@@ -45,20 +41,9 @@ type ButtonLinkProps = {
   "aria-label"?: string;
 };
 
-export function ButtonLink({
-  href,
-  children,
-  variant,
-  size,
-  className,
-  ...rest
-}: ButtonLinkProps) {
+export function ButtonLink({ href, children, variant, size, className, ...rest }: ButtonLinkProps) {
   return (
-    <a
-      href={href}
-      className={buttonClasses({ variant, size, className })}
-      {...rest}
-    >
+    <a href={href} className={buttonClasses({ variant, size, className })} {...rest}>
       {children}
     </a>
   );
