@@ -1,9 +1,13 @@
 import { MAX_WAITLIST_BODY_BYTES, parseWaitlistPayload } from "@/lib/waitlist/validation";
+import type { Attribution } from "@/lib/waitlist/attribution";
 
 import type { RateLimiter } from "@/lib/waitlist/rate-limit";
 
 export type WaitlistDb = {
-  insertSubscriber(email: string): Promise<"inserted" | "duplicate">;
+  insertSubscriber(
+    email: string,
+    attribution?: Attribution | null,
+  ): Promise<"inserted" | "duplicate">;
 };
 
 export type WaitlistBody = { ok: true } | { ok: false; error: string };
@@ -20,6 +24,7 @@ export type RegisterSubscriberInput = {
   enabled: boolean;
   db: WaitlistDb | null;
   limiter: RateLimiter;
+  attributionEnabled?: boolean;
 };
 
 function failure(status: number, error: string, retryAfterSeconds?: number): WaitlistResult {
@@ -51,6 +56,7 @@ export async function registerSubscriber({
   enabled,
   db,
   limiter,
+  attributionEnabled,
 }: RegisterSubscriberInput): Promise<WaitlistResult> {
   if (!enabled) {
     return failure(503, "disabled");
@@ -60,7 +66,9 @@ export async function registerSubscriber({
     return failure(413, "invalid_request");
   }
 
-  const parsed = parseWaitlistPayload(rawBody);
+  const parsed = parseWaitlistPayload(rawBody, {
+    attributionEnabled: attributionEnabled === true,
+  });
   if (!parsed.ok) {
     return failure(400, parsed.error);
   }
@@ -81,7 +89,10 @@ export async function registerSubscriber({
   }
 
   try {
-    const outcome = await db.insertSubscriber(parsed.payload.email);
+    const outcome = await db.insertSubscriber(
+      parsed.payload.email,
+      parsed.payload.attribution,
+    );
     if (outcome === "inserted" || outcome === "duplicate") {
       return { status: 200, body: { ok: true } };
     }

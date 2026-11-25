@@ -45,6 +45,14 @@ export function isWaitlistEnabled(): boolean {
   );
 }
 
+/**
+ * Attribution collection is owner-gated and disabled by default. Existing
+ * waitlist behavior must keep working even when attribution is disabled.
+ */
+export function isWaitlistAttributionEnabled(): boolean {
+  return process.env.WAITLIST_ATTRIBUTION_ENABLED === "true";
+}
+
 export const WAITLIST_HREF = "#waitlist";
 
 export const NAV_LINKS = [

@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+import {
+  parseAttribution,
+  type Attribution,
+  type AttributionParseOptions,
+} from "@/lib/waitlist/attribution";
+
 export const MAX_WAITLIST_BODY_BYTES = 4 * 1024;
 
 /**
@@ -18,6 +24,11 @@ export const waitlistEmailSchema = z
 export type WaitlistPayload = {
   email: string;
   consent: true;
+  attribution: Attribution | null;
+};
+
+export type ParseWaitlistOptions = {
+  attributionEnabled?: boolean;
 };
 
 export type ParseResult =
@@ -25,10 +36,17 @@ export type ParseResult =
   | { ok: true; honeypot: false; payload: WaitlistPayload }
   | {
       ok: false;
-      error: "invalid_request" | "invalid_email" | "consent_required";
+      error:
+        | "invalid_request"
+        | "invalid_email"
+        | "consent_required"
+        | "invalid_attribution";
     };
 
-export function parseWaitlistPayload(rawBody: string): ParseResult {
+export function parseWaitlistPayload(
+  rawBody: string,
+  options: ParseWaitlistOptions = {},
+): ParseResult {
   let data: unknown;
 
   try {
@@ -56,10 +74,21 @@ export function parseWaitlistPayload(rawBody: string): ParseResult {
     return { ok: false, error: "consent_required" };
   }
 
+  const attributionResult = parseAttribution(record, {
+    enabled: options.attributionEnabled === true,
+  } satisfies AttributionParseOptions);
+  if (!attributionResult.ok) {
+    return { ok: false, error: attributionResult.error };
+  }
+
   return {
     ok: true,
     honeypot: false,
-    payload: { email: emailResult.data, consent: true },
+    payload: {
+      email: emailResult.data,
+      consent: true,
+      attribution: attributionResult.attribution,
+    },
   };
 }
 

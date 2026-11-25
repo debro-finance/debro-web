@@ -6,6 +6,7 @@
 
 - The signup form requests an email address and explicit consent. Its hidden `company` field is an anti-abuse honeypot and is not stored.
 - The API validates and normalizes the email. The database row contains an internal ID, email, subscription status, consent timestamp and record timestamp; there are no account credentials, names, wallet details or financial data in the waitlist schema.
+- Additive nullable UTM attribution columns (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`) exist in the migration for future approved attribution. Collection is disabled by default (`WAITLIST_ATTRIBUTION_ENABLED=false`), values are validated against strict allowlists/length limits, and no attribution is stored until owner approval and notice updates.
 - New and duplicate signups receive the same generic response. A salted hash of the request IP is held only as a key in the in-memory rate limiter; the application does not persist that key. Provider-side access logs and telemetry were not inspected.
 - The root layout includes Vercel Analytics. The owner/counsel must verify its actual data flows and determine whether the notice’s limited technical-information and service-provider statements adequately cover them.
 - No email-sending system or account creation is implemented. The one-time launch email is an operational commitment, not an existing automated workflow.

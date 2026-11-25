@@ -29,6 +29,13 @@ function makeDb(implementation?: WaitlistDb["insertSubscriber"]) {
   };
 }
 
+const EMPTY_ATTRIBUTION = {
+  utm_source: null,
+  utm_medium: null,
+  utm_campaign: null,
+  utm_content: null,
+};
+
 function request(
   body: string,
   {
@@ -65,7 +72,10 @@ describe("POST /api/waitlist", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true });
     expect(response.headers.get("cache-control")).toBe("no-store");
-    expect(state.db?.insertSubscriber).toHaveBeenCalledWith("user@example.com");
+    expect(state.db?.insertSubscriber).toHaveBeenCalledWith(
+      "user@example.com",
+      EMPTY_ATTRIBUTION,
+    );
   });
 
   it("rejects a disabled waitlist without reading subscriber data", async () => {

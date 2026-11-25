@@ -26,6 +26,12 @@ Implemented:
 - Automated checks in `tests/unit/seo.test.ts` cover metadata copy, canonical origin, robots/sitemap behavior, structured data and indexing gates. `tests/unit/content.test.ts` guards the investing-first hierarchy and keeps wallet/Solana detail in the FAQ.
 - Live checks (dev/preview vs approved Production) are recorded in `docs/QA.md`.
 
+## Vercel Analytics
+- The existing `@vercel/analytics/next` integration remains mounted in `src/app/layout.tsx`.
+- The current Vercel team is on Hobby. Do not enable paid features, upgrade plans, introduce another analytics provider, or depend on custom events.
+- Future custom conversion events, if approved later, should be implemented without changing the public waitlist response contract. The conversion source should be the server-confirmed new registration outcome (inserted record), not client-side form submission alone. Any event payload must remain aggregate-safe and must not include email, raw IP, referrer URL, or personal information.
+- Preserve the generic public waitlist response and anti-enumeration protections. Do not add client-observable signals that distinguish new vs duplicate registrations.
+
 ## Measured results
 See `docs/QA.md` for the exact Lighthouse run, environment, scores and Core Web Vitals lab values. Targets remain aspirations, not ranking guarantees:
 
