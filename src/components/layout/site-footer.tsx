@@ -111,8 +111,11 @@ export function SiteFooter() {
               the launch announcement.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-white/65">
-              For privacy inquiries or deletion requests, use the designated privacy contact channel
-              once it has been confirmed by the owner.
+              For privacy inquiries or deletion requests, contact{" "}
+              <a className="underline-offset-4 hover:underline" href="mailto:privacy@debro.finance">
+                privacy@debro.finance
+              </a>
+              .
             </p>
             <a
               href="/waitlist-privacy"

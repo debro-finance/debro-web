@@ -17,7 +17,7 @@
     "test:watch": "vitest",
     "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
     "waitlist:remove": "node --env-file-if-exists=.env.local scripts/waitlist-remove.mjs",
-    "waitlist:report": "node --env-file-if-exists=.env.local scripts/waitlist-report.mjs",
+    "waitlist:report": "node --env-file-if-exists=.env.local scripts/waitlist-report.ts",
     "assets:generate": "node scripts/generate-brand-assets.mjs"
   },
   "dependencies": {

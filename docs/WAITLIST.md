@@ -1,12 +1,12 @@
 # Waitlist functional & data specification
 
-Status: **implemented and tested; owner reports the shared-database waitlist is currently accepting registrations. The owner-provided notice is implemented at `/waitlist-privacy`; responsible-entity and confirmed privacy-contact channel, service-provider disclosures, and legal review remain outstanding. Attribution schema/reporting foundation is additive and disabled by default pending owner approval.**
+Status: **implemented and tested; owner reports the shared-database waitlist is currently accepting registrations. The owner-provided notice is implemented at `/waitlist-privacy`, and `privacy@debro.finance` is confirmed as a real, authorized contact (see `AGENTS.md`). Responsible-entity, service-provider disclosure, and legal review remain outstanding. Attribution schema/reporting foundation is additive and disabled by default pending owner approval.**
 
 ## Use and scope
 - Single opt-in email signup; explicit consent to be contacted about **DeBro launch availability** only.
 - No newsletters, progress marketing, promotional campaigns or verification email.
 - English form with accessible consent text, loading, success, duplicate and error states.
-- The signup form asks for an email address and consent only. It does not collect a name, account credentials, wallet details or financial information. A hidden `company` honeypot field is included for abuse prevention and is not stored.
+- The signup form asks for an email address and consent only. It does not collect a name, account credentials, wallet details or financial information. A hidden `company` honeypot field is included for abuse prevention and is not stored. At submit time the client may also forward up to four approved UTM query parameters; they are best-effort metadata, are never stored client-side, and are ignored entirely while attribution is disabled.
 - Duplicate and new submissions return the same generic success response, so membership is not exposed.
 
 ## Data model
@@ -36,12 +36,12 @@ The server trims surrounding whitespace and lowercases the entire address before
 ## API contract
 `POST /api/waitlist` accepts JSON `{ email: string, consent: true, company?: string }`.
 
-Optional attribution fields `utm_source`, `utm_medium`, `utm_campaign`, and `utm_content` are accepted by the parser only when `WAITLIST_ATTRIBUTION_ENABLED=true` and the values match the approved allowlist in `src/lib/waitlist/attribution.ts`. While attribution is disabled, submitted UTM values are ignored and no attribution is stored. Invalid attribution types, overlong values, or non-approved values return `400 invalid_attribution`.
+Optional attribution fields `utm_source`, `utm_medium`, `utm_campaign`, and `utm_content` are parsed only when `WAITLIST_ATTRIBUTION_ENABLED=true`. Values are trimmed, lowercased, length-limited and checked against approved allowlists. Unapproved, malformed or oversized values are discarded (`NULL`) and never prevent a valid registration. While attribution is disabled the fields are ignored entirely and no attribution is stored.
 
 | Status | Meaning |
 | --- | --- |
 | `200 {ok:true}` | Successful insert, verified existing duplicate, or honeypot absorption (never reveals which) |
-| `400 invalid_email` / `consent_required` / `invalid_request` / `invalid_attribution` | Safe validation failure |
+| `400 invalid_email` / `consent_required` / `invalid_request` | Safe validation failure |
 | `413 invalid_request` | Body over 4 KB |
 | `429 rate_limited` + `Retry-After` | More than 5 valid-route attempts per hashed key in 10 minutes |
 | `503 disabled` / `unavailable` | Collection disabled or database unavailable |
@@ -57,21 +57,28 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 
 ## Attribution (owner-gated)
 - Supported fields: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`.
-- Collection is disabled by default (`WAITLIST_ATTRIBUTION_ENABLED=false`).
-- Values are validated against strict length limits and approved allowlists in `src/lib/waitlist/attribution.ts`. The allowlists are empty until owner approval.
-- Do not store arbitrary query strings, full referrer URLs, personal information, fingerprints, or additional persistent visitor identifiers.
+- The waitlist form reads only these four parameters from `window.location.search` at submit time. No cookies, localStorage/sessionStorage, persistent visitor identifiers, referrer URLs or browser fingerprints are created or stored.
+- Collection is disabled by default (`WAITLIST_ATTRIBUTION_ENABLED=false`). When disabled, fields are ignored entirely.
+- Approved initial vocabulary lives in `src/lib/waitlist/attribution.ts`:
+  - `utm_source`: `x`, `instagram`, `linkedin`, `reddit`, `partner`, `newsletter`
+  - `utm_medium`: `social`, `referral`, `email`
+  - `utm_campaign`: `prelaunch`, `hackathon`, `launch`
+  - `utm_content`: explicitly controlled, non-personal publication identifiers (`hero`, `footer`, `waitlist`)
+- Values are trimmed, lowercased, length-limited (64 characters) and allowlisted. Invalid or unapproved values are discarded as `NULL`; a valid registration is never blocked by marketing metadata.
 - Duplicate registrations preserve the original attribution record; conflicts do not overwrite attribution.
-- Before enabling attribution, the owner must approve privacy implications, update the privacy notice, populate approved campaign values, and run the additive migration on production after backup/verification.
+- Required privacy notice changes are prepared in `docs/PRIVACY-DRAFT.md` but the live notice and launch-only consent are unchanged. Do not activate collection before owner approval and notice publication.
 
 ## Reporting
-- `npm run waitlist:report -- [--from ISO_DATE] [--to ISO_DATE] [--include-attribution]` outputs aggregate JSON only.
-- The report includes total subscribed records, unsubscribed records, new registrations in the selected range, and daily/weekly registration counts.
-- Acquisition breakdown is included only when explicitly requested and attribution data has been approved/collected.
+- `npm run waitlist:report -- [--from ISO_DATE] [--to ISO_DATE] [--include-attribution]` runs in a PostgreSQL read-only transaction and outputs aggregate JSON only.
+- `subscribedCount` is the number of currently subscribed records, independent of the reporting window. `newRegistrationsCount` counts registrations created inside the window; `unsubscribedCount`, `dailyCounts` and `weeklyCounts` are also reported.
+- Reporting boundaries are UTC: inclusive start and exclusive end. Date-only `--from` starts at 00:00:00Z; date-only `--to` includes the whole UTC day by using the next day at 00:00:00Z as the exclusive end. Full timestamps with offsets are converted to UTC. Daily and weekly buckets are also computed in UTC so results do not depend on the database session time zone.
+- Reversed ranges and missing CLI argument values are rejected with safe JSON errors.
+- Acquisition breakdown is included only when `--include-attribution` is passed and respects the same range. Against the pre-migration schema it degrades gracefully (`attributionAvailable: false`, `acquisitionBreakdown: null`) without failing the rest of the report.
 - The report never prints subscriber emails or other personal information.
 
 ## Consent, retention and deletion
 - Consent is limited to one email announcing DeBro availability; no newsletters or recurring marketing.
-- The owner-provided notice is implemented in the application at `/waitlist-privacy`. Its copy approval does not constitute legal approval. The responsible legal entity and a real, monitored privacy contact still require owner confirmation; the implementation now avoids fabricating a contact address and refers to a designated privacy contact pending owner confirmation.
+- The owner-provided notice is implemented in the application at `/waitlist-privacy`. Its copy approval does not constitute legal approval. The owner has confirmed `privacy@debro.finance` as a real, authorized and monitored contact; it is preserved in the notice and footer. The responsible legal entity and formal legal review remain outstanding. See `AGENTS.md` for the canonical contact rule.
 - `npm run waitlist:remove -- --email <address>` marks a subscriber unsubscribed.
 - `npm run waitlist:remove -- --email <address> --delete` permanently removes the row.
 - Both scripts print only an affected count, never the address or subscriber data.
@@ -109,7 +116,8 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
    ```sh
    DATABASE_URL=<approved-production-connection> npm run db:migrate
    ```
-2. The migration applies `db/migrations/0002_waitlist_attribution.sql`, adding nullable `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` columns and length constraints. It uses `IF NOT EXISTS`/guarded constraints and does not modify existing rows.
+2. The migration applies `db/migrations/0002_waitlist_attribution.sql`, adding nullable `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` columns and length constraints. It uses `IF NOT EXISTS`/guarded constraints scoped to `public.waitlist_subscribers`, and does not modify existing rows.
+3. The migration sets bounded `lock_timeout = '2s'` and `statement_timeout = '15s'` for its session. If a lock or statement cannot complete in that window it fails and rolls back; retry only after confirming the cause and re-taking a backup. Do not remove or raise these limits without owner approval.
 
 ### Verification
 1. Verify schema:
@@ -119,7 +127,14 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
    WHERE table_schema = 'public' AND table_name = 'waitlist_subscribers'
    ORDER BY ordinal_position;
    ```
-2. Verify constraints include the four `waitlist_subscribers_utm_*_length` checks.
+2. Verify constraints are scoped to the intended table and include the four `waitlist_subscribers_utm_*_length` checks:
+   ```sql
+   SELECT conname
+   FROM pg_constraint
+   WHERE conrelid = 'public.waitlist_subscribers'::regclass
+     AND conname LIKE 'waitlist_subscribers_utm_%_length'
+   ORDER BY conname;
+   ```
 3. Verify data preservation:
    ```sql
    SELECT count(*) AS total,
@@ -131,8 +146,9 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
    ```
    Compare totals/timestamps against pre-migration metadata.
 4. Verify existing rows have `NULL` attribution and unchanged IDs/statuses/consent timestamps.
-5. Verify app behavior with `WAITLIST_ATTRIBUTION_ENABLED=false`: submit a test registration through a non-production-safe path only if owner authorizes; otherwise rely on pre-deploy integration tests and read-only smoke checks. Never insert test PII into production.
-6. Only after owner approval, deploy/configure approved allowlists and set `WAITLIST_ATTRIBUTION_ENABLED=true`.
+5. Verify app behavior with `WAITLIST_ATTRIBUTION_ENABLED=false` using read-only smoke checks and the isolated-local integration suite. Never submit synthetic signups to the shared Neon database or either deployed environment.
+6. Run `npm run waitlist:report --` (no attribution flag) as a read-only production smoke check; then optionally run with `--include-attribution` after migration to confirm `attributionAvailable: true`. Both outputs must be aggregate-only.
+7. Only after owner approval, deploy/configure approved allowlists and set `WAITLIST_ATTRIBUTION_ENABLED=true`.
 
 ### Rollback
 - **Preferred rollback (no data loss):** keep the additive nullable columns in place and set `WAITLIST_ATTRIBUTION_ENABLED=false`. The application is backwards-compatible and ignores attribution when disabled. This avoids destructive schema changes on live data.
@@ -141,4 +157,4 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 - **Do not drop columns** in production as part of routine rollback unless owner explicitly approves a separate reviewed destructive migration after confirming no dependency and full backup.
 
 ## Test coverage
-`tests/unit/waitlist.test.ts`, `tests/unit/route.test.ts`, `tests/unit/waitlist-report.test.ts`, and `tests/integration/waitlist.db.test.ts` cover valid registration, invalid email, missing consent, duplicate registration, malformed and oversized requests, honeypot, rate limiting, database unavailable/failure, normalization, constraints, safe error output, end-to-end persistence, attribution validation/disabled behavior, duplicate attribution preservation, and aggregate reporting without PII.
+`tests/unit/waitlist.test.ts`, `tests/unit/route.test.ts`, `tests/unit/attribution.test.ts`, `tests/unit/waitlist-form-attribution.test.tsx`, `tests/unit/waitlist-report.test.ts`, and `tests/integration/waitlist.db.test.ts` cover valid registration, invalid email, missing consent, duplicate registration, malformed and oversized requests, honeypot, rate limiting, database unavailable/failure, normalization, constraints, safe error output, end-to-end persistence, UTM capture/validation/discarding, migration 0001 -> 0002 data preservation, duplicate attribution preservation, UTC reporting ranges, time zones, CLI behavior, attribution breakdown, and aggregate-only reporting without PII.

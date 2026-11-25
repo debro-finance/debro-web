@@ -17,7 +17,7 @@ Implemented:
 - Favicon from the official navy icon and a 180×180 apple icon.
 - `lang="en"`, responsive viewport, theme color and semantic heading hierarchy.
 - JSON-LD `Organization` and `WebSite` with only name, URL, logo, language and description. No address, social profiles, ratings or offers.
-- The owner-provided Waitlist Privacy notice is implemented at `/waitlist-privacy` and linked from the waitlist form and footer. Its page metadata has a dedicated title, description and canonical path. This does not imply formal legal approval; responsible-entity/contact, provider/analytics disclosures, legal review and deletion/backup operations remain owner requirements. See `docs/PRIVACY-DRAFT.md`.
+- The owner-provided Waitlist Privacy notice is implemented at `/waitlist-privacy` and linked from the waitlist form and footer. Its page metadata has a dedicated title, description and canonical path. The confirmed contact `privacy@debro.finance` is preserved; see `AGENTS.md`. This does not imply formal legal approval; responsible-entity, provider/analytics disclosures, legal review and deletion/backup operations remain owner requirements. See `docs/PRIVACY-DRAFT.md`.
 
 ## Technical quality
 - All landing content is server-rendered and crawlable; interactive islands are the mobile menu and form only.

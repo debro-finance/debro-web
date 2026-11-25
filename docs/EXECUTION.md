@@ -13,11 +13,11 @@ Status: **implementation complete on `development`; production release owner-gat
 
 ## Owner-controlled launch gates
 - [ ] Domain purchase/DNS/TLS and canonical production URL.
-- [ ] Confirm the responsible legal entity and a monitored privacy-contact/request route; see `docs/PRIVACY-DRAFT.md`.
+- [ ] Confirm the responsible legal entity. `privacy@debro.finance` is confirmed as a monitored contact; implement/test the manual request-handling route; see `AGENTS.md` and `docs/PRIVACY-DRAFT.md`.
 - [ ] Complete legal review of the notice and confirm the Neon, Vercel, Vercel Analytics and other provider data flows.
 - [ ] Implement and test the single launch-announcement operation and post-announcement deletion of all waitlist records; confirm provider backup/log retention and deletion handling. No automatic expiry or bulk deletion currently exists.
 - [ ] The owner reports waitlist collection is currently active. Decide whether to pause further collection until the privacy requirements and handling process are approved; this task did not change collection settings.
-- [ ] Before enabling attribution: approve privacy implications, update privacy notice, approve UTM allowlists, back up production DB, run additive migration manually, verify, then set `WAITLIST_ATTRIBUTION_ENABLED=true`.
+- [ ] Before enabling attribution: approve privacy implications, publish revised privacy notice, confirm the initial UTM vocabulary in `src/lib/waitlist/attribution.ts`, back up production DB, run additive migration manually, verify, then set `WAITLIST_ATTRIBUTION_ENABLED=true`.
 - [ ] Final copy/claims approval and final interface typeface confirmation.
 - [ ] Vercel plan eligibility for public commercial use.
 - [ ] Neon production configuration and preview database isolation verified.

@@ -49,29 +49,30 @@ export const COUNT_UNSUBSCRIBED_SQL = `
   WHERE status = 'unsubscribed'
 `;
 
+// Reporting windows use UTC boundaries: inclusive start, exclusive end.
 export const COUNT_NEW_REGISTRATIONS_SQL = `
   SELECT count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
-    AND ($2::timestamptz IS NULL OR created_at <= $2::timestamptz)
+    AND ($2::timestamptz IS NULL OR created_at < $2::timestamptz)
 `;
 
 export const DAILY_REGISTRATION_COUNTS_SQL = `
-  SELECT date_trunc('day', created_at)::date AS day,
+  SELECT (created_at AT TIME ZONE 'UTC')::date AS day,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
-    AND ($2::timestamptz IS NULL OR created_at <= $2::timestamptz)
+    AND ($2::timestamptz IS NULL OR created_at < $2::timestamptz)
   GROUP BY 1
   ORDER BY 1
 `;
 
 export const WEEKLY_REGISTRATION_COUNTS_SQL = `
-  SELECT date_trunc('week', created_at)::date AS week,
+  SELECT date_trunc('week', created_at AT TIME ZONE 'UTC')::date AS week,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
-    AND ($2::timestamptz IS NULL OR created_at <= $2::timestamptz)
+    AND ($2::timestamptz IS NULL OR created_at < $2::timestamptz)
   GROUP BY 1
   ORDER BY 1
 `;
@@ -83,6 +84,8 @@ export const ACQUISITION_BREAKDOWN_SQL = `
          utm_content,
          count(*)::int AS count
   FROM public.waitlist_subscribers
+  WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
+    AND ($2::timestamptz IS NULL OR created_at < $2::timestamptz)
   GROUP BY utm_source, utm_medium, utm_campaign, utm_content
   ORDER BY count DESC, utm_source NULLS LAST, utm_medium NULLS LAST,
            utm_campaign NULLS LAST, utm_content NULLS LAST

@@ -36,11 +36,7 @@ export type ParseResult =
   | { ok: true; honeypot: false; payload: WaitlistPayload }
   | {
       ok: false;
-      error:
-        | "invalid_request"
-        | "invalid_email"
-        | "consent_required"
-        | "invalid_attribution";
+      error: "invalid_request" | "invalid_email" | "consent_required";
     };
 
 export function parseWaitlistPayload(
@@ -74,12 +70,11 @@ export function parseWaitlistPayload(
     return { ok: false, error: "consent_required" };
   }
 
-  const attributionResult = parseAttribution(record, {
+  // Optional marketing metadata is best-effort: invalid or unapproved values
+  // are discarded and never prevent a valid registration.
+  const attribution = parseAttribution(record, {
     enabled: options.attributionEnabled === true,
   } satisfies AttributionParseOptions);
-  if (!attributionResult.ok) {
-    return { ok: false, error: attributionResult.error };
-  }
 
   return {
     ok: true,
@@ -87,7 +82,7 @@ export function parseWaitlistPayload(
     payload: {
       email: emailResult.data,
       consent: true,
-      attribution: attributionResult.attribution,
+      attribution,
     },
   };
 }

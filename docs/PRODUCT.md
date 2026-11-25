@@ -26,7 +26,7 @@ Status: APPROVED product direction (2026-11-18); refined investing-first positio
 - All waitlist CTAs point to the waitlist **section**, never directly to the email input, so the heading and signup area are framed correctly below the sticky header.
 - Signup: single opt-in (no confirmation email); confirmation appears on site; no newsletter or periodic product updates.
 - Collected emails will be used **only once/for communications necessary to announce DeBro availability** under the disclosed consent purpose; no unrelated marketing. Do not silently extend this purpose.
-- The owner reports that the waitlist currently accepts registrations and persists them in the existing shared Neon database. The owner-provided notice copy is implemented at `/waitlist-privacy`; the responsible entity, a real monitored privacy contact, legal review, provider/analytics disclosures, and operational deletion/backup handling remain owner/counsel actions. See `docs/PRIVACY-DRAFT.md`. Do not change collection settings in this repository without owner direction.
+- The owner reports that the waitlist currently accepts registrations and persists them in the existing shared Neon database. The owner-provided notice copy is implemented at `/waitlist-privacy`, and `privacy@debro.finance` is confirmed as a real, authorized and monitored contact (see `AGENTS.md`). The responsible entity, legal review, provider/analytics disclosures, and operational deletion/backup handling remain owner/counsel actions. See `docs/PRIVACY-DRAFT.md`. Do not change collection settings in this repository without owner direction.
 - Replace CTA with **Launch App** only after owner approval and production readiness; keep app host separate.
 
 ## Initial copy direction (superseded by current landing copy)
