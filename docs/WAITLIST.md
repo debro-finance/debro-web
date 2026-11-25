@@ -71,7 +71,7 @@ The route never returns raw SQL, stack traces, emails or connection details. Ins
 ## Reporting
 - `npm run waitlist:report -- [--from ISO_DATE] [--to ISO_DATE] [--include-attribution]` runs in a PostgreSQL read-only transaction and outputs aggregate JSON only.
 - `subscribedCount` is the number of currently subscribed records, independent of the reporting window. `newRegistrationsCount` counts registrations created inside the window; `unsubscribedCount`, `dailyCounts` and `weeklyCounts` are also reported.
-- Reporting boundaries are UTC: inclusive start and exclusive end. Date-only `--from` starts at 00:00:00Z; date-only `--to` includes the whole UTC day by using the next day at 00:00:00Z as the exclusive end. Full timestamps with offsets are converted to UTC.
+- Reporting boundaries are UTC: inclusive start and exclusive end. Date-only `--from` starts at 00:00:00Z; date-only `--to` includes the whole UTC day by using the next day at 00:00:00Z as the exclusive end. Full timestamps with offsets are converted to UTC. Daily and weekly buckets are also computed in UTC so results do not depend on the database session time zone.
 - Reversed ranges and missing CLI argument values are rejected with safe JSON errors.
 - Acquisition breakdown is included only when `--include-attribution` is passed and respects the same range. Against the pre-migration schema it degrades gracefully (`attributionAvailable: false`, `acquisitionBreakdown: null`) without failing the rest of the report.
 - The report never prints subscriber emails or other personal information.

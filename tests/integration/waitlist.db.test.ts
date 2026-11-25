@@ -391,7 +391,7 @@ describeWithDatabase("waitlist persistence, migration and reporting", () => {
     });
     // Two synthetic records from the migration test also fall inside January.
     expect(report.newRegistrationsCount).toBe(5);
-    expect(report.dailyCounts).toHaveLength(4);
+    expect(report.dailyCounts).toHaveLength(3);
     expect(report.acquisitionBreakdown).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ utmSource: "newsletter", count: 2 }),

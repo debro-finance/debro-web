@@ -58,7 +58,7 @@ export const COUNT_NEW_REGISTRATIONS_SQL = `
 `;
 
 export const DAILY_REGISTRATION_COUNTS_SQL = `
-  SELECT date_trunc('day', created_at)::date AS day,
+  SELECT (created_at AT TIME ZONE 'UTC')::date AS day,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
@@ -68,7 +68,7 @@ export const DAILY_REGISTRATION_COUNTS_SQL = `
 `;
 
 export const WEEKLY_REGISTRATION_COUNTS_SQL = `
-  SELECT date_trunc('week', created_at)::date AS week,
+  SELECT date_trunc('week', created_at AT TIME ZONE 'UTC')::date AS week,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)

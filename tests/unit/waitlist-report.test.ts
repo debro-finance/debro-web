@@ -74,10 +74,10 @@ describe("getWaitlistReport", () => {
       void params;
       if (sql.includes("status = 'subscribed'")) return [{ count: 3 }];
       if (sql.includes("status = 'unsubscribed'")) return [{ count: 1 }];
-      if (sql.includes("date_trunc('day'")) {
+      if (sql.includes("AS day")) {
         return [{ day: "2026-01-01", count: 2 }];
       }
-      if (sql.includes("date_trunc('week'")) {
+      if (sql.includes("AS week")) {
         return [{ week: "2025-12-29", count: 2 }];
       }
       if (sql.includes("GROUP BY utm_source")) {
