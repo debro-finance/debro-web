@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   getWaitlistReport,
+  hasAttributionColumns,
   normalizeReportRange,
   parseWaitlistReportArgs,
   WaitlistReportError,
@@ -65,6 +66,28 @@ describe("parseWaitlistReportArgs", () => {
     expect(() => parseWaitlistReportArgs(["--to", "--include-attribution"])).toThrow(
       WaitlistReportError,
     );
+  });
+});
+
+describe("hasAttributionColumns", () => {
+  it("checks the four attribution columns read-only", async () => {
+    const query = vi.fn(async (text: string) => {
+      void text;
+      return [{ count: 4 }];
+    });
+    expect(
+      await hasAttributionColumns({
+        query: query as unknown as WaitlistReportDb["query"],
+      }),
+    ).toBe(true);
+    expect(query.mock.calls[0]?.[0]).toContain("information_schema.columns");
+
+    const missing = vi.fn(async () => [{ count: 0 }]);
+    expect(
+      await hasAttributionColumns({
+        query: missing as unknown as WaitlistReportDb["query"],
+      }),
+    ).toBe(false);
   });
 });
 
