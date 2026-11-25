@@ -4,6 +4,7 @@ import {
   COUNT_SUBSCRIBED_SQL,
   COUNT_UNSUBSCRIBED_SQL,
   DAILY_REGISTRATION_COUNTS_SQL,
+  HAS_ATTRIBUTION_COLUMNS_SQL,
   WEEKLY_REGISTRATION_COUNTS_SQL,
 } from "../lib/waitlist/sql.ts";
 
@@ -163,8 +164,16 @@ function asCount(rows: readonly Record<string, unknown>[]): number {
 }
 
 function asDateString(value: unknown): string {
+  // Reporting SQL returns YYYY-MM-DD text so this is only a defensive guard.
+  if (typeof value === "string") {
+    return value.slice(0, 10);
+  }
   if (value instanceof Date) {
-    return value.toISOString().slice(0, 10);
+    // Use UTC calendar fields; never local getFullYear/getMonth/getDate.
+    const year = value.getUTCFullYear();
+    const month = String(value.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(value.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
   return String(value);
 }
@@ -172,6 +181,17 @@ function asDateString(value: unknown): string {
 function isMissingAttributionColumn(error: unknown): boolean {
   const code = (error as { code?: unknown } | null)?.code;
   return code === "42703" || code === "42P01";
+}
+
+/**
+ * Read-only schema check. Callers can use this to avoid issuing a query that
+ * would fail (and abort a read-only transaction) on the pre-migration schema.
+ */
+export async function hasAttributionColumns(
+  db: WaitlistReportDb,
+): Promise<boolean> {
+  const rows = await db.query(HAS_ATTRIBUTION_COLUMNS_SQL);
+  return asCount(rows) === 4;
 }
 
 export async function getWaitlistReport(
@@ -182,14 +202,13 @@ export async function getWaitlistReport(
   const normalizedRange = normalizeReportRange(range);
   const params = [normalizedRange.from, normalizedRange.to] as const;
 
-  const [subscribedRows, unsubscribedRows, newRows, dailyRows, weeklyRows] =
-    await Promise.all([
-      db.query(COUNT_SUBSCRIBED_SQL),
-      db.query(COUNT_UNSUBSCRIBED_SQL),
-      db.query(COUNT_NEW_REGISTRATIONS_SQL, params),
-      db.query(DAILY_REGISTRATION_COUNTS_SQL, params),
-      db.query(WEEKLY_REGISTRATION_COUNTS_SQL, params),
-    ]);
+  // Sequential queries keep the adapter compatible with a single pg Client,
+  // which does not allow concurrent queries on one connection.
+  const subscribedRows = await db.query(COUNT_SUBSCRIBED_SQL);
+  const unsubscribedRows = await db.query(COUNT_UNSUBSCRIBED_SQL);
+  const newRows = await db.query(COUNT_NEW_REGISTRATIONS_SQL, params);
+  const dailyRows = await db.query(DAILY_REGISTRATION_COUNTS_SQL, params);
+  const weeklyRows = await db.query(WEEKLY_REGISTRATION_COUNTS_SQL, params);
 
   let acquisitionBreakdown: WaitlistAcquisitionBreakdown[] | null = null;
   let attributionAvailable = false;
