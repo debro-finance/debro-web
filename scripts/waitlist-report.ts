@@ -2,6 +2,7 @@ import pg from "pg";
 
 import {
   getWaitlistReport,
+  hasAttributionColumns,
   parseWaitlistReportArgs,
   WaitlistReportError,
   type WaitlistReportDb,
@@ -71,10 +72,19 @@ try {
     },
   };
 
+  // Check schema first so a missing-column error never aborts the read-only
+  // transaction before the rest of the report is produced.
+  const attributionColumnsAvailable = args.includeAttribution
+    ? await hasAttributionColumns(reportDb)
+    : false;
+
   const report = await getWaitlistReport(
     reportDb,
     { from: args.from, to: args.to },
-    { includeAcquisitionBreakdown: args.includeAttribution },
+    {
+      includeAcquisitionBreakdown:
+        args.includeAttribution && attributionColumnsAvailable,
+    },
   );
 
   await client.query("COMMIT");

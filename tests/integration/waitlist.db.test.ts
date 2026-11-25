@@ -103,11 +103,15 @@ describeWithDatabase("waitlist persistence, migration and reporting", () => {
     await client.query(sql);
   }
 
-  async function runCli(args: string[] = []) {
+  async function runCli(
+    args: string[] = [],
+    env: Record<string, string> = {},
+  ) {
     return execFileAsync(process.execPath, ["scripts/waitlist-report.ts", ...args], {
       cwd: process.cwd(),
       env: {
         ...process.env,
+        ...env,
         DATABASE_URL: "",
         TEST_DATABASE_URL: connectionString,
       },
@@ -176,6 +180,16 @@ describeWithDatabase("waitlist persistence, migration and reporting", () => {
       acquisitionBreakdown: null,
       attributionAvailable: false,
     });
+    expect(unavailableCli.stderr).not.toContain('"error"');
+
+    // A subsequent read-only CLI run must succeed; a failed missing-column
+    // query must not leave the transaction in an aborted state.
+    const afterUnavailableCli = await runCli();
+    expect(JSON.parse(afterUnavailableCli.stdout)).toMatchObject({
+      subscribedCount: 2,
+      unsubscribedCount: 1,
+    });
+    expect(afterUnavailableCli.stderr).not.toContain('"error"');
 
     await applyMigration("0002_waitlist_attribution.sql");
 
@@ -363,74 +377,160 @@ describeWithDatabase("waitlist persistence, migration and reporting", () => {
     expect(rows.rows).toHaveLength(1);
   });
 
-  it("reports UTC windows and acquisition breakdown inside the requested range", async () => {
-    await client.query(
-      `INSERT INTO public.waitlist_subscribers (id, email, consent_at, status, created_at, utm_source)
-       VALUES
-         ($1, 'range-a@example.com', now(), 'subscribed', '2026-01-01T00:00:00Z', 'newsletter'),
-         ($2, 'range-b@example.com', now(), 'subscribed', '2026-01-01T10:00:00Z', 'newsletter'),
-         ($3, 'range-c@example.com', now(), 'unsubscribed', '2026-01-31T23:59:59Z', null),
-         ($4, 'range-d@example.com', now(), 'subscribed', '2026-02-01T00:00:00Z', 'x')`,
-      [
-        "33333333-3333-4333-8333-333333333333",
-        "44444444-4444-4444-8444-444444444444",
-        "55555555-5555-4555-8555-555555555555",
-        "66666666-6666-4666-8666-666666666666",
-      ],
-    );
+  it("reports deterministic UTC windows, buckets and attribution counts", async () => {
+    // Fully isolated fixtures: the transaction is rolled back afterwards, so
+    // the result cannot depend on other tests or their execution order.
+    await client.query("BEGIN");
+    try {
+      await client.query("TRUNCATE TABLE public.waitlist_subscribers");
+      await client.query(
+        `INSERT INTO public.waitlist_subscribers
+           (id, email, consent_at, status, created_at, utm_source)
+         VALUES
+           ($1, 'report-jan1-a@example.com', now(), 'subscribed',   '2031-01-01T00:00:00Z', 'newsletter'),
+           ($2, 'report-jan1-b@example.com', now(), 'subscribed',   '2031-01-01T02:00:00+02:00', 'newsletter'),
+           ($3, 'report-jan1-c@example.com', now(), 'subscribed',   '2031-01-01T23:59:59Z', 'newsletter'),
+           ($4, 'report-jan2@example.com',   now(), 'unsubscribed', '2031-01-02T12:00:00Z', 'x'),
+           ($5, 'report-jan31@example.com',  now(), 'subscribed',   '2031-01-31T23:59:59Z', null),
+           ($6, 'report-outside@example.com', now(), 'subscribed',  '2032-02-01T00:00:00Z', 'partner')`,
+        [
+          "33333333-3333-4333-8333-333333333333",
+          "44444444-4444-4444-8444-444444444444",
+          "55555555-5555-4555-8555-555555555555",
+          "66666666-6666-4666-8666-666666666666",
+          "77777777-7777-4777-8777-777777777777",
+          "88888888-8888-4888-8888-888888888888",
+        ],
+      );
 
-    const report = await getWaitlistReport(
-      reportDb,
-      { from: "2026-01-01", to: "2026-01-31" },
-      { includeAcquisitionBreakdown: true },
-    );
+      await client.query("SET TIME ZONE 'UTC'");
+      const utcReport = await getWaitlistReport(
+        reportDb,
+        { from: "2031-01-01", to: "2031-01-31" },
+        { includeAcquisitionBreakdown: true },
+      );
 
-    expect(report.range).toEqual({
-      from: "2026-01-01T00:00:00.000Z",
-      to: "2026-02-01T00:00:00.000Z",
-    });
-    // Two synthetic records from the migration test also fall inside January.
-    expect(report.newRegistrationsCount).toBe(5);
-    expect(report.dailyCounts).toHaveLength(3);
-    expect(report.acquisitionBreakdown).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ utmSource: "newsletter", count: 2 }),
-      ]),
-    );
-    expect(
-      report.acquisitionBreakdown?.some((entry) => entry.utmSource === "x"),
-    ).toBe(false);
+      expect(utcReport.range).toEqual({
+        from: "2031-01-01T00:00:00.000Z",
+        to: "2031-02-01T00:00:00.000Z",
+      });
+      expect(utcReport.newRegistrationsCount).toBe(5);
+      expect(utcReport.dailyCounts).toEqual([
+        { day: "2031-01-01", count: 3 },
+        { day: "2031-01-02", count: 1 },
+        { day: "2031-01-31", count: 1 },
+      ]);
+      expect(utcReport.weeklyCounts).toEqual([
+        { week: "2030-12-30", count: 4 },
+        { week: "2031-01-27", count: 1 },
+      ]);
+      expect(utcReport.acquisitionBreakdown).toEqual([
+        expect.objectContaining({ utmSource: "newsletter", count: 3 }),
+        expect.objectContaining({ utmSource: "x", count: 1 }),
+        expect.objectContaining({
+          utmSource: null,
+          utmMedium: null,
+          utmCampaign: null,
+          utmContent: null,
+          count: 1,
+        }),
+      ]);
+      expect(
+        utcReport.acquisitionBreakdown?.some(
+          (entry) => entry.utmSource === "partner",
+        ),
+      ).toBe(false);
 
-    const offsetReport = await getWaitlistReport(reportDb, {
-      from: "2026-01-01T02:00:00+02:00",
-      to: "2026-01-01T12:00:00+02:00",
-    });
-    expect(offsetReport.newRegistrationsCount).toBe(1);
-    expect(offsetReport.range).toEqual({
-      from: "2026-01-01T00:00:00.000Z",
-      to: "2026-01-01T10:00:00.000Z",
-    });
+      // The PostgreSQL session timezone must not affect SQL buckets or labels.
+      await client.query("SET TIME ZONE 'America/Argentina/Buenos_Aires'");
+      const argentinaReport = await getWaitlistReport(
+        reportDb,
+        { from: "2031-01-01", to: "2031-01-31" },
+        { includeAcquisitionBreakdown: true },
+      );
+      expect(argentinaReport).toEqual(utcReport);
+
+      const offsetReport = await getWaitlistReport(reportDb, {
+        from: "2031-01-01T02:00:00+02:00",
+        to: "2031-01-01T03:00:00+02:00",
+      });
+      expect(offsetReport.newRegistrationsCount).toBe(2);
+      expect(offsetReport.range).toEqual({
+        from: "2031-01-01T00:00:00.000Z",
+        to: "2031-01-01T01:00:00.000Z",
+      });
+    } finally {
+      await client.query("ROLLBACK");
+    }
   });
 
-  it("exposes CLI behavior with aggregate-only output", async () => {
-    const { stdout } = await runCli([
-      "--from",
-      "2026-01-01",
-      "--to",
-      "2026-01-31",
-      "--include-attribution",
-    ]);
-    const report = JSON.parse(stdout);
+  it("exposes identical CLI reports under UTC and Argentina timezones", async () => {
+    const cliEmails = [
+      "cli-apr10-a@example.com",
+      "cli-apr10-b@example.com",
+      "cli-apr11@example.com",
+      "cli-outside@example.com",
+    ];
 
-    expect(report).toMatchObject({
-      range: {
-        from: "2026-01-01T00:00:00.000Z",
-        to: "2026-02-01T00:00:00.000Z",
-      },
-      newRegistrationsCount: 5,
-      attributionAvailable: true,
-    });
-    expect(stdout).not.toContain("@example.com");
+    try {
+      await client.query(
+        `INSERT INTO public.waitlist_subscribers
+           (id, email, consent_at, status, created_at, utm_source)
+         VALUES
+           ($1, $2, now(), 'subscribed',   '2032-04-10T00:00:00Z', 'newsletter'),
+           ($3, $4, now(), 'subscribed',   '2032-04-10T12:00:00Z', 'newsletter'),
+           ($5, $6, now(), 'unsubscribed', '2032-04-11T23:59:59Z', null),
+           ($7, $8, now(), 'subscribed',   '2032-04-12T00:00:00Z', 'partner')`,
+        [
+          "91111111-1111-4111-8111-111111111111",
+          cliEmails[0],
+          "92222222-2222-4222-8222-222222222222",
+          cliEmails[1],
+          "93333333-3333-4333-8333-333333333333",
+          cliEmails[2],
+          "94444444-4444-4444-8444-444444444444",
+          cliEmails[3],
+        ],
+      );
+
+      const args = [
+        "--from",
+        "2032-04-10",
+        "--to",
+        "2032-04-11",
+        "--include-attribution",
+      ];
+      const utc = await runCli(args, { TZ: "UTC" });
+      const argentina = await runCli(args, {
+        TZ: "America/Argentina/Buenos_Aires",
+      });
+
+      expect(argentina.stdout).toBe(utc.stdout);
+      const report = JSON.parse(utc.stdout);
+      expect(report).toMatchObject({
+        range: {
+          from: "2032-04-10T00:00:00.000Z",
+          to: "2032-04-12T00:00:00.000Z",
+        },
+        newRegistrationsCount: 3,
+        dailyCounts: [
+          { day: "2032-04-10", count: 2 },
+          { day: "2032-04-11", count: 1 },
+        ],
+        attributionAvailable: true,
+      });
+      expect(
+        report.acquisitionBreakdown.some(
+          (entry: { utmSource: string | null }) => entry.utmSource === "partner",
+        ),
+      ).toBe(false);
+      expect(utc.stdout).not.toContain("@example.com");
+    } finally {
+      await client.query(
+        "DELETE FROM public.waitlist_subscribers WHERE email = ANY($1)",
+        [cliEmails],
+      );
+    }
 
     const before = await client.query(
       "SELECT count(*)::int AS count FROM public.waitlist_subscribers",
@@ -445,7 +545,7 @@ describeWithDatabase("waitlist persistence, migration and reporting", () => {
       stderr: expect.stringContaining("missing_argument_value"),
     });
     await expect(
-      runCli(["--from", "2026-02-01", "--to", "2026-01-01"]),
+      runCli(["--from", "2032-04-12", "--to", "2032-04-10"]),
     ).rejects.toMatchObject({
       stderr: expect.stringContaining("invalid_range"),
     });

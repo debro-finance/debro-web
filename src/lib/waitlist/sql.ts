@@ -58,7 +58,7 @@ export const COUNT_NEW_REGISTRATIONS_SQL = `
 `;
 
 export const DAILY_REGISTRATION_COUNTS_SQL = `
-  SELECT (created_at AT TIME ZONE 'UTC')::date AS day,
+  SELECT to_char((created_at AT TIME ZONE 'UTC')::date, 'YYYY-MM-DD') AS day,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
@@ -68,13 +68,25 @@ export const DAILY_REGISTRATION_COUNTS_SQL = `
 `;
 
 export const WEEKLY_REGISTRATION_COUNTS_SQL = `
-  SELECT date_trunc('week', created_at AT TIME ZONE 'UTC')::date AS week,
+  SELECT to_char(
+           date_trunc('week', created_at AT TIME ZONE 'UTC')::date,
+           'YYYY-MM-DD'
+         ) AS week,
          count(*)::int AS count
   FROM public.waitlist_subscribers
   WHERE ($1::timestamptz IS NULL OR created_at >= $1::timestamptz)
     AND ($2::timestamptz IS NULL OR created_at < $2::timestamptz)
   GROUP BY 1
   ORDER BY 1
+`;
+
+/** Read-only metadata check used before issuing attribution GROUP BY queries. */
+export const HAS_ATTRIBUTION_COLUMNS_SQL = `
+  SELECT count(*)::int AS count
+  FROM information_schema.columns
+  WHERE table_schema = 'public'
+    AND table_name = 'waitlist_subscribers'
+    AND column_name IN ('utm_source', 'utm_medium', 'utm_campaign', 'utm_content')
 `;
 
 export const ACQUISITION_BREAKDOWN_SQL = `
