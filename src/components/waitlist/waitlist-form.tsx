@@ -2,6 +2,30 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { CheckIcon, SpinnerIcon } from "@/components/ui/icons";
+import { ATTRIBUTION_FIELDS } from "@/lib/waitlist/attribution";
+
+/**
+ * Reads only the four approved UTM parameters from the current URL at submit
+ * time. Nothing is stored client-side: no cookies, localStorage, sessionStorage
+ * or visitor identifiers are created. Server validation decides whether each
+ * value is approved and whether attribution collection is enabled.
+ */
+function readAttributionFromLocation(): Record<string, string> {
+  const values: Record<string, string> = {};
+  if (typeof window === "undefined") {
+    return values;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  for (const field of ATTRIBUTION_FIELDS) {
+    const value = params.get(field);
+    if (value) {
+      values[field] = value;
+    }
+  }
+
+  return values;
+}
 
 type Status =
   | { kind: "idle" }
@@ -83,7 +107,12 @@ export function WaitlistForm({
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, consent, company }),
+        body: JSON.stringify({
+          email,
+          consent,
+          company,
+          ...readAttributionFromLocation(),
+        }),
       });
 
       const payload = (await response.json().catch(() => null)) as {

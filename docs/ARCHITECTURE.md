@@ -16,7 +16,7 @@ Status: **implemented on `development`; production release owner-gated.**
 - 404 responses use a branded `not-found.tsx`.
 
 ## Waitlist data flow
-1. Client submits JSON: `email`, `consent`, hidden `company` honeypot. Optional UTM attribution fields are parsed only when `WAITLIST_ATTRIBUTION_ENABLED=true`; otherwise they are ignored and never stored.
+1. Client submits JSON: `email`, `consent`, hidden `company` honeypot, plus up to four approved UTM fields read from the current URL at submit time. Optional UTM attribution fields are parsed only when `WAITLIST_ATTRIBUTION_ENABLED=true`; otherwise they are ignored and never stored. Invalid or unapproved values are discarded rather than rejected.
 2. Route enforces a 4 KB body limit and derives a hashed client key from `x-forwarded-for`/`x-real-ip`.
 3. `src/server/waitlist.ts` validates, checks the honeypot, applies the in-memory limiter, and calls a narrow database interface.
 4. `src/server/db.ts` uses `@neondatabase/serverless` over HTTP with a parameterized conflict-safe insert into `public.waitlist_subscribers`; zero-row inserts require a follow-up check confirming the duplicate exists. When approved attribution is present, the insert uses the additive attribution columns but still preserves original attribution on conflict.

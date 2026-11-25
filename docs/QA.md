@@ -160,3 +160,11 @@ Historical Preview incident: the Neon `preview/development` branch had `current_
 - No production domain, TLS, redirect or Search Console verification has been performed; these are owner gates.
 - Lighthouse is a single local lab run. Repeat on the deployed production URL before launch and record field CWV after traffic exists.
 - Copy, claims, legal pages, final typeface and the privacy/retention policy still require owner approval.
+
+## Deployment verification (read-only, 2026-11-25)
+
+- Vercel project: `debro-web` (Hobby team), production domain `debro.finance`.
+- Latest visible Production deployment: `40ded47` on `main`, Ready, created Nov 20. Latest visible development Preview deployment: `b81f77e`, Ready, created Nov 20. **No Vercel deployment was found for `6dbffb6` (PR #28 merge into `development`) or for any later development commit.** The branch appears not to have received a Git-triggered preview after Nov 20; investigate Git integration event delivery before relying on a preview for this follow-up.
+- Vercel Build & Deployment settings show no build-command override (default Next.js build), no deployment checks, and an auto Ignored Build Step. No Vercel build step runs `npm run db:migrate`.
+- GitHub CI's `database` job uses only `TEST_DATABASE_URL` pointing to the disposable PostgreSQL 16 service database `debro_test`; `npm run db:migrate` is never run with a production `DATABASE_URL` in CI. Preview and automatic merges therefore do not migrate the shared Neon database.
+- No synthetic signups were submitted to either deployed environment and no production subscriber data was accessed.

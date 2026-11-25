@@ -20,6 +20,9 @@ Keep implementation small, accessible, responsive, secure and SEO-first. When a 
 ## Service context
 Vercel GitHub integration, Neon and Vercel Analytics have been connected by the owner. Reuse existing integrations; do not create duplicate providers or databases. Waitlist emails are collected only for a launch announcement after explicit consent.
 
+## Confirmed privacy contact
+`privacy@debro.finance` is a real, authorized mailbox owned and monitored by the human owner. Preserve it in the waitlist privacy page and footer as the contact for privacy and removal requests; do not describe it as fabricated, unconfirmed, or placeholder. This confirmation does **not** establish a legal entity or constitute formal legal approval of the privacy notice.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

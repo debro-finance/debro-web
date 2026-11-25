@@ -29,13 +29,6 @@ function makeDb(implementation?: WaitlistDb["insertSubscriber"]) {
   };
 }
 
-const EMPTY_ATTRIBUTION = {
-  utm_source: null,
-  utm_medium: null,
-  utm_campaign: null,
-  utm_content: null,
-};
-
 function request(
   body: string,
   {
@@ -74,7 +67,7 @@ describe("POST /api/waitlist", () => {
     expect(response.headers.get("cache-control")).toBe("no-store");
     expect(state.db?.insertSubscriber).toHaveBeenCalledWith(
       "user@example.com",
-      EMPTY_ATTRIBUTION,
+      null,
     );
   });
 
