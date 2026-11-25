@@ -151,14 +151,8 @@ export default function WaitlistPrivacyPage() {
               </h2>
               <p className="leading-relaxed">
                 Yes. You can request the removal of your email address from the DeBro waitlist at
-                any time by contacting us at{" "}
-                <a
-                  href="mailto:privacy@debro.finance"
-                  className="text-navy underline-offset-4 hover:underline"
-                >
-                  privacy@debro.finance
-                </a>
-                .
+                any time by contacting the designated privacy contact once that channel has been
+                confirmed by the owner.
               </p>
               <p className="leading-relaxed">
                 We will use your request solely to process the removal of your information and

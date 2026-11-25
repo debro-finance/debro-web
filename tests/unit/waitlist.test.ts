@@ -13,6 +13,13 @@ function makeDb(
   return { insertSubscriber: vi.fn(implementation) };
 }
 
+const EMPTY_ATTRIBUTION = {
+  utm_source: null,
+  utm_medium: null,
+  utm_campaign: null,
+  utm_content: null,
+};
+
 function submit(
   overrides: Partial<RegisterSubscriberInput> = {},
   payload: Record<string, unknown> = {
@@ -40,7 +47,10 @@ describe("registerSubscriber", () => {
     const result = await submit({ db });
 
     expect(result).toEqual({ status: 200, body: { ok: true } });
-    expect(db.insertSubscriber).toHaveBeenCalledWith("user@example.com");
+    expect(db.insertSubscriber).toHaveBeenCalledWith(
+      "user@example.com",
+      EMPTY_ATTRIBUTION,
+    );
   });
 
   it("returns 503 and does not touch the database when disabled", async () => {
@@ -185,5 +195,74 @@ describe("registerSubscriber", () => {
     expect(JSON.stringify(consoleError.mock.calls)).not.toContain(
       "connection refused",
     );
+  });
+
+  it("ignores attribution fields while collection is disabled", async () => {
+    const db = makeDb();
+    const result = await submit(
+      { db, attributionEnabled: false },
+      {
+        email: "user@example.com",
+        consent: true,
+        utm_source: "newsletter",
+        utm_medium: "email",
+        utm_campaign: "launch",
+        utm_content: "hero",
+      },
+    );
+
+    expect(result.status).toBe(200);
+    expect(db.insertSubscriber).toHaveBeenCalledWith(
+      "user@example.com",
+      EMPTY_ATTRIBUTION,
+    );
+  });
+
+  it("rejects malformed attribution values", async () => {
+    const db = makeDb();
+    const result = await submit(
+      { db, attributionEnabled: false },
+      {
+        email: "user@example.com",
+        consent: true,
+        utm_source: { bad: true },
+      },
+    );
+
+    expect(result.status).toBe(400);
+    expect(result.body).toEqual({ ok: false, error: "invalid_attribution" });
+    expect(db.insertSubscriber).not.toHaveBeenCalled();
+  });
+
+  it("rejects overlong attribution values", async () => {
+    const db = makeDb();
+    const result = await submit(
+      { db, attributionEnabled: false },
+      {
+        email: "user@example.com",
+        consent: true,
+        utm_campaign: "x".repeat(65),
+      },
+    );
+
+    expect(result.status).toBe(400);
+    expect(result.body).toEqual({ ok: false, error: "invalid_attribution" });
+    expect(db.insertSubscriber).not.toHaveBeenCalled();
+  });
+
+  it("rejects attribution values not present in approved allowlists", async () => {
+    const db = makeDb();
+    const result = await submit(
+      { db, attributionEnabled: true },
+      {
+        email: "user@example.com",
+        consent: true,
+        utm_source: "newsletter",
+      },
+    );
+
+    expect(result.status).toBe(400);
+    expect(result.body).toEqual({ ok: false, error: "invalid_attribution" });
+    expect(db.insertSubscriber).not.toHaveBeenCalled();
   });
 });

@@ -4,7 +4,7 @@ import { waitlistRateLimiter } from "@/lib/waitlist/rate-limit";
 import { MAX_WAITLIST_BODY_BYTES } from "@/lib/waitlist/validation";
 import { getWaitlistDb } from "@/server/db";
 import { registerSubscriber } from "@/server/waitlist";
-import { isWaitlistEnabled } from "@/lib/site";
+import { isWaitlistAttributionEnabled, isWaitlistEnabled } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -45,6 +45,7 @@ export async function POST(request: Request) {
     enabled: isWaitlistEnabled(),
     db: getWaitlistDb(),
     limiter: waitlistRateLimiter,
+    attributionEnabled: isWaitlistAttributionEnabled(),
   });
 
   const headers: Record<string, string> = { "Cache-Control": "no-store" };

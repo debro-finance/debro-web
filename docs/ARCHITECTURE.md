@@ -16,10 +16,10 @@ Status: **implemented on `development`; production release owner-gated.**
 - 404 responses use a branded `not-found.tsx`.
 
 ## Waitlist data flow
-1. Client submits JSON: `email`, `consent`, hidden `company` honeypot.
+1. Client submits JSON: `email`, `consent`, hidden `company` honeypot. Optional UTM attribution fields are parsed only when `WAITLIST_ATTRIBUTION_ENABLED=true`; otherwise they are ignored and never stored.
 2. Route enforces a 4 KB body limit and derives a hashed client key from `x-forwarded-for`/`x-real-ip`.
 3. `src/server/waitlist.ts` validates, checks the honeypot, applies the in-memory limiter, and calls a narrow database interface.
-4. `src/server/db.ts` uses `@neondatabase/serverless` over HTTP with a parameterized conflict-safe insert into `public.waitlist_subscribers`; zero-row inserts require a follow-up check confirming the duplicate exists.
+4. `src/server/db.ts` uses `@neondatabase/serverless` over HTTP with a parameterized conflict-safe insert into `public.waitlist_subscribers`; zero-row inserts require a follow-up check confirming the duplicate exists. When approved attribution is present, the insert uses the additive attribution columns but still preserves original attribution on conflict.
 5. Successful inserts, verified duplicates and honeypot submissions return the same generic response. Database failures return safe codes without SQL, stack traces or PII.
 
 The service depends on a `WaitlistDb` interface, so unit tests and PostgreSQL integration tests exercise the same behavior without importing the Neon adapter.
@@ -30,6 +30,7 @@ The service depends on a `WaitlistDb` interface, so unit tests and PostgreSQL in
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin; trailing slash trimmed |
 | `SITE_INDEXABLE` | Must be `true` **and** `VERCEL_ENV=production` for indexing |
 | `WAITLIST_ENABLED` | Explicit `true` required on Vercel; local development enables with a database URL |
+| `WAITLIST_ATTRIBUTION_ENABLED` | Optional UTM attribution collection; default off, owner approval required before enabling |
 | `DATABASE_URL` | Server-only Neon/PostgreSQL connection string |
 | `RATE_LIMIT_SALT` | Optional salt for in-memory rate-limit hashes |
 
